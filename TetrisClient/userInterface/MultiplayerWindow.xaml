@@ -404,6 +404,21 @@
         <TextBlock
             FontSize="48"
             FontWeight="Bold"
+            Foreground="#008c1c"
+            Grid.ColumnSpan="2"
+            Height="76"
+            HorizontalAlignment="Left"
+            Margin="25,224,0,0"
+            TextAlignment="Center"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Visibility="Hidden"
+            Width="298"
+            x:Name="YouWonTextP2"><Run Text="YOU WON" /></TextBlock>
+
+        <TextBlock
+            FontSize="48"
+            FontWeight="Bold"
             Foreground="#FF00FFE7"
             Grid.Column="2"
             Grid.ColumnSpan="2"
@@ -416,6 +431,23 @@
             Visibility="Hidden"
             Width="298"
             x:Name="GameOverTextP1"><Run Text="GAME OVER" /></TextBlock>
+
+        <TextBlock
+            FontSize="48"
+            FontWeight="Bold"
+            Foreground="#008c1c"
+            Grid.Column="2"
+            Grid.ColumnSpan="2"
+            Height="76"
+            HorizontalAlignment="Left"
+            Margin="172,224,0,0"
+            TextAlignment="Center"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Visibility="Hidden"
+            Width="298"
+            x:Name="YouWonTextP1"><Run Text="YOU WON" /></TextBlock>
+
         <Button
             Background="#FF03DAC6"
             BorderBrush="Black"

@@ -28,6 +28,11 @@ namespace TetrisClient
             NewTetromino();
         }
 
+        public void StopGame()
+        {
+            GameTimer.IsEnabled = false;
+        }
+
         /// <summary>
         /// Picks a random Tetromino Shape.
         /// </summary>
@@ -93,7 +98,7 @@ namespace TetrisClient
             Tetromino = NextTetromino;
             if (Representation.CheckCollision(Tetromino))
             {
-                GameTimer.IsEnabled = false;
+                StopGame();
                 GameOver = true;
             }
 

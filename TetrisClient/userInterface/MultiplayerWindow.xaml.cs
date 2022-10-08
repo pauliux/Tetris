@@ -17,7 +17,7 @@ namespace TetrisClient
         private HubConnection _connection;
         private TetrisEngine _engine = new();
         private DispatcherTimer _renderTimer;
-        
+
         private readonly SoundPlayer _sound1 = new(Resource1.Sound1);
         private readonly SoundPlayer _sound2 = new(Resource1.Sound2);
 
@@ -84,7 +84,7 @@ namespace TetrisClient
                 _enemyNextTetromino = JsonConvert.DeserializeObject<Tetromino>(tetromino))));
             _connection.On<string>("SendScore", score => Dispatcher.BeginInvoke(new Action(() =>
                 _enemyScore = JsonConvert.DeserializeObject<Score>(score))));
-            _connection.On<bool>("SendGameStatus", status => Dispatcher.BeginInvoke(new Action(() =>
+            _connection.On<bool>("SendIsGameOver", status => Dispatcher.BeginInvoke(new Action(() =>
                 _enemyGameOver = status)));
         }
 
@@ -93,6 +93,11 @@ namespace TetrisClient
             Dispatcher.Invoke(() => { ReadyButton.Visibility = Visibility.Hidden; });
             _engine.StartGame(seed);
             Timer();
+        }
+
+        private void StopGame()
+        {
+            _engine.StopGame();
         }
 
         /// <summary>
@@ -143,7 +148,7 @@ namespace TetrisClient
             Task.Run(async () =>
                 await _connection.InvokeAsync("SendTetromino", JsonConvert.SerializeObject(_engine.Tetromino)));
             Task.Run(async () =>
-                await _connection.InvokeAsync("SendGameStatus", _engine.GameOver));
+                await _connection.InvokeAsync("SendIsGameOver", _engine.GameOver));
             Task.Run(async () =>
                 await _connection.InvokeAsync("SendNextTetromino", JsonConvert.SerializeObject(_engine.NextTetromino)));
         }
@@ -157,10 +162,15 @@ namespace TetrisClient
             if (_engine.GameOver)
             {
                 Dispatcher.Invoke(() => { GameOverTextP1.Visibility = Visibility.Visible; });
-            }
+                Dispatcher.Invoke(() => { YouWonTextP2.Visibility = Visibility.Visible; });
+ }
 
             if (_enemyGameOver)
+            {
                 Dispatcher.Invoke(() => { GameOverTextP2.Visibility = Visibility.Visible; });
+                Dispatcher.Invoke(() => { YouWonTextP1.Visibility = Visibility.Visible; });
+                StopGame();
+            }
         }
 
         private void SetTextBlocks()
@@ -233,17 +243,17 @@ namespace TetrisClient
             board ??= _engine.Representation.Board;
 
             for (var y = 0; y < board.GetLength(0); y++)
-            for (var x = 0; x < board.GetLength(1); x++)
-            {
-                var block = board[y, x];
-                if (block == 0) continue; //block does not need to be rendered when it is 0 because its empty
+                for (var x = 0; x < board.GetLength(1); x++)
+                {
+                    var block = board[y, x];
+                    if (block == 0) continue; //block does not need to be rendered when it is 0 because its empty
 
-                var rectangle = CreateRectangle(ConvertNumberToBrush(board[y, x]));
-                grid.Children.Add(rectangle);
+                    var rectangle = CreateRectangle(ConvertNumberToBrush(board[y, x]));
+                    grid.Children.Add(rectangle);
 
-                Grid.SetRow(rectangle, y); // Ligt het niet hier aan?
-                Grid.SetColumn(rectangle, x); // Ligt het niet hier aan?
-            }
+                    Grid.SetRow(rectangle, y); // Ligt het niet hier aan?
+                    Grid.SetColumn(rectangle, x); // Ligt het niet hier aan?
+                }
         }
 
         /// <summary>

@@ -17,6 +17,6 @@ namespace TetrisServer.Hubs
 
         public async Task SendScore(string score) => await Clients.Others.SendAsync("SendScore", score);
 
-        public async Task SendGameStatus(bool status) => await Clients.Others.SendAsync("SendGameStatus", status);
+        public async Task SendIsGameOver(bool status) => await Clients.Others.SendAsync("SendIsGameOver", status);
     }
 }
