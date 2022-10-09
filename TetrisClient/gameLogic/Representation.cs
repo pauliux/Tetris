@@ -106,7 +106,7 @@ namespace TetrisClient
         {
             if (type is not "UP" and not "DOWN" ) return false; 
             
-            var testTetromino = new Tetromino(tetromino.OffsetX, tetromino.OffsetY,tetromino.Matrix,tetromino.Shape);
+            var testTetromino = new Tetromino(tetromino.OffsetX, tetromino.OffsetY,tetromino.Matrix);
             testTetromino.OffsetX += givenXOffset;
             testTetromino.Matrix = type switch
             {
@@ -124,16 +124,17 @@ namespace TetrisClient
         /// <param name="tetromino">Tetromino object</param>
         public void PutTetrominoInBoard(Tetromino tetromino)
         {
+            //Board = tetromino.Matrix.Value;
             // Loop trough all blocks in the tetromino
             for (var y = 0; y < tetromino.Matrix.Value.GetLength(0); y++) //dimension 0 = y
-            for (var x = 0; x < tetromino.Matrix.Value.GetLength(1); x++) //dimension 1 = x
-            {
-                // Do nothing when cell in the tetromino matrix is 0(not a block)
-                if (tetromino.Matrix.Value[y, x] == 0) continue;
+                for (var x = 0; x < tetromino.Matrix.Value.GetLength(1); x++) //dimension 1 = x
+                {
+                    // Do nothing when cell in the tetromino matrix is 0(not a block)
+                    if (tetromino.Matrix.Value[y, x] == 0) continue;
 
-                // Put the value at the correct spot
-                Board[y + tetromino.OffsetY, x + tetromino.OffsetX] = ConvertTetrominoShapeToNumber(tetromino.Shape);
-            }
+                    // Put the value at the correct spot
+                    Board[y + tetromino.OffsetY, x + tetromino.OffsetX] = tetromino.Matrix.Value[y, x];
+                }
         }
 
         /// <summary>
@@ -186,28 +187,6 @@ namespace TetrisClient
             for (var y = deletedRow; y > 0; y--) //dimension 0 = y
             for (var x = 0; x < Board.GetLength(1); x++) //dimension 1 = x
                 Board[y, x] = Board[y - 1, x];
-        }
-
-        /// <summary>
-        /// Converts the shape of the tetromino to its corresponding number
-        /// this number will later be used in the UI to match it's corresponding color(Brush)
-        /// </summary>
-        /// <param name="tetrominoShape"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        private static int ConvertTetrominoShapeToNumber(TetrominoShape tetrominoShape)
-        {
-            return tetrominoShape switch
-            {
-                TetrominoShape.O => 1,
-                TetrominoShape.T => 2,
-                TetrominoShape.J => 3,
-                TetrominoShape.L => 4,
-                TetrominoShape.S => 5,
-                TetrominoShape.Z => 6,
-                TetrominoShape.I => 7,
-                _ => throw new ArgumentOutOfRangeException(nameof(tetrominoShape), tetrominoShape, null)
-            };
         }
     }
 }

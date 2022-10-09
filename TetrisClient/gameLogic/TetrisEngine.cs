@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Threading;
 
 namespace TetrisClient
@@ -23,7 +24,7 @@ namespace TetrisClient
             GameOver = false;
             Representation = new Representation();
             Score = new Score();
-            NextTetromino = _random == null ? new Tetromino(4, 0) : new Tetromino(4, 0, GenerateShape());
+            NextTetromino = _random == null ? new Tetromino(4, 0) : new Tetromino(4, 0, _random);
             Timer();
             NewTetromino();
         }
@@ -34,16 +35,6 @@ namespace TetrisClient
         }
 
         /// <summary>
-        /// Picks a random Tetromino Shape.
-        /// </summary>
-        /// <returns>TetrominoShape enum</returns>
-        private TetrominoShape GenerateShape()
-        {
-            var values = Enum.GetValues(typeof(TetrominoShape));
-            return (TetrominoShape) values.GetValue(_random.Next(values.Length));
-        }
-
-        /// <summary>
         /// Start a DispatcherTimer because those don't interrupt the program
         /// This timer is used for determining the drop speed of tetrominos.
         /// </summary>
@@ -51,7 +42,7 @@ namespace TetrisClient
         {
             GameTimer = new DispatcherTimer();
             GameTimer.Tick += dispatcherTimer_Tick;
-            GameTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000);
+            GameTimer.Interval = new TimeSpan(0, 0, 0, 0, 900);
             GameTimer.Start();
         }
 
@@ -102,7 +93,7 @@ namespace TetrisClient
                 GameOver = true;
             }
 
-            NextTetromino = _random == null ? new Tetromino(4, 0) : new Tetromino(4, 0, GenerateShape());
+            NextTetromino = _random == null ? new Tetromino(4, 0) : new Tetromino(4, 0, _random);
         }
 
         /// <summary>
@@ -114,8 +105,7 @@ namespace TetrisClient
         {
             var ghostTetromino = new Tetromino(Tetromino.OffsetX,
                 Tetromino.OffsetY,
-                Tetromino.Matrix,
-                Tetromino.Shape);
+                Tetromino.Matrix);
             while (Representation.IsInRangeOfBoard(ghostTetromino, 0, 1)
                    && !Representation.CheckCollision(ghostTetromino, givenYOffset: 1))
                 ghostTetromino.OffsetY++;

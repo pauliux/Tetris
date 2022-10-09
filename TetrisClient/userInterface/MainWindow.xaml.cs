@@ -77,7 +77,8 @@ namespace TetrisClient
             tetromino.CalculatePositions().ForEach(coordinate =>
             {
                 var (y, x) = coordinate;
-                var rectangle = CreateRectangle(Tetromino.DetermineColor(tetromino.Shape), opacity);
+                var shapeRectangle = tetromino.Matrix.Value[y - tetromino.OffsetY, x - tetromino.OffsetX];
+                var rectangle = CreateRectangle(Tetromino.BrushArray[shapeRectangle], opacity);
                 grid.Children.Add(rectangle);
 
                 Grid.SetRow(rectangle, y);
@@ -93,17 +94,17 @@ namespace TetrisClient
             var board = _engine.Representation.Board;
 
             for (var y = 0; y < board.GetLength(0); y++)
-            for (var x = 0; x < board.GetLength(1); x++)
-            {
-                var block = board[y, x];
-                if (block == 0) continue; //block does not need to be rendered when it is 0 because its empty
+                for (var x = 0; x < board.GetLength(1); x++)
+                {
+                    var block = board[y, x];
+                    if (block == 0) continue; //block does not need to be rendered when it is 0 because its empty
 
-                var rectangle = CreateRectangle(ConvertNumberToBrush(board[y, x]));
-                TetrisGrid.Children.Add(rectangle);
+                    var rectangle = CreateRectangle(Tetromino.BrushArray[board[y, x]]);
+                    TetrisGrid.Children.Add(rectangle);
 
-                Grid.SetRow(rectangle, y);
-                Grid.SetColumn(rectangle, x);
-            }
+                    Grid.SetRow(rectangle, y);
+                    Grid.SetColumn(rectangle, x);
+                }
         }
 
         /// <summary>
@@ -211,7 +212,7 @@ namespace TetrisClient
         /// <param name="routedEventArgs"></param>
         private void TogglePause(object sender, RoutedEventArgs routedEventArgs)
         {
-            PauseButton.Content = (string) PauseButton.Content == "Pause" ? "Resume" : "Pause";
+            PauseButton.Content = (string)PauseButton.Content == "Pause" ? "Resume" : "Pause";
             _renderTimer.IsEnabled = !_renderTimer.IsEnabled;
             _engine.TogglePause();
         }
@@ -238,26 +239,5 @@ namespace TetrisClient
             Fill = color, // Background color
             Opacity = opacity // Opacity
         };
-
-        /// <summary>
-        /// Based on the <paramref name="num"/> given, determines what color should be returned.
-        /// </summary>
-        /// <param name="num">number of the TetrominoShape</param>
-        /// <returns>Brush color that corresponds with the given number</returns>
-        /// <exception cref="ArgumentOutOfRangeException">If an invalid number has been passed</exception>
-        private static Brush ConvertNumberToBrush(int num)
-        {
-            return num switch
-            {
-                1 => Tetromino.DetermineColor(TetrominoShape.O),
-                2 => Tetromino.DetermineColor(TetrominoShape.T),
-                3 => Tetromino.DetermineColor(TetrominoShape.J),
-                4 => Tetromino.DetermineColor(TetrominoShape.L),
-                5 => Tetromino.DetermineColor(TetrominoShape.S),
-                6 => Tetromino.DetermineColor(TetrominoShape.Z),
-                7 => Tetromino.DetermineColor(TetrominoShape.I),
-                _ => throw new ArgumentOutOfRangeException(nameof(num), num, null)
-            };
-        }
     }
 }
