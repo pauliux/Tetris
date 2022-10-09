@@ -83,11 +83,19 @@ namespace TetrisClient
             _connection.On<string>("SendNextTetromino", tetromino => Dispatcher.BeginInvoke(new Action(() =>
                 _enemyNextTetromino = JsonConvert.DeserializeObject<Tetromino>(tetromino))));
             _connection.On<string>("SendScore", score => Dispatcher.BeginInvoke(new Action(() =>
-                _enemyScore = JsonConvert.DeserializeObject<Score>(score))));
+               GetEnemyScore(score))));
             _connection.On<bool>("SendIsGameOver", status => Dispatcher.BeginInvoke(new Action(() =>
                 _enemyGameOver = status)));
         }
 
+        private void GetEnemyScore(String score)
+        {
+            _enemyScore = JsonConvert.DeserializeObject<Score>(score);
+            if (_enemyScore != null && _enemyScore.Level > _engine.Score.Level)
+            {
+                _engine.Score.ForceLevelUpdate = true;
+            }
+        }
         private void StartGame(int seed)
         {
             Dispatcher.Invoke(() => { ReadyButton.Visibility = Visibility.Hidden; });

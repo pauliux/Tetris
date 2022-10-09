@@ -1,7 +1,10 @@
-﻿namespace TetrisClient
+﻿using System;
+
+namespace TetrisClient
 {
     public class Score
     {
+        public bool ForceLevelUpdate;
         public int Level;
 
         public int Points;
@@ -17,9 +20,10 @@
 
         public Score()
         {
-            Level = 0;
+            Level = 1;
             Points = 0;
             Rows = 0;
+            ForceLevelUpdate = false;
         }
 
         /// <summary>
@@ -49,8 +53,13 @@
         /// <returns>true if the level is upped else false</returns>
         public bool HandleLevel()
         {
-            if (_rowsForLeveling < 10) return false;
-            _rowsForLeveling -= 10;
+            if (ForceLevelUpdate)
+            {
+                ForceLevelUpdate = false;
+            }
+            else if (_rowsForLeveling < 2) return false;
+
+            _rowsForLeveling = 0;
             Level++;
             return true;
         }

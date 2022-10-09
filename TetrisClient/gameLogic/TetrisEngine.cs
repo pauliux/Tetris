@@ -19,7 +19,7 @@ namespace TetrisClient
         /// </summary>
         public void StartGame(int? seed = null)
         {
-            if (seed != null) _random = new Random((int) seed);
+            if (seed != null) _random = new Random((int)seed);
             GameOver = false;
             Representation = new Representation();
             Score = new Score();
@@ -51,7 +51,7 @@ namespace TetrisClient
         {
             GameTimer = new DispatcherTimer();
             GameTimer.Tick += dispatcherTimer_Tick;
-            GameTimer.Interval = new TimeSpan(0, 0, 0, 0, 700);
+            GameTimer.Interval = new TimeSpan(0, 0, 0, 0, 1000);
             GameTimer.Start();
         }
 
@@ -63,9 +63,9 @@ namespace TetrisClient
         /// <param name="e"></param>
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            if (DropTetromino()) return;
+            if (DropTetromino() && !Score.ForceLevelUpdate) return;
             if (HandleScore())
-                GameTimer.Interval = new TimeSpan(0, 0, 0, 0, Convert.ToInt32(GameTimer.Interval.Milliseconds * 0.9));
+                GameTimer.Interval = new TimeSpan(0, 0, 0, 0, Convert.ToInt32(GameTimer.Interval.Milliseconds * 0.5));
             NewTetromino();
         }
 
@@ -200,8 +200,12 @@ namespace TetrisClient
         private bool HandleScore()
         {
             var deletedRows = Representation.HandleRowDeletion();
-            if (deletedRows == 0) return false;
-            Score.HandleScore(deletedRows);
+            if (!Score.ForceLevelUpdate)
+            {
+                if (deletedRows == 0) return false;
+                Score.HandleScore(deletedRows);
+            }
+            
             return Score.HandleLevel();
         }
 
