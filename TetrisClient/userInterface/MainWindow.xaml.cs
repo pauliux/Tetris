@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using TetrisClient.gameLogic;
 
 namespace TetrisClient
 {
@@ -78,7 +79,7 @@ namespace TetrisClient
             {
                 var (y, x) = coordinate;
                 var shapeRectangle = tetromino.Matrix.Value[y - tetromino.OffsetY, x - tetromino.OffsetX];
-                var rectangle = CreateRectangle(Tetromino.BrushArray[shapeRectangle], opacity);
+                var rectangle = CreateRectangle(TetrominoBrushes.BrushArray[shapeRectangle], opacity);
                 grid.Children.Add(rectangle);
 
                 Grid.SetRow(rectangle, y);
@@ -99,7 +100,7 @@ namespace TetrisClient
                     var block = board[y, x];
                     if (block == 0) continue; //block does not need to be rendered when it is 0 because its empty
 
-                    var rectangle = CreateRectangle(Tetromino.BrushArray[board[y, x]]);
+                    var rectangle = CreateRectangle(TetrominoBrushes.BrushArray[board[y, x]]);
                     TetrisGrid.Children.Add(rectangle);
 
                     Grid.SetRow(rectangle, y);

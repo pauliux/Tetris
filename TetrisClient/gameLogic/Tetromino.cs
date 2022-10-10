@@ -11,17 +11,7 @@ namespace TetrisClient
     /// </summary>
     public class Tetromino
     {
-        public static Brush[] BrushArray =
-        {
-            Brushes.Black,
-            Brushes.Yellow,
-            Brushes.BlueViolet,
-            Brushes.Aqua,
-            Brushes.DarkOrange,
-            Brushes.LimeGreen,
-            Brushes.Red,
-            Brushes.Blue
-        };
+        
 
         public Dictionary<char, Matrix> TetrominoShapes = new Dictionary<char, Matrix>
         {
