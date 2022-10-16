@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Threading;
 using TetrisClient.gameLogic;
+using TetrisClient.gameLogic.Bomb;
 using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Level;
 using TetrisClient.gameLogic.Tetromino;
@@ -40,6 +41,10 @@ namespace TetrisClient
             NewTetromino();
         }
 
+        public Bomb GetBomb()
+        {
+            return (Bomb)_abstractFactory.getBomb();
+        }
         public void StopGame()
         {
             GameTimer.IsEnabled = false;

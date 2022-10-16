@@ -15,5 +15,6 @@ namespace TetrisClient.gameLogic
         public abstract Unit getTetromino(int offsetX, int offsetY);
 
         public abstract Unit getTetromino(int offsetX, int offsetY, Matrix matrix);
+        public abstract Unit getBomb();
     }
 }

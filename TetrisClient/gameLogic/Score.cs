@@ -4,7 +4,7 @@ namespace TetrisClient
 {
     public class Score
     {
-        private const int NumOfRowsForLeveling = 2;
+        private const int NumOfRowsForLeveling = 4;
 
         public bool ForceLevelUpdate;
         public int Level;

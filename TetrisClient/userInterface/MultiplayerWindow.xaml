@@ -151,7 +151,7 @@
             Foreground="#FF00FFE7"
             Grid.Column="3"
             HorizontalAlignment="Left"
-            Margin="148,348,0,0"
+            Margin="146,348,0,0"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             x:Name="Score">
@@ -163,9 +163,9 @@
             FontSize="24"
             Foreground="#FF00FFE7"
             Grid.Column="3"
-            Height="35"
+            Height="34"
             HorizontalAlignment="Center"
-            Margin="0,297,0,0"
+            Margin="0,312,0,0"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             x:Name="Lines">
@@ -179,7 +179,7 @@
             Grid.Column="3"
             Height="35"
             HorizontalAlignment="Center"
-            Margin="0,244,0,0"
+            Margin="0,276,0,0"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             x:Name="Level">
@@ -193,7 +193,7 @@
             Grid.Column="3"
             Height="35"
             HorizontalAlignment="Left"
-            Margin="253,241,0,0"
+            Margin="253,274,0,0"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             x:Name="LevelTextBlockP1">
@@ -207,10 +207,10 @@
             Grid.Column="3"
             Height="35"
             HorizontalAlignment="Left"
-            Margin="253,294,0,0"
+            Margin="253,312,0,0"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
-            x:Name="LinesTextBlockP1">
+            x:Name="LinesTextBlockP1" RenderTransformOrigin="0.464,1.23">
             <TextBlock.Effect>
                 <DropShadowEffect />
             </TextBlock.Effect><Run Language="en-gb" Text="0" /></TextBlock>
@@ -256,10 +256,9 @@
         <TextBlock
             FontSize="24"
             Foreground="#FF00FFE7"
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
+            Grid.Column="2"
             HorizontalAlignment="Left"
-            Margin="274,348,0,0"
+            Margin="2,348,0,0"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             x:Name="Score_Copy">
@@ -270,11 +269,10 @@
         <TextBlock
             FontSize="24"
             Foreground="#FF00FFE7"
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
+            Grid.Column="2"
             Height="35"
             HorizontalAlignment="Left"
-            Margin="274,297,0,0"
+            Margin="2,312,0,0"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             x:Name="Lines_Copy">
@@ -285,11 +283,10 @@
         <TextBlock
             FontSize="24"
             Foreground="#FF00FFE7"
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
+            Grid.Column="2"
             Height="35"
             HorizontalAlignment="Left"
-            Margin="274,244,0,0"
+            Margin="2,276,0,0"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             x:Name="Level_Copy">
@@ -303,7 +300,7 @@
             Grid.Column="2"
             Height="35"
             HorizontalAlignment="Left"
-            Margin="102,241,0,0"
+            Margin="103,274,0,0"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             x:Name="LevelTextBlockP2">
@@ -317,7 +314,7 @@
             Grid.Column="2"
             Height="35"
             HorizontalAlignment="Left"
-            Margin="102,294,0,0"
+            Margin="103,312,0,0"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             x:Name="LinesTextBlockP2">
@@ -465,6 +462,16 @@
             <Button.Effect>
                 <DropShadowEffect />
             </Button.Effect>
+        </Button>
+        <Button 
+            x:Name="BombButton"
+            IsEnabled="False"
+            Grid.Column="3" HorizontalAlignment="Left" Margin="148,189,0,0" VerticalAlignment="Top" Height="61" Width="61">
+            <Image x:Name="BombButtonImage" Source="/Resources/bomb1_disabled.png"/>
+            <Button.Effect>
+                <DropShadowEffect />
+            </Button.Effect>
+
         </Button>
 
     </Grid>

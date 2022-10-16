@@ -5,6 +5,13 @@
         <TargetFramework>net5.0-windows</TargetFramework>
         <UseWPF>true</UseWPF>
     </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\bomb1.png" />
+      <None Remove="Resources\bomb1_disabled.png" />
+      <None Remove="Resources\bomb4.png" />
+      <None Remove="Resources\bomb4_disabled.png" />
+    </ItemGroup>
     
     <ItemGroup>
       <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.0-preview.2.21154.6" />
@@ -21,6 +28,21 @@
     
     <ItemGroup>
       <Folder Include="bin\Debug\net5.0-windows" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Content Include="Resources\bomb1.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Resources\bomb1_disabled.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Resources\bomb4.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Resources\bomb4_disabled.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

@@ -6,12 +6,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
 using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic;
+using TetrisClient.gameLogic.Bomb;
 using TetrisClient.gameLogic.Level;
 using TetrisClient.gameLogic.Tetromino;
 using static System.Formats.Asn1.AsnWriter;
@@ -106,6 +108,7 @@ namespace TetrisClient
         private void StartGame(int seed)
         {
             Dispatcher.Invoke(() => { ReadyButton.Visibility = Visibility.Hidden; });
+            Dispatcher.Invoke(() => { ReadyButton.Visibility = Visibility.Hidden; });
             _engine.StartGame(seed);
             Timer();
         }
@@ -149,8 +152,23 @@ namespace TetrisClient
             CheckGameOver();
             SetTextBlocks();
             RenderGrid();
+            SetBombButton();
         }
 
+        private void SetBombButton()
+        {
+            Bomb bomb = _engine.GetBomb();
+            if (_engine.Score.Points >= 200)
+            {
+                BombButton.IsEnabled = true;
+                BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageEnabled(), UriKind.Relative));
+            }
+            else
+            {
+                BombButton.IsEnabled = false;
+                BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageDisabled(), UriKind.Relative));
+            }
+        }
         /// <summary>
         /// Sends all the required data to the server so it can dispatch it to the other client.
         /// </summary>
