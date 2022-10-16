@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Media;
+using System.Reflection.Emit;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +10,11 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
+using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic;
+using TetrisClient.gameLogic.Level;
+using TetrisClient.gameLogic.Tetromino;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace TetrisClient
 {
@@ -23,8 +28,8 @@ namespace TetrisClient
         private readonly SoundPlayer _sound2 = new(Resource1.Sound2);
 
         private int[,] _enemyBoard;
-        private Tetromino _enemyTetromino;
-        private Tetromino _enemyNextTetromino;
+        private TetrominoJsonObject _enemyTetromino;
+        private TetrominoJsonObject _enemyNextTetromino;
         private Score _enemyScore;
         private bool _enemyGameOver;
 
@@ -80,9 +85,9 @@ namespace TetrisClient
             _connection.On<string>("SendBoard", board => Dispatcher.BeginInvoke(new Action(() =>
                 _enemyBoard = JsonConvert.DeserializeObject<int[,]>(board))));
             _connection.On<string>("SendTetromino", tetromino => Dispatcher.BeginInvoke(new Action(() =>
-                _enemyTetromino = JsonConvert.DeserializeObject<Tetromino>(tetromino))));
+                _enemyTetromino = JsonConvert.DeserializeObject<TetrominoJsonObject>(tetromino))));
             _connection.On<string>("SendNextTetromino", tetromino => Dispatcher.BeginInvoke(new Action(() =>
-                _enemyNextTetromino = JsonConvert.DeserializeObject<Tetromino>(tetromino))));
+                _enemyNextTetromino = JsonConvert.DeserializeObject<TetrominoJsonObject>(tetromino))));
             _connection.On<string>("SendScore", score => Dispatcher.BeginInvoke(new Action(() =>
                GetEnemyScore(score))));
             _connection.On<bool>("SendIsGameOver", status => Dispatcher.BeginInvoke(new Action(() =>
@@ -97,6 +102,7 @@ namespace TetrisClient
                 _engine.Score.ForceLevelUpdate = true;
             }
         }
+
         private void StartGame(int seed)
         {
             Dispatcher.Invoke(() => { ReadyButton.Visibility = Visibility.Hidden; });
@@ -172,7 +178,7 @@ namespace TetrisClient
             {
                 Dispatcher.Invoke(() => { GameOverTextP1.Visibility = Visibility.Visible; });
                 Dispatcher.Invoke(() => { YouWonTextP2.Visibility = Visibility.Visible; });
- }
+            }
 
             if (_enemyGameOver)
             {
@@ -243,6 +249,15 @@ namespace TetrisClient
                 Grid.SetRow(rectangle, y);
                 Grid.SetColumn(rectangle, grid != NextGridP1 && grid != NextGridP2 ? x : x - 4);
             });
+        }
+
+        private void RenderTetromino(TetrominoJsonObject tetromino, Panel grid, double opacity = 1)
+        {
+            Creator creator = new LevelCreator();
+            Level level = creator.GetLevel(_enemyScore.Level);
+            AbstractFactory abstractFactory = level.GetAbstractFactory();
+            Tetromino generatedTetromino = (Tetromino)abstractFactory.getTetromino(tetromino.OffsetX, tetromino.OffsetY, tetromino.Matrix);
+            RenderTetromino(generatedTetromino, grid, opacity);
         }
 
         /// <summary>

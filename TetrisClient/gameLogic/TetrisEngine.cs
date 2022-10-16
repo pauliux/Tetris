@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Threading;
+using TetrisClient.gameLogic;
+using TetrisClient.gameLogic.Factory;
+using TetrisClient.gameLogic.Level;
+using TetrisClient.gameLogic.Tetromino;
 
 namespace TetrisClient
 {
@@ -14,17 +18,24 @@ namespace TetrisClient
         public bool GameOver;
         private Random _random;
 
+        private Level _level;
+        private Creator _creator;
+        private AbstractFactory _abstractFactory;
+
         /// <summary>
         /// Starts the game, creates all items
         /// Starts the timer
         /// </summary>
         public void StartGame(int? seed = null)
         {
+            _creator = new LevelCreator();
+            _level = _creator.GetLevel(1);
+            _abstractFactory = _level.GetAbstractFactory();
             if (seed != null) _random = new Random((int)seed);
             GameOver = false;
             Representation = new Representation();
             Score = new Score();
-            NextTetromino = _random == null ? new Tetromino(4, 0) : new Tetromino(4, 0, _random);
+            NextTetromino = _random == null ? (Tetromino)_abstractFactory.getTetromino(4, 0) : (Tetromino)_abstractFactory.getTetromino(4, 0, _random);
             Timer();
             NewTetromino();
         }
@@ -48,7 +59,7 @@ namespace TetrisClient
 
         /// <summary>
         /// Every tick of the timer it will drop the tetromino and handle the score
-        /// If a level is upped the speed reduced by 10%
+        /// If a level is upped the speed increased
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -56,7 +67,12 @@ namespace TetrisClient
         {
             if (DropTetromino() && !Score.ForceLevelUpdate) return;
             if (HandleScore())
+            {
+                _level = _creator.GetLevel(Score.Level);
+                _abstractFactory = _level.GetAbstractFactory();
                 GameTimer.Interval = new TimeSpan(0, 0, 0, 0, Convert.ToInt32(GameTimer.Interval.Milliseconds * 0.5));
+            }
+
             NewTetromino();
         }
 
@@ -93,7 +109,7 @@ namespace TetrisClient
                 GameOver = true;
             }
 
-            NextTetromino = _random == null ? new Tetromino(4, 0) : new Tetromino(4, 0, _random);
+            NextTetromino = _random == null ? (Tetromino)_abstractFactory.getTetromino(4, 0) : (Tetromino)_abstractFactory.getTetromino(4, 0, _random);
         }
 
         /// <summary>
@@ -103,7 +119,7 @@ namespace TetrisClient
         /// <returns>The ghost tetromino</returns>
         public Tetromino CreateGhostTetromino()
         {
-            var ghostTetromino = new Tetromino(Tetromino.OffsetX,
+            var ghostTetromino = (Tetromino)_abstractFactory.getTetromino(Tetromino.OffsetX,
                 Tetromino.OffsetY,
                 Tetromino.Matrix);
             while (Representation.IsInRangeOfBoard(ghostTetromino, 0, 1)
@@ -136,10 +152,11 @@ namespace TetrisClient
         {
             if (type is not "UP" and not "DOWN") return;
 
-            var offsetsToTest = new[] {0, 1, -1, 2, -2};
+            var offsetsToTest = new[] { 0, 1, -1, 2, -2 };
             foreach (var offset in offsetsToTest)
             {
-                if (Representation.CheckTurnCollision(Tetromino, type, offset)) continue;
+                var testTetromino = (Tetromino)_abstractFactory.getTetromino(Tetromino.OffsetX, Tetromino.OffsetY, Tetromino.Matrix);
+                if (Representation.CheckTurnCollision(testTetromino, type, offset)) continue;
                 Tetromino.OffsetX += offset;
                 Tetromino.Matrix = type switch
                 {
@@ -195,7 +212,7 @@ namespace TetrisClient
                 if (deletedRows == 0) return false;
                 Score.HandleScore(deletedRows);
             }
-            
+
             return Score.HandleLevel();
         }
 

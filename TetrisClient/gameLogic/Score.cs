@@ -4,6 +4,8 @@ namespace TetrisClient
 {
     public class Score
     {
+        private const int NumOfRowsForLeveling = 2;
+
         public bool ForceLevelUpdate;
         public int Level;
 
@@ -14,7 +16,7 @@ namespace TetrisClient
 
         /// <summary>
         /// used for level calculation
-        /// if it reaches 10 or higher the level is upped
+        /// if it reaches NumOfRowsForLeveling or higher the level is upped
         /// </summary>
         private int _rowsForLeveling;
 
@@ -48,7 +50,7 @@ namespace TetrisClient
         }
 
         /// <summary>
-        /// Calculates if a level needs to be added (level will be upped by one every 10 deleted rows)
+        /// Calculates if a level needs to be added (level will be upped by one every NumOfRowsForLeveling deleted rows)
         /// </summary>
         /// <returns>true if the level is upped else false</returns>
         public bool HandleLevel()
@@ -57,7 +59,7 @@ namespace TetrisClient
             {
                 ForceLevelUpdate = false;
             }
-            else if (_rowsForLeveling < 2) return false;
+            else if (_rowsForLeveling < NumOfRowsForLeveling) return false;
 
             _rowsForLeveling = 0;
             Level++;

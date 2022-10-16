@@ -2,27 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Media;
+using System.Xml.Linq;
+using TetrisClient.gameLogic.Factory;
 
-namespace TetrisClient
+namespace TetrisClient.gameLogic.Tetromino
 {
 
     /// <summary>
     /// A Tetromino is a "block" in the tetris game.
     /// </summary>
-    public class Tetromino
+    public abstract class Tetromino : Unit
     {
-        
-
-        public Dictionary<char, Matrix> TetrominoShapes = new Dictionary<char, Matrix>
-        {
-            {'O',new Matrix(new[,] { { 1, 1 }, { 1, 1 } })},
-            {'T',new Matrix(new[,] { { 2, 2, 2 }, { 0, 2, 0 }, { 0, 0, 0 } })},
-            {'J',new Matrix(new[,] { { 0, 3, 0 }, { 0, 3, 0 }, { 3, 3, 0 } })},
-            {'L',new Matrix(new[,] { { 0, 4, 0 }, { 0, 4, 0 }, { 0, 4, 4 } })},
-            {'S',new Matrix(new[,] { { 0, 5, 5 }, { 5, 5, 0 }, { 0, 0, 0 } })},
-            {'Z',new Matrix(new[,] { { 6, 6, 0 }, { 0, 6, 6 }, { 0, 0, 0 } })},
-            {'I', new Matrix(new[,] { { 0, 0, 0, 0 }, { 7, 7, 7, 7 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } })}
-        };
+        public abstract Dictionary<char, Matrix> GetTetrominos();
 
         public Matrix Matrix { get; set; }
         public int OffsetX;
@@ -33,10 +24,9 @@ namespace TetrisClient
         /// Constructor overloading is used if alternate spawnpoints
         /// are being chosen.
         /// </summary>
-        public Tetromino() => new Tetromino(0, 0);
-
-        public Tetromino(int offsetX, int offsetY, Random random)
+        public Tetromino(int level, int offsetX, int offsetY, Random random) : base(level)
         {
+
             Matrix = CreateShape(random);
             OffsetX = offsetX;
             OffsetY = offsetY;
@@ -45,10 +35,10 @@ namespace TetrisClient
         /// <summary>
         /// Constructor with the option of setting the offsets.
         /// </summary>
+        /// <param name="level">game level</param>
         /// <param name="offsetX">from the left side of the grid</param>
         /// <param name="offsetY">from the bottom of the grid</param>
-        /// <param name="seed">random seed</param>
-        public Tetromino(int offsetX, int offsetY)
+        public Tetromino(int level, int offsetX, int offsetY) : base(level)
         {
             Matrix = CreateShape();
             OffsetX = offsetX;
@@ -58,12 +48,11 @@ namespace TetrisClient
         /// <summary>
         /// This constructor is only used to clone tetromino's
         /// </summary>
+        /// <param name="level">game level</param>
         /// <param name="offsetX">from the left side of the grid</param>
         /// <param name="offsetY">from the bottom of the grid</param>
         /// <param name="matrix">matrix of a tetromino</param>
-        /// <param name="shape">shape of a tetromino</param>
-        /// <param name="seed">random seed</param>
-        public Tetromino(int offsetX, int offsetY, Matrix matrix)
+        public Tetromino(int level, int offsetX, int offsetY, Matrix matrix) : base(level)
         {
             Matrix = matrix;
             OffsetX = offsetX;
@@ -91,13 +80,13 @@ namespace TetrisClient
         /// <summary>
         /// Gives back the 3D array that corresponds with the given Tetromino shape enum.
         /// </summary>
-        /// <param name="shape">TetrominoShape enum</param>
+        /// <param name="rand">random generator. If provided, it will generate same 'random' shape as enemy's</param>
         /// <returns>3D array that represents a Tetromino of the passed enum</returns>
         /// <exception cref="ArgumentOutOfRangeException">when an invalid entry is passed</exception>
         public Matrix CreateShape(Random rand = null)
         {
             Random random = rand ?? new Random();
-            return TetrominoShapes.ElementAt(random.Next(0, TetrominoShapes.Count)).Value;
+            return GetTetrominos().ElementAt(random.Next(0, GetTetrominos().Count)).Value;
         }
     }
 }

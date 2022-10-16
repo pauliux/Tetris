@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace TetrisClient.gameLogic
+namespace TetrisClient.gameLogic.Tetromino
 {
     public static class TetrominoBrushes
     {

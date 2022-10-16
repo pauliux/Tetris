@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TetrisClient.gameLogic.Tetromino;
 using static System.Linq.Enumerable;
 
 namespace TetrisClient
@@ -98,15 +99,14 @@ namespace TetrisClient
         /// Recreates the current Tetromino and executes the action based on the given <paramref name="type"/>
         /// and checks if that action results in a collision.
         /// </summary>
-        /// <param name="tetromino">Tetromino object</param>
+        /// <param name="testTetromino">Tetromino object</param>
         /// <param name="type">Key pressed</param>
         /// <param name="givenXOffset">Given offset</param>
         /// <returns>true if a collision has occured with the recreated Tetromino</returns>
-        public bool CheckTurnCollision(Tetromino tetromino, string type, int givenXOffset = 0)
+        public bool CheckTurnCollision(Tetromino testTetromino, string type, int givenXOffset = 0)
         {
             if (type is not "UP" and not "DOWN" ) return false; 
             
-            var testTetromino = new Tetromino(tetromino.OffsetX, tetromino.OffsetY,tetromino.Matrix);
             testTetromino.OffsetX += givenXOffset;
             testTetromino.Matrix = type switch
             {
