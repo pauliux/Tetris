@@ -23,8 +23,6 @@ namespace TetrisClient
 {
     public partial class MultiplayerWindow
     {
-        //private HubConnection _connection;
-        //private Singleton singleton;
         private TetrisEngine _engine = new();
         private DispatcherTimer _renderTimer;
 
@@ -41,14 +39,6 @@ namespace TetrisClient
         {
             InitializeComponent();
             Singleton singleton = Singleton.GetInstance();
-            // Url that TetrisHub will run on.
-            //const string url = "http://127.0.0.1:5000/TetrisHub";
-
-            //// The Builder that helps us create the connection.
-            //_connection = new HubConnectionBuilder()
-            //    .WithUrl(url)
-            //    .WithAutomaticReconnect()
-            //    .Build();
 
             CreateSubscriptions();
 
