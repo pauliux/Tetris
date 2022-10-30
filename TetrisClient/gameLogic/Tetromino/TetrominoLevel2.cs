@@ -7,7 +7,7 @@ using TetrominoComponent = TetrisClient.gameLogic.Decorator.TetrominoComponent;
 
 namespace TetrisClient.gameLogic.Tetromino
 {
-    public class TetrominoLevel2 : Tetromino
+    public class TetrominoLevel2 : TetrominoFigure
     {
         public TetrominoLevel2(int level, int offsetX, int offsetY, Random random, TetrominoComponent component) : base(level, offsetX, offsetY, random, component)
         {

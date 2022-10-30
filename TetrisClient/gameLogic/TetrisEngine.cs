@@ -6,18 +6,20 @@ using TetrisClient.gameLogic.Bomb;
 using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Level;
 using TetrisClient.gameLogic.Tetromino;
+using TetrisClient.gameLogic.Command;
 
 namespace TetrisClient
 {
     public class TetrisEngine
     {
         public Representation Representation;
-        public Tetromino Tetromino;
-        public Tetromino NextTetromino;
+        public TetrominoFigure Tetromino;
+        public TetrominoFigure NextTetromino;
         public Score Score;
         public DispatcherTimer GameTimer;
         public bool GameOver;
         private Random _random;
+        private User user;
 
         private Level _level;
         private Creator _creator;
@@ -29,6 +31,7 @@ namespace TetrisClient
         /// </summary>
         public void StartGame(int? seed = null)
         {
+            user = new User();
             _creator = new LevelCreator();
             _level = _creator.GetLevel(1);
             _abstractFactory = _level.GetAbstractFactory();
@@ -36,7 +39,7 @@ namespace TetrisClient
             GameOver = false;
             Representation = new Representation();
             Score = new Score();
-            NextTetromino = _random == null ? (Tetromino)_abstractFactory.getTetromino(4, 0) : (Tetromino)_abstractFactory.getTetromino(4, 0, _random);
+            NextTetromino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
             Timer();
             NewTetromino();
         }
@@ -99,6 +102,25 @@ namespace TetrisClient
             return false;
         }
 
+        public void AngelBomb()
+        {
+            Bomb bomb = GetBomb();
+            if (Score.Points > 200)
+            {
+                Score.Points = Score.Points - 200;
+                if (bomb.GetLevel() > 1)
+                {
+                    user.Compute("ANGELBOMB4", Tetromino, Representation, _abstractFactory);
+                    Representation = user.getRepresentation(Representation);
+                }
+                else
+                {
+                    user.Compute("ANGELBOMB2", Tetromino, Representation, _abstractFactory);
+                    Representation = user.getRepresentation(Representation);
+                }
+            }
+        }
+
         /// <summary>
         /// Sets the next tetromino as the current tetromino and than creates a new next tetromino and does
         /// the same with the matrices.
@@ -114,7 +136,7 @@ namespace TetrisClient
                 GameOver = true;
             }
 
-            NextTetromino = _random == null ? (Tetromino)_abstractFactory.getTetromino(4, 0) : (Tetromino)_abstractFactory.getTetromino(4, 0, _random);
+            NextTetromino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
         }
 
         /// <summary>
@@ -122,9 +144,9 @@ namespace TetrisClient
         /// It gets dropped to as low as possible(kinda like the hard drop)
         /// </summary>
         /// <returns>The ghost tetromino</returns>
-        public Tetromino CreateGhostTetromino()
+        public TetrominoFigure CreateGhostTetromino()
         {
-            var ghostTetromino = (Tetromino)_abstractFactory.getTetromino(Tetromino.OffsetX,
+            var ghostTetromino = (TetrominoFigure)_abstractFactory.getTetromino(Tetromino.OffsetX,
                 Tetromino.OffsetY,
                 Tetromino.Matrix);
             while (Representation.IsInRangeOfBoard(ghostTetromino, 0, 1)
@@ -137,17 +159,25 @@ namespace TetrisClient
         //Moves the tetromino to the right if allowed
         public void MoveRight()
         {
-            if (MovePossible(offsetInBoardX: 1, offsetCollisionX: 1))
-                Tetromino.OffsetX++;
+            user.Compute("right", Tetromino, Representation, _abstractFactory);
+            Representation = user.getRepresentation(Representation);
+            Tetromino = user.getTetraminoFigure(Tetromino);
         }
 
         //Moves the tetromino to the left if allowed
         public void MoveLeft()
         {
-            if (MovePossible(offsetInBoardX: -1, offsetCollisionX: -1))
-                Tetromino.OffsetX--;
+            user.Compute("left", Tetromino, Representation, _abstractFactory);
+            Representation = user.getRepresentation(Representation);
+            Tetromino = user.getTetraminoFigure(Tetromino);
         }
 
+        public void Undo()
+        {
+            user.Undo(1);
+            Representation = user.getRepresentation(Representation);
+            Tetromino = user.getTetraminoFigure(Tetromino);
+        }
         /// <summary>
         /// Tries to rotate a tetromino with given offsets, if one of them succeeds
         /// the tetromino will turn.
@@ -155,33 +185,20 @@ namespace TetrisClient
         /// <param name="type"> UP(clockwise) or DOWN(CounterClockWise)</param>
         public void HandleRotation(string type)
         {
-            if (type is not "UP" and not "DOWN") return;
-
-            var offsetsToTest = new[] { 0, 1, -1, 2, -2 };
-            foreach (var offset in offsetsToTest)
-            {
-                var testTetromino = (Tetromino)_abstractFactory.getTetromino(Tetromino.OffsetX, Tetromino.OffsetY, Tetromino.Matrix);
-                if (Representation.CheckTurnCollision(testTetromino, type, offset)) continue;
-                Tetromino.OffsetX += offset;
-                Tetromino.Matrix = type switch
-                {
-                    "UP" => Tetromino.Matrix.Rotate90(),
-                    "DOWN" => Tetromino.Matrix.Rotate90CounterClockwise(),
-                    _ => Tetromino.Matrix
-                };
-                break;
-            }
+            user.Compute(type, Tetromino, Representation, _abstractFactory);
+           // Representation = user.getRepresentation(Representation);
+            Tetromino = user.getTetraminoFigure(Tetromino);
         }
 
         //Drops the current tetromino to as low as possible
         public void HardDrop()
         {
-            while (SoftDrop())
-            {
-            }
+            user.Compute("HARDDROP", Tetromino, Representation, _abstractFactory);
+            //Representation = user.getRepresentation(Representation);
+            Tetromino = user.getTetraminoFigure(Tetromino);
         }
 
-        //Drops the current tetromino by one
+        ////Drops the current tetromino by one
         public bool SoftDrop()
         {
             if (!MovePossible(offsetInBoardX: 0, offsetInBoardY: 1, offsetCollisionY: 1)) return false;

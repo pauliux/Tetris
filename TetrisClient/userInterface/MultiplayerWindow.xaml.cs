@@ -250,7 +250,7 @@ namespace TetrisClient
         /// <param name="tetromino"></param>
         /// <param name="grid">TetrisGrid or NextGrid for next tetromino</param>
         /// <param name="opacity">Opacity, used for rendering a ghost tetromino</param>
-        private void RenderTetromino(Tetromino tetromino, Panel grid, double opacity = 1)
+        private void RenderTetromino(TetrominoFigure tetromino, Panel grid, double opacity = 1)
         {
             tetromino.CalculatePositions().ForEach(coordinate =>
             {
@@ -269,7 +269,7 @@ namespace TetrisClient
             Creator creator = new LevelCreator();
             Level level = creator.GetLevel(_enemyScore.Level);
             AbstractFactory abstractFactory = level.GetAbstractFactory();
-            Tetromino generatedTetromino = (Tetromino)abstractFactory.getTetromino(tetromino.OffsetX, tetromino.OffsetY, tetromino.Matrix);
+            TetrominoFigure generatedTetromino = (TetrominoFigure)abstractFactory.getTetromino(tetromino.OffsetX, tetromino.OffsetY, tetromino.Matrix);
             RenderTetromino(generatedTetromino, grid, opacity);
         }
 
@@ -346,6 +346,12 @@ namespace TetrisClient
                 case Key.LeftShift:
                     _sound2.Play();
                     _engine.SoftDrop();
+                    break;
+                case Key.Z:
+                    _engine.Undo();
+                    break;
+                case Key.B:
+                    _engine.AngelBomb();
                     break;
                 default:
                     return;

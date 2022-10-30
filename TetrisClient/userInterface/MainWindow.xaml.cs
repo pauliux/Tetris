@@ -73,7 +73,7 @@ namespace TetrisClient
         /// <param name="tetromino"></param>
         /// <param name="grid">TetrisGrid or NextGrid for next tetromino</param>
         /// <param name="opacity">Opacity, used for rendering a ghost tetromino</param>
-        private void RenderTetromino(Tetromino tetromino, Panel grid, double opacity = 1)
+        private void RenderTetromino(TetrominoFigure tetromino, Panel grid, double opacity = 1)
         {
             tetromino.CalculatePositions().ForEach(coordinate =>
             {

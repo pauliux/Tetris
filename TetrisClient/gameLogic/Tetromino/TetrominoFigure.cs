@@ -13,7 +13,7 @@ namespace TetrisClient.gameLogic.Tetromino
     /// <summary>
     /// A Tetromino is a "block" in the tetris game.
     /// </summary>
-    public abstract class Tetromino : Unit
+    public abstract class TetrominoFigure : Unit
     {
         public Matrix Matrix { get; set; }
         public int OffsetX;
@@ -25,7 +25,7 @@ namespace TetrisClient.gameLogic.Tetromino
         /// Constructor overloading is used if alternate spawnpoints
         /// are being chosen.
         /// </summary>
-        public Tetromino(int level, int offsetX, int offsetY, Random random, TetrominoComponent component) : base(level)
+        public TetrominoFigure(int level, int offsetX, int offsetY, Random random, TetrominoComponent component) : base(level)
         {
             this._component = component;
             Matrix = CreateShape(random);
@@ -40,7 +40,7 @@ namespace TetrisClient.gameLogic.Tetromino
         /// <param name="offsetX">from the left side of the grid</param>
         /// <param name="offsetY">from the bottom of the grid</param>
         /// <param name="component">decorator></param>
-        public Tetromino(int level, int offsetX, int offsetY, TetrominoComponent component) : base(level)
+        public TetrominoFigure(int level, int offsetX, int offsetY, TetrominoComponent component) : base(level)
         {
             this._component = component;
             Matrix = CreateShape();
@@ -56,7 +56,7 @@ namespace TetrisClient.gameLogic.Tetromino
         /// <param name="offsetY">from the bottom of the grid</param>
         /// <param name="matrix">matrix of a tetromino</param>
         /// <param name="component">decorator></param>
-        public Tetromino(int level, int offsetX, int offsetY, Matrix matrix, TetrominoComponent component) :base(level)
+        public TetrominoFigure(int level, int offsetX, int offsetY, Matrix matrix, TetrominoComponent component) : base(level)
         {
             this._component = component;
             Matrix = matrix;
