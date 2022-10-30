@@ -29,7 +29,6 @@
     
     <ItemGroup>
       <Folder Include="bin\Debug\net5.0-windows" />
-      <Folder Include="gameLogic\Prototype\" />
     </ItemGroup>
     
     <ItemGroup>

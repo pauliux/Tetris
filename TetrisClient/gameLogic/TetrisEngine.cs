@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Threading;
 using TetrisClient.gameLogic;
 using TetrisClient.gameLogic.Bomb;
+using TetrisClient.gameLogic.Facade;
 using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Level;
 using TetrisClient.gameLogic.Tetromino;
@@ -22,6 +23,7 @@ namespace TetrisClient
         private Level _level;
         private Creator _creator;
         private AbstractFactory _abstractFactory;
+        
 
         /// <summary>
         /// Starts the game, creates all items
@@ -40,10 +42,9 @@ namespace TetrisClient
             Timer();
             NewTetromino();
         }
-
-        public Bomb GetBomb()
+        public Bombs GetBomb()
         {
-            return (Bomb)_abstractFactory.getBomb();
+            return (Bombs)_abstractFactory.getBomb();
         }
         public void StopGame()
         {
@@ -125,10 +126,10 @@ namespace TetrisClient
         public Tetromino CreateGhostTetromino()
         {
             var ghostTetromino = (Tetromino)_abstractFactory.getTetromino(Tetromino.OffsetX,
-                Tetromino.OffsetY,
-                Tetromino.Matrix);
-            while (Representation.IsInRangeOfBoard(ghostTetromino, 0, 1)
-                   && !Representation.CheckCollision(ghostTetromino, givenYOffset: 1))
+              Tetromino.OffsetY,
+              Tetromino.Matrix);
+            while (Representation.IsInRangeOfBoard(ghostTetromino, 0, 1) &&
+              !Representation.CheckCollision(ghostTetromino, givenYOffset: 1))
                 ghostTetromino.OffsetY++;
 
             return ghostTetromino;
@@ -155,15 +156,23 @@ namespace TetrisClient
         /// <param name="type"> UP(clockwise) or DOWN(CounterClockWise)</param>
         public void HandleRotation(string type)
         {
-            if (type is not "UP" and not "DOWN") return;
+            if (type is not "UP"
+              and not "DOWN") return;
 
-            var offsetsToTest = new[] { 0, 1, -1, 2, -2 };
+            var offsetsToTest = new[] {
+        0,
+        1,
+        -1,
+        2,
+        -2
+      };
             foreach (var offset in offsetsToTest)
             {
                 var testTetromino = (Tetromino)_abstractFactory.getTetromino(Tetromino.OffsetX, Tetromino.OffsetY, Tetromino.Matrix);
                 if (Representation.CheckTurnCollision(testTetromino, type, offset)) continue;
                 Tetromino.OffsetX += offset;
-                Tetromino.Matrix = type switch
+                Tetromino.Matrix = type
+                switch
                 {
                     "UP" => Tetromino.Matrix.Rotate90(),
                     "DOWN" => Tetromino.Matrix.Rotate90CounterClockwise(),
@@ -176,9 +185,7 @@ namespace TetrisClient
         //Drops the current tetromino to as low as possible
         public void HardDrop()
         {
-            while (SoftDrop())
-            {
-            }
+            while (SoftDrop()) { }
         }
 
         //Drops the current tetromino by one
@@ -189,7 +196,6 @@ namespace TetrisClient
             return true;
         }
 
-
         /// <summary>
         /// Checks if the move is possible, the move can be simulated by giving offsets
         /// </summary>
@@ -199,10 +205,10 @@ namespace TetrisClient
         /// <param name="offsetCollisionY">^</param>
         /// <returns></returns>
         private bool MovePossible(int offsetInBoardX = 0, int offsetInBoardY = 0, int offsetCollisionX = 0,
-            int offsetCollisionY = 0)
+          int offsetCollisionY = 0)
         {
-            return Representation.IsInRangeOfBoard(Tetromino, offsetInBoardX, offsetInBoardY)
-                   && !Representation.CheckCollision(Tetromino, offsetCollisionX, offsetCollisionY);
+            return Representation.IsInRangeOfBoard(Tetromino, offsetInBoardX, offsetInBoardY) &&
+              !Representation.CheckCollision(Tetromino, offsetCollisionX, offsetCollisionY);
         }
 
         /// <summary>

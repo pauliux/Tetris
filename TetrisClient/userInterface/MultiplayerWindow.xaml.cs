@@ -17,6 +17,7 @@ using TetrisClient.gameLogic.Bomb;
 using TetrisClient.gameLogic.Level;
 using TetrisClient.gameLogic.Tetromino;
 using static System.Formats.Asn1.AsnWriter;
+using TetrisClient.gameLogic.Facade;
 
 namespace TetrisClient
 {
@@ -157,16 +158,19 @@ namespace TetrisClient
 
         private void SetBombButton()
         {
-            Bomb bomb = _engine.GetBomb();
+            Bombs bomb = _engine.GetBomb();
+            Facade facade = new Facade(bomb);
             if (_engine.Score.Points >= 200)
             {
                 BombButton.IsEnabled = true;
-                BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageEnabled(), UriKind.Relative));
+                //BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageEnabled(), UriKind.Relative));
+                BombButtonImage.Source = new BitmapImage(new Uri(FacadeClient.ClientEnableBomb(facade), UriKind.Relative));
             }
             else
             {
                 BombButton.IsEnabled = false;
-                BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageDisabled(), UriKind.Relative));
+                //BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageDisabled(), UriKind.Relative));
+                BombButtonImage.Source = new BitmapImage(new Uri(FacadeClient.ClientDisableBomb(facade), UriKind.Relative));
             }
         }
         /// <summary>

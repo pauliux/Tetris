@@ -7,12 +7,12 @@ using TetrisClient.gameLogic.Factory;
 
 namespace TetrisClient.gameLogic.Bomb
 {
-    public abstract class Bomb : Unit
+    public abstract class Bombs : Unit
     {
         private string _imageEnabled;
         private string _imageDisabled;
 
-        protected Bomb(int level, string imageEnabled, string imageDisabled) : base(level)
+        protected Bombs(int level, string imageEnabled, string imageDisabled) : base(level)
         {
             _imageEnabled = imageEnabled;
             _imageDisabled = imageDisabled;
