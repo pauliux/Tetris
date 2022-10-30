@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Media;
 using System.Xml.Linq;
+using TetrisClient.gameLogic.Decorator;
 using TetrisClient.gameLogic.Factory;
+using TetrisClient.gameLogic.Level;
 
 namespace TetrisClient.gameLogic.Tetromino
 {
@@ -13,20 +15,19 @@ namespace TetrisClient.gameLogic.Tetromino
     /// </summary>
     public abstract class Tetromino : Unit
     {
-        public abstract Dictionary<char, Matrix> GetTetrominos();
-
         public Matrix Matrix { get; set; }
         public int OffsetX;
         public int OffsetY;
 
+        private readonly TetrominoComponent _component;
         /// <summary>
         /// Default start position is at the left top (0,0).
         /// Constructor overloading is used if alternate spawnpoints
         /// are being chosen.
         /// </summary>
-        public Tetromino(int level, int offsetX, int offsetY, Random random) : base(level)
+        public Tetromino(int level, int offsetX, int offsetY, Random random, TetrominoComponent component) : base(level)
         {
-
+            this._component = component;
             Matrix = CreateShape(random);
             OffsetX = offsetX;
             OffsetY = offsetY;
@@ -38,8 +39,10 @@ namespace TetrisClient.gameLogic.Tetromino
         /// <param name="level">game level</param>
         /// <param name="offsetX">from the left side of the grid</param>
         /// <param name="offsetY">from the bottom of the grid</param>
-        public Tetromino(int level, int offsetX, int offsetY) : base(level)
+        /// <param name="component">decorator></param>
+        public Tetromino(int level, int offsetX, int offsetY, TetrominoComponent component) : base(level)
         {
+            this._component = component;
             Matrix = CreateShape();
             OffsetX = offsetX;
             OffsetY = offsetY;
@@ -52,8 +55,10 @@ namespace TetrisClient.gameLogic.Tetromino
         /// <param name="offsetX">from the left side of the grid</param>
         /// <param name="offsetY">from the bottom of the grid</param>
         /// <param name="matrix">matrix of a tetromino</param>
-        public Tetromino(int level, int offsetX, int offsetY, Matrix matrix) : base(level)
+        /// <param name="component">decorator></param>
+        public Tetromino(int level, int offsetX, int offsetY, Matrix matrix, TetrominoComponent component) :base(level)
         {
+            this._component = component;
             Matrix = matrix;
             OffsetX = offsetX;
             OffsetY = offsetY;
@@ -86,7 +91,7 @@ namespace TetrisClient.gameLogic.Tetromino
         public Matrix CreateShape(Random rand = null)
         {
             Random random = rand ?? new Random();
-            return GetTetrominos().ElementAt(random.Next(0, GetTetrominos().Count)).Value;
+            return _component.getTetrominos().ElementAt(random.Next(0, _component.getTetrominos().Count)).Value;
         }
     }
 }
