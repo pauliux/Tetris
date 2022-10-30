@@ -19,6 +19,7 @@
     </ItemGroup>
     
     <ItemGroup>
+      <None Include="..\.editorconfig" Link=".editorconfig" />
       <None Include="bin\Debug\net5.0-windows\TetrisTechno.wav" />
     </ItemGroup>
     
@@ -28,6 +29,7 @@
     
     <ItemGroup>
       <Folder Include="bin\Debug\net5.0-windows" />
+      <Folder Include="gameLogic\Prototype\" />
     </ItemGroup>
     
     <ItemGroup>

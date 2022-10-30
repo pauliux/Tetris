@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace TetrisClient.gameLogic.Factory
 {
-    public abstract class Unit
+    public abstract class Unit : ICloneable
     {
         private int level;
 
         protected Unit(int level)
         {
             this.level = level;
+        }
+
+        public object Clone()
+        {
+            return (Unit)this.MemberwiseClone();
         }
     }
 }
