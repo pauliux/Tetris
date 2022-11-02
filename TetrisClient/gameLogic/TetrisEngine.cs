@@ -90,13 +90,14 @@ namespace TetrisClient
         /// <returns>true if drop was possible else false</returns>
         private bool DropTetromino()
         {
+            Facade facade = new Facade(Representation);
             if (MovePossible(offsetInBoardY: 1, offsetCollisionY: 1))
             {
                 Tetromino.OffsetY++;
                 return true;
             }
-
-            Representation.PutTetrominoInBoard(Tetromino);
+            facade.PutTetromino(Tetromino);
+            //Representation.PutTetrominoInBoard(Tetromino);
             return false;
         }
 
