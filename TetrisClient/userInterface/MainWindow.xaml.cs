@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using TetrisClient.gameLogic.Strategy;
 using TetrisClient.gameLogic.Tetromino;
 
 namespace TetrisClient
@@ -58,7 +59,7 @@ namespace TetrisClient
 
             RenderLandedTetrominos();
 
-            RenderTetromino(_engine.Tetromino, TetrisGrid);
+            RenderTetromino(TetrisEngine.Tetromino, TetrisGrid);
             RenderTetromino(_engine.CreateGhostTetromino(), TetrisGrid, 0.30);
 
             NextGrid.Children.Clear();
@@ -92,7 +93,7 @@ namespace TetrisClient
         /// </summary>
         private void RenderLandedTetrominos()
         {
-            var board = _engine.Representation.Board;
+            var board = TetrisEngine.Representation.Board;
 
             for (var y = 0; y < board.GetLength(0); y++)
                 for (var x = 0; x < board.GetLength(1); x++)
@@ -161,27 +162,39 @@ namespace TetrisClient
             switch (e.Key)
             {
                 case Key.Right:
-                    _engine.MoveRight();
+                    TetrisEngine.Tetromino.setStrategy(new MoveRight());
+                    TetrisEngine.Tetromino.action();
+                    //_engine.MoveRight();
                     _sound2.Play();
                     break;
                 case Key.Left:
-                    _engine.MoveLeft();
+                    TetrisEngine.Tetromino.setStrategy(new MoveLeft());
+                    TetrisEngine.Tetromino.action();
+                    //_engine.MoveLeft();
                     _sound2.Play();
                     break;
                 case Key.Up:
-                    _engine.HandleRotation("UP");
                     _sound2.Play();
+                    TetrisEngine.Tetromino.setStrategy(new RotationUp());
+                    TetrisEngine.Tetromino.action();
+                    //_engine.HandleRotation("UP");
                     break;
                 case Key.Down:
-                    _engine.HandleRotation("DOWN");
                     _sound2.Play();
+                    TetrisEngine.Tetromino.setStrategy(new RotationDown());
+                    TetrisEngine.Tetromino.action();
+                    //_engine.HandleRotation("DOWN");
                     break;
                 case Key.Space:
-                    _engine.HardDrop();
+                    TetrisEngine.Tetromino.setStrategy(new HardDrop());
+                    TetrisEngine.Tetromino.action();
+                    //_engine.HardDrop();
                     _sound1.Play();
                     break;
                 case Key.LeftShift:
-                    _engine.SoftDrop();
+                    TetrisEngine.Tetromino.setStrategy(new SoftDrop());
+                    TetrisEngine.Tetromino.action();
+                    //_engine.SoftDrop();
                     _sound2.Play();
                     break;
                 default:

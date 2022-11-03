@@ -10,6 +10,8 @@ namespace TetrisClient.gameLogic.Factory
     {
         private int level;
 
+        private AbstractStrategy abstractStrategy;
+
         protected Unit(int level)
         {
             this.level = level;
@@ -19,5 +21,21 @@ namespace TetrisClient.gameLogic.Factory
         {
             return (Unit)this.MemberwiseClone();
         }
+
+        public AbstractStrategy getStrategy()
+        {
+            return abstractStrategy;
+        }
+
+        public void setStrategy(AbstractStrategy abstractStrategy)
+        {
+            this.abstractStrategy = abstractStrategy;
+        }
+
+        public void action()
+        {
+            this.abstractStrategy.moveDifferently();
+        }
+
     }
 }
