@@ -46,6 +46,12 @@ namespace TetrisClient
         {
             return (Bombs)_abstractFactory.getBomb();
         }
+
+        public Bombs GetEvilBomb()
+        {
+            return (Bombs)_abstractFactory.getEvilBomb();
+        }
+
         public void StopGame()
         {
             GameTimer.IsEnabled = false;

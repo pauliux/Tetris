@@ -47,5 +47,13 @@ namespace TetrisClient.gameLogic.Level
             IBuilder builder = new BuildBomb(rawUnit);
             return this.director.getBomb(builder);
         }
+
+        public override Unit getEvilBomb()
+        {
+            //return new EvilBombLevel2();
+            Unit rawUnit = new EvilBombLevel2();
+            IBuilder builder = new BuildBomb(rawUnit);
+            return this.director.getBomb(builder);
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TetrisClient.gameLogic.Bomb;
 using TetrisClient.gameLogic.Builder;
 using TetrisClient.gameLogic.Decorator;
+using TetrisClient.gameLogic.EvilBomb;
 using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Tetromino;
 
@@ -44,6 +45,14 @@ namespace TetrisClient.gameLogic.Level
         {
             //return new BombLevel1();
             Unit rawUnit = new BombLevel1();
+            IBuilder builder = new BuildBomb(rawUnit);
+            return this.director.getBomb(builder);
+        }
+
+        public override Unit getEvilBomb()
+        {
+            //return new EvilBombLevel1();
+            Unit rawUnit = new EvilBombLevel1();
             IBuilder builder = new BuildBomb(rawUnit);
             return this.director.getBomb(builder);
         }

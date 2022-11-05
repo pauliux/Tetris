@@ -155,6 +155,7 @@ namespace TetrisClient
             SetTextBlocks();
             RenderGrid();
             SetBombButton();
+            SetEvilBombButton();
         }
 
         private void SetBombButton()
@@ -174,6 +175,25 @@ namespace TetrisClient
                 BombButtonImage.Source = new BitmapImage(new Uri(FacadeClient.ClientDisableBomb(facade), UriKind.Relative));
             }
         }
+
+        private void SetEvilBombButton()
+        {
+            Bombs evilBomb = _engine.GetEvilBomb();
+            Facade facade = new Facade(evilBomb);
+            if (_engine.Score.Points >= 200)
+            {
+                BombEvilButton.IsEnabled = true;
+                //BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageEnabled(), UriKind.Relative));
+                BombEvilButtonImage.Source = new BitmapImage(new Uri(FacadeClient.ClientEnableBomb(facade), UriKind.Relative));
+            }
+            else
+            {
+                BombEvilButton.IsEnabled = false;
+                //BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageDisabled(), UriKind.Relative));
+                BombEvilButtonImage.Source = new BitmapImage(new Uri(FacadeClient.ClientDisableBomb(facade), UriKind.Relative));
+            }
+        }
+
         /// <summary>
         /// Sends all the required data to the server so it can dispatch it to the other client.
         /// </summary>
