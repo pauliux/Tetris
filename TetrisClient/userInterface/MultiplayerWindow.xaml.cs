@@ -17,6 +17,8 @@ using TetrisClient.gameLogic.Bomb;
 using TetrisClient.gameLogic.Level;
 using TetrisClient.gameLogic.Tetromino;
 using static System.Formats.Asn1.AsnWriter;
+using TetrisClient.gameLogic.Facade;
+using TetrisClient.gameLogic.Strategy;
 
 namespace TetrisClient
 {
@@ -157,16 +159,19 @@ namespace TetrisClient
 
         private void SetBombButton()
         {
-            Bomb bomb = _engine.GetBomb();
+            Bombs bomb = _engine.GetBomb();
+            Facade facade = new Facade(bomb);
             if (_engine.Score.Points >= 200)
             {
                 BombButton.IsEnabled = true;
-                BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageEnabled(), UriKind.Relative));
+                //BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageEnabled(), UriKind.Relative));
+                BombButtonImage.Source = new BitmapImage(new Uri(FacadeClient.ClientEnableBomb(facade), UriKind.Relative));
             }
             else
             {
                 BombButton.IsEnabled = false;
-                BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageDisabled(), UriKind.Relative));
+                //BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageDisabled(), UriKind.Relative));
+                BombButtonImage.Source = new BitmapImage(new Uri(FacadeClient.ClientDisableBomb(facade), UriKind.Relative));
             }
         }
         /// <summary>
@@ -177,9 +182,9 @@ namespace TetrisClient
             Task.Run(async () =>
                 await _connection.InvokeAsync("SendScore", JsonConvert.SerializeObject(_engine.Score)));
             Task.Run(async () =>
-                await _connection.InvokeAsync("SendBoard", JsonConvert.SerializeObject(_engine.Representation.Board)));
+                await _connection.InvokeAsync("SendBoard", JsonConvert.SerializeObject(TetrisEngine.Representation.Board)));
             Task.Run(async () =>
-                await _connection.InvokeAsync("SendTetromino", JsonConvert.SerializeObject(_engine.Tetromino)));
+                await _connection.InvokeAsync("SendTetromino", JsonConvert.SerializeObject(TetrisEngine.Tetromino)));
             Task.Run(async () =>
                 await _connection.InvokeAsync("SendIsGameOver", _engine.GameOver));
             Task.Run(async () =>
@@ -232,7 +237,7 @@ namespace TetrisClient
                 RenderLandedTetrominos(TetrisGridP2, _enemyBoard);
             }
 
-            RenderTetromino(_engine.Tetromino, TetrisGridP1);
+            RenderTetromino(TetrisEngine.Tetromino, TetrisGridP1);
             RenderTetromino(_engine.CreateGhostTetromino(), TetrisGridP1, 0.30);
 
             if (_enemyTetromino != null)
@@ -283,7 +288,7 @@ namespace TetrisClient
         /// </summary>
         private void RenderLandedTetrominos(Panel grid, int[,] board = null)
         {
-            board ??= _engine.Representation.Board;
+            board ??= TetrisEngine.Representation.Board;
 
             for (var y = 0; y < board.GetLength(0); y++)
                 for (var x = 0; x < board.GetLength(1); x++)
@@ -330,27 +335,39 @@ namespace TetrisClient
             {
                 case Key.Right:
                     _sound2.Play();
-                    _engine.MoveRight();
+                    TetrisEngine.Tetromino.setStrategy(new MoveRight());
+                    TetrisEngine.Tetromino.action();
+                    //_engine.MoveRight();
                     break;
                 case Key.Left:
                     _sound2.Play();
-                    _engine.MoveLeft();
+                    TetrisEngine.Tetromino.setStrategy(new MoveLeft());
+                    TetrisEngine.Tetromino.action();
+                    //_engine.MoveLeft();
                     break;
                 case Key.Up:
                     _sound2.Play();
-                    _engine.HandleRotation("UP");
+                    TetrisEngine.Tetromino.setStrategy(new RotationUp());
+                    TetrisEngine.Tetromino.action();
+                    //_engine.HandleRotation("UP");
                     break;
                 case Key.Down:
                     _sound2.Play();
-                    _engine.HandleRotation("DOWN");
+                    TetrisEngine.Tetromino.setStrategy(new RotationDown());
+                    TetrisEngine.Tetromino.action();
+                    //_engine.HandleRotation("DOWN");
                     break;
                 case Key.Space:
                     _sound1.Play();
-                    _engine.HardDrop();
+                    TetrisEngine.Tetromino.setStrategy(new HardDrop());
+                    TetrisEngine.Tetromino.action();
+                    //_engine.HardDrop();
                     break;
                 case Key.LeftShift:
                     _sound2.Play();
-                    _engine.SoftDrop();
+                    TetrisEngine.Tetromino.setStrategy(new SoftDrop());
+                    TetrisEngine.Tetromino.action();
+                    //_engine.SoftDrop();
                     break;
                 default:
                     return;

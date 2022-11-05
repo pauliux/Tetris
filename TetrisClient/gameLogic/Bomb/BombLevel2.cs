@@ -7,7 +7,7 @@ using TetrisClient.gameLogic.Factory;
 
 namespace TetrisClient.gameLogic.Bomb
 {
-    public class BombLevel2 : Bomb
+    public class BombLevel2 : Bombs
     {
         private const int Level = 2;
         private const string ImageEnabled = "/Resources/bomb4.png";
