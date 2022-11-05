@@ -474,5 +474,16 @@
 
         </Button>
 
+        <Button 
+            x:Name="BombEvilButton"
+            IsEnabled="False"
+            Grid.Column="3" HorizontalAlignment="Left" Margin="229,189,0,0" VerticalAlignment="Top" Height="61" Width="61">
+            <Image x:Name="BombEvilButtonImage" Source="/Resources/bomb1_evil_disabled.png"/>
+            <Button.Effect>
+                <DropShadowEffect />
+            </Button.Effect>
+
+        </Button>
+
     </Grid>
 </Window>
