@@ -63,7 +63,7 @@ namespace TetrisClient
             RenderTetromino(_engine.CreateGhostTetromino(), TetrisGrid, 0.30);
 
             NextGrid.Children.Clear();
-            RenderTetromino(_engine.NextTetromino, NextGrid);
+            RenderTetromino(TetrisEngine.NextTetromino, NextGrid);
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace TetrisClient
         /// </summary>
         private void UpdateGame()
         {
-            if (_engine.GameOver)
+            if (TetrisEngine.GameOver)
             {
                 _renderTimer.IsEnabled = false;
                 GameOverText.Visibility = Visibility.Visible;
@@ -128,9 +128,9 @@ namespace TetrisClient
 
             _renderTimer.Interval = _engine.GameTimer.Interval;
 
-            LevelTextBlock.Text = $"{_engine.Score.Level}";
-            ScoreTextBlock.Text = $"{_engine.Score.Points}";
-            LinesTextBlock.Text = $"{_engine.Score.Rows}";
+            LevelTextBlock.Text = $"{TetrisEngine.Score.Level}";
+            ScoreTextBlock.Text = $"{TetrisEngine.Score.Points}";
+            LinesTextBlock.Text = $"{TetrisEngine.Score.Rows}";
 
             RenderGrid();
         }

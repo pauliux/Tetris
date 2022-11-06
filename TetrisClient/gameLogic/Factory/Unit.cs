@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TetrisClient.gameLogic.Observers;
 
 namespace TetrisClient.gameLogic.Factory
 {
-    public abstract class Unit : ICloneable
+    public abstract class Unit : Observer, ICloneable
     {
         private int level;
 
@@ -35,7 +36,17 @@ namespace TetrisClient.gameLogic.Factory
         public void action()
         {
             this.abstractStrategy.moveDifferently();
+            string actionName = "Tetromino changed position!";
+
+            if (this.subject != null)
+            {
+                this.subject.receiveMessage(actionName);
+            }
         }
 
+        public override void update(string command)
+        {
+            Console.WriteLine("Tetromino changed position!");
+        }
     }
 }

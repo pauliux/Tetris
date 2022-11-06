@@ -21,6 +21,7 @@ using static System.Formats.Asn1.AsnWriter;
 using TetrisClient.gameLogic.Facade;
 using TetrisClient.gameLogic.Strategy;
 using TetrisClient.gameLogic.Adapter;
+using TetrisClient.gameLogic.Observers;
 
 namespace TetrisClient
 {
@@ -37,6 +38,8 @@ namespace TetrisClient
         private TetrominoJsonObject _enemyNextTetromino;
         private Score _enemyScore;
         private bool _enemyGameOver;
+
+        private static Subject subject = new ConcreteSubject();
 
         public MultiplayerWindow()
         {
@@ -96,9 +99,9 @@ namespace TetrisClient
         private void GetEnemyScore(String score)
         {
             _enemyScore = JsonConvert.DeserializeObject<Score>(score);
-            if (_enemyScore != null && _enemyScore.Level > _engine.Score.Level)
+            if (_enemyScore != null && _enemyScore.Level > TetrisEngine.Score.Level)
             {
-                _engine.Score.ForceLevelUpdate = true;
+                TetrisEngine.Score.ForceLevelUpdate = true;
             }
         }
 
@@ -107,6 +110,7 @@ namespace TetrisClient
             Dispatcher.Invoke(() => { ReadyButton.Visibility = Visibility.Hidden; });
             Dispatcher.Invoke(() => { ReadyButton.Visibility = Visibility.Hidden; });
             _engine.StartGame(seed);
+            subject.subscribe(TetrisEngine.Tetromino);
             Timer();
         }
 
@@ -157,8 +161,8 @@ namespace TetrisClient
         {
             Bombs bomb = _engine.GetBomb();
             Facade facade = new Facade(bomb);
-            Target angelBomb = new Adapter("angel", _engine.Score.Level);
-            if (_engine.Score.Points >= angelBomb.GetInformationCurrentScore())
+            Target angelBomb = new Adapter("angel", TetrisEngine.Score.Level);
+            if (TetrisEngine.Score.Points >= angelBomb.GetInformationCurrentScore())
             {
                 BombButton.IsEnabled = true;
                 //BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageEnabled(), UriKind.Relative));
@@ -176,8 +180,8 @@ namespace TetrisClient
         {
             Bombs evilBomb = _engine.GetEvilBomb();
             Facade facade = new Facade(evilBomb);
-            Target devilBomb = new Adapter("devil", _engine.Score.Level);
-            if (_engine.Score.Points >= devilBomb.GetInformationCurrentScore())
+            Target devilBomb = new Adapter("devil", TetrisEngine.Score.Level);
+            if (TetrisEngine.Score.Points >= devilBomb.GetInformationCurrentScore())
             {
                 BombEvilButton.IsEnabled = true;
                 //BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageEnabled(), UriKind.Relative));
@@ -198,15 +202,15 @@ namespace TetrisClient
         {
             Singleton singleton = Singleton.GetInstance();
             Task.Run(async () =>
-         await singleton.getConnection().InvokeAsync("SendScore", JsonConvert.SerializeObject(_engine.Score)));
+         await singleton.getConnection().InvokeAsync("SendScore", JsonConvert.SerializeObject(TetrisEngine.Score)));
             Task.Run(async () =>
                 await singleton.getConnection().InvokeAsync("SendBoard", JsonConvert.SerializeObject(TetrisEngine.Representation.Board)));
             Task.Run(async () =>
                 await singleton.getConnection().InvokeAsync("SendTetromino", JsonConvert.SerializeObject(TetrisEngine.Tetromino)));
             Task.Run(async () =>
-                await singleton.getConnection().InvokeAsync("SendIsGameOver", _engine.GameOver));
+                await singleton.getConnection().InvokeAsync("SendIsGameOver", TetrisEngine.GameOver));
             Task.Run(async () =>
-                await singleton.getConnection().InvokeAsync("SendNextTetromino", JsonConvert.SerializeObject(_engine.NextTetromino)));
+                await singleton.getConnection().InvokeAsync("SendNextTetromino", JsonConvert.SerializeObject(TetrisEngine.NextTetromino)));
         }
 
 
@@ -215,7 +219,7 @@ namespace TetrisClient
         /// </summary>
         private void CheckGameOver()
         {
-            if (_engine.GameOver)
+            if (TetrisEngine.GameOver)
             {
                 Dispatcher.Invoke(() => { GameOverTextP1.Visibility = Visibility.Visible; });
                 Dispatcher.Invoke(() => { YouWonTextP2.Visibility = Visibility.Visible; });
@@ -231,9 +235,9 @@ namespace TetrisClient
 
         private void SetTextBlocks()
         {
-            LevelTextBlockP1.Text = $"{_engine.Score.Level}";
-            ScoreTextBlockP1.Text = $"{_engine.Score.Points}";
-            LinesTextBlockP1.Text = $"{_engine.Score.Rows}";
+            LevelTextBlockP1.Text = $"{TetrisEngine.Score.Level}";
+            ScoreTextBlockP1.Text = $"{TetrisEngine.Score.Points}";
+            LinesTextBlockP1.Text = $"{TetrisEngine.Score.Rows}";
 
             if (_enemyScore == null) return;
             LevelTextBlockP2.Text = $"{_enemyScore.Level}";
@@ -263,7 +267,7 @@ namespace TetrisClient
 
 
             NextGridP1.Children.Clear();
-            RenderTetromino(_engine.NextTetromino, NextGridP1);
+            RenderTetromino(TetrisEngine.NextTetromino, NextGridP1);
 
             if (_enemyNextTetromino == null) return;
             NextGridP2.Children.Clear();
@@ -346,7 +350,7 @@ namespace TetrisClient
         protected override void OnKeyDown(KeyEventArgs e)
         {
             if (!_renderTimer.IsEnabled) return;
-            if (_engine.GameOver) return;
+            if (TetrisEngine.GameOver) return;
 
             // In-game actions
             switch (e.Key)

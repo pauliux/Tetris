@@ -16,10 +16,10 @@ namespace TetrisClient
     {
         public static Representation Representation;
         public static TetrominoFigure Tetromino;
-        public TetrominoFigure NextTetromino;
-        public Score Score;
+        public static TetrominoFigure NextTetromino;
+        public static Score Score;
         public DispatcherTimer GameTimer;
-        public bool GameOver;
+        public static bool GameOver;
         private Random _random;
         private User user;
 
