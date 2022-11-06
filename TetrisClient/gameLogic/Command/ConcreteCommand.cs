@@ -16,15 +16,17 @@ namespace TetrisClient.gameLogic.Command
         Representation representation;
         Receiver receiver;
         AbstractFactory abstractFactory;
+        int removeLine;
         // Constructor
         public ConcreteCommand(Receiver receiver,
-            string @operator, TetrominoFigure operand, Representation representation, AbstractFactory abstractFactory)
+            string @operator, TetrominoFigure operand, Representation representation, AbstractFactory abstractFactory, int removeLine)
         {
             this.receiver = receiver;
             this.@operator = @operator;
             this.operand = operand;
             this.representation = representation;
             this.abstractFactory = abstractFactory;
+            this.removeLine = removeLine;
         }
         // Gets operator
         public string Operator
@@ -43,12 +45,12 @@ namespace TetrisClient.gameLogic.Command
         // Execute new command
         public override void Execute()
         {
-            receiver.Operation(@operator, operand, representation, abstractFactory);
+            receiver.Operation(@operator, operand, representation, abstractFactory, removeLine);
         }
         // Unexecute last command
         public override void UnExecute()
         {
-            receiver.Operation(Undo(@operator), operand, representation, abstractFactory);
+            receiver.Operation(Undo(@operator), operand, representation, abstractFactory, removeLine);
         }
         public override TetrominoFigure GetTetrominoFigure()
         {

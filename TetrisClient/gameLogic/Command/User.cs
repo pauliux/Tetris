@@ -42,10 +42,10 @@ namespace TetrisClient.gameLogic.Command
             }
         }
 
-        public void Compute(string @operator, TetrominoFigure operand, Representation representation, AbstractFactory abstractFactory)
+        public void Compute(string @operator, TetrominoFigure operand, Representation representation, AbstractFactory abstractFactory, int removeLine)
         {
             // Create command operation and execute it
-            Command command = new ConcreteCommand(receiver, @operator, operand, representation, abstractFactory);
+            Command command = new ConcreteCommand(receiver, @operator, operand, representation, abstractFactory, removeLine);
             command.Execute();
             // Add command to undo list
             commands.Insert(current,command);

@@ -20,6 +20,7 @@ using TetrisClient.gameLogic.Singleton;
 using static System.Formats.Asn1.AsnWriter;
 using TetrisClient.gameLogic.Facade;
 using TetrisClient.gameLogic.Strategy;
+using TetrisClient.gameLogic.Adapter;
 
 namespace TetrisClient
 {
@@ -156,7 +157,8 @@ namespace TetrisClient
         {
             Bombs bomb = _engine.GetBomb();
             Facade facade = new Facade(bomb);
-            if (_engine.Score.Points >= 200)
+            Target angelBomb = new Adapter("angel", _engine.Score.Level);
+            if (_engine.Score.Points >= angelBomb.GetInformationCurrentScore())
             {
                 BombButton.IsEnabled = true;
                 //BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageEnabled(), UriKind.Relative));
@@ -174,7 +176,8 @@ namespace TetrisClient
         {
             Bombs evilBomb = _engine.GetEvilBomb();
             Facade facade = new Facade(evilBomb);
-            if (_engine.Score.Points >= 200)
+            Target devilBomb = new Adapter("devil", _engine.Score.Level);
+            if (_engine.Score.Points >= devilBomb.GetInformationCurrentScore())
             {
                 BombEvilButton.IsEnabled = true;
                 //BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageEnabled(), UriKind.Relative));

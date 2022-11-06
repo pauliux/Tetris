@@ -12,7 +12,7 @@ namespace TetrisClient.gameLogic.Command
     {
         private TetrominoFigure Tetromino;
         private Representation Representation;
-        public void Operation(string @operator, TetrominoFigure tetromino, Representation representation, AbstractFactory abstractFactory)
+        public void Operation(string @operator, TetrominoFigure tetromino, Representation representation, AbstractFactory abstractFactory, int remove)
         {
             var offsetsToTest = new[] { 0, 1, -1, 2, -2 };
             switch (@operator)
@@ -59,19 +59,13 @@ namespace TetrisClient.gameLogic.Command
 
                     }
                     break;
-                case "ANGELBOMB2":
+                case "ANGELBOMB":
                     ICollection<int> temp2 = new List<int>();
-                    temp2.Add(15);
-                    temp2.Add(14);
+                    for(int i = 15; i > 15 - remove; i--)
+                    {
+                        temp2.Add(i);
+                    }
                     representation.DeleteRow(temp2);
-                    break;
-                case "ANGELBOMB4":
-                    ICollection<int> temp4 = new List<int>();
-                    temp4.Add(15);
-                    temp4.Add(14);
-                    temp4.Add(13);
-                    temp4.Add(12);
-                    representation.DeleteRow(temp4);
                     break;
             }
 

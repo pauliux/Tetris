@@ -8,12 +8,26 @@ namespace TetrisClient.gameLogic.Adapter
 {
     public class Adapter : Target
     {
-        private Adaptee adaptee = new Adaptee();
-        public override void Request()
+        private Adaptee adaptee;
+        private string typee;
+        public Adapter(string type, int level)
         {
-            // Possibly do some other work
-            // and then call SpecificRequest
-            adaptee.SpecificRequest();
+            typee = type;
+            this.level = level;
+        }
+        public override int GetInformationLinesToChange()
+        {
+            adaptee = new Adaptee();
+
+            linesToChange = adaptee.GetBombsEffect(typee, level);
+            return linesToChange;
+        }
+        public override int GetInformationCurrentScore()
+        {
+            adaptee = new Adaptee();
+            linesToChange = adaptee.GetBombsEffect(typee, level);
+            score = adaptee.GetBombsScore(typee, linesToChange, level);
+            return score;
         }
     }
 }

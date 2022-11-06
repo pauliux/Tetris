@@ -8,9 +8,18 @@ namespace TetrisClient.gameLogic.Adapter
 {
     public class Target
     {
-        public virtual void Request()
+        protected int linesToChange;
+        protected int level;
+        protected string type;
+        protected int score;
+
+        public virtual int GetInformationLinesToChange()
         {
-            Console.WriteLine("Called Target Request()");
+            return 0;
+        }
+        public virtual int GetInformationCurrentScore()
+        {
+            return 0;
         }
     }
 }
