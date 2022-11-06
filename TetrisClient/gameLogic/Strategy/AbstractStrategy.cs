@@ -32,7 +32,7 @@ namespace TetrisClient
             var offsetsToTest = new[] { 0, 1, -1, 2, -2 };
             foreach (var offset in offsetsToTest)
             {
-                var testTetromino = (Tetromino)TetrisEngine._abstractFactory.getTetromino(TetrisEngine.Tetromino.OffsetX, TetrisEngine.Tetromino.OffsetY, TetrisEngine.Tetromino.Matrix);
+                var testTetromino = (TetrominoFigure)TetrisEngine._abstractFactory.getTetromino(TetrisEngine.Tetromino.OffsetX, TetrisEngine.Tetromino.OffsetY, TetrisEngine.Tetromino.Matrix);
                 if (TetrisEngine.Representation.CheckTurnCollision(testTetromino, type, offset)) continue;
                 TetrisEngine.Tetromino.OffsetX += offset;
                 TetrisEngine.Tetromino.Matrix = type switch

@@ -9,7 +9,7 @@ namespace TetrisClient.gameLogic.Facade
 {
     class FacadeClient
     {
-        private Tetromino.Tetromino tetromino;
+        private TetrominoFigure tetromino;
         public static string ClientEnableBomb(Facade facade)
         {
             return facade.EnableBombPic();
@@ -18,7 +18,7 @@ namespace TetrisClient.gameLogic.Facade
         {
             return facade.DisableBombPic();
         }
-        public static void PutTetromino(Facade facade, Tetromino.Tetromino tetromino)
+        public static void PutTetromino(Facade facade, TetrominoFigure tetromino)
         {
             facade.PutTetromino(tetromino);
         }

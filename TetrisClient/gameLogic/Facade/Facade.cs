@@ -7,7 +7,7 @@ namespace TetrisClient.gameLogic.Facade
     {
         protected Bombs bombs;
         protected Representation representation;
-        protected TetrisClient.gameLogic.Tetromino.Tetromino Tetromino;
+        protected TetrominoFigure Tetromino;
 
         public Facade(Representation representation)
         {
@@ -17,7 +17,7 @@ namespace TetrisClient.gameLogic.Facade
         {
             this.bombs = bombs;
         }
-        public void PutTetromino(Tetromino.Tetromino Tetromino)
+        public void PutTetromino(TetrominoFigure Tetromino)
         {
             representation.PutTetrominoInBoard(Tetromino);
         }

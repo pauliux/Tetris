@@ -195,11 +195,11 @@ namespace TetrisClient
         {
             Singleton singleton = Singleton.GetInstance();
             Task.Run(async () =>
-                await singleton.getConnection().InvokeAsync("SendScore", JsonConvert.SerializeObject(_engine.Score)));
+         await singleton.getConnection().InvokeAsync("SendScore", JsonConvert.SerializeObject(_engine.Score)));
             Task.Run(async () =>
-                await singleton.getConnection().InvokeAsync("SendBoard", JsonConvert.SerializeObject(_engine.Representation.Board)));
+                await singleton.getConnection().InvokeAsync("SendBoard", JsonConvert.SerializeObject(TetrisEngine.Representation.Board)));
             Task.Run(async () =>
-                await singleton.getConnection().InvokeAsync("SendTetromino", JsonConvert.SerializeObject(_engine.Tetromino)));
+                await singleton.getConnection().InvokeAsync("SendTetromino", JsonConvert.SerializeObject(TetrisEngine.Tetromino)));
             Task.Run(async () =>
                 await singleton.getConnection().InvokeAsync("SendIsGameOver", _engine.GameOver));
             Task.Run(async () =>
@@ -358,19 +358,27 @@ namespace TetrisClient
                     break;
                 case Key.Up:
                     _sound2.Play();
-                    _engine.HandleRotation("UP");
+                    TetrisEngine.Tetromino.setStrategy(new RotationUp());
+                    TetrisEngine.Tetromino.action();
+                    //_engine.HandleRotation("UP");
                     break;
                 case Key.Down:
                     _sound2.Play();
-                    _engine.HandleRotation("DOWN");
+                    TetrisEngine.Tetromino.setStrategy(new RotationDown());
+                    TetrisEngine.Tetromino.action();
+                    //_engine.HandleRotation("DOWN");
                     break;
                 case Key.Space:
                     _sound1.Play();
-                    _engine.HardDrop();
+                    TetrisEngine.Tetromino.setStrategy(new HardDrop());
+                    TetrisEngine.Tetromino.action();
+                    //_engine.HardDrop();
                     break;
                 case Key.LeftShift:
                     _sound2.Play();
-                    _engine.SoftDrop();
+                    TetrisEngine.Tetromino.setStrategy(new SoftDrop());
+                    TetrisEngine.Tetromino.action();
+                    //_engine.SoftDrop();
                     break;
                 case Key.Z:
                     _engine.Undo();

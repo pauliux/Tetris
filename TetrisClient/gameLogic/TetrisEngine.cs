@@ -14,8 +14,8 @@ namespace TetrisClient
     public class TetrisEngine
     {
         public static Representation Representation;
-        public static Tetromino Tetromino;
-        public Tetromino NextTetromino;
+        public static TetrominoFigure Tetromino;
+        public TetrominoFigure NextTetromino;
         public Score Score;
         public DispatcherTimer GameTimer;
         public bool GameOver;
@@ -112,7 +112,7 @@ namespace TetrisClient
 
         public void AngelBomb()
         {
-            Bomb bomb = GetBomb();
+            Bombs bomb = GetBomb();
             if (Score.Points > 200)
             {
                 Score.Points = Score.Points - 200;
@@ -154,7 +154,7 @@ namespace TetrisClient
         /// <returns>The ghost tetromino</returns>
         public TetrominoFigure CreateGhostTetromino()
         {
-            var ghostTetromino = (Tetromino)_abstractFactory.getTetromino(Tetromino.OffsetX,
+            var ghostTetromino = (TetrominoFigure)_abstractFactory.getTetromino(Tetromino.OffsetX,
               Tetromino.OffsetY,
               Tetromino.Matrix);
             while (Representation.IsInRangeOfBoard(ghostTetromino, 0, 1) &&
