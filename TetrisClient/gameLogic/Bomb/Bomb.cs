@@ -11,11 +11,13 @@ namespace TetrisClient.gameLogic.Bomb
     {
         private string _imageEnabled;
         private string _imageDisabled;
+        private int level;
 
         protected Bombs(int level, string imageEnabled, string imageDisabled) : base(level)
         {
             _imageEnabled = imageEnabled;
             _imageDisabled = imageDisabled;
+            this.level = level;
         }
 
         public string GetImageEnabled()
@@ -26,6 +28,11 @@ namespace TetrisClient.gameLogic.Bomb
         public string GetImageDisabled()
         {
             return _imageDisabled;
+        }
+
+        public int GetLevel()
+        {
+            return level;
         }
     }
 }

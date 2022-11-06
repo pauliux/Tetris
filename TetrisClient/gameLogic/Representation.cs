@@ -51,7 +51,7 @@ namespace TetrisClient
         /// <param name="givenXOffset">Offset from the left side of the board</param>
         /// <param name="givenYOffset">Offset from the bottom side of the board</param>
         /// <returns></returns>
-        public bool IsInRangeOfBoard(Tetromino tetromino, int givenXOffset = 0, int givenYOffset = 0)
+        public bool IsInRangeOfBoard(TetrominoFigure tetromino, int givenXOffset = 0, int givenYOffset = 0)
         {
             // Checks if any of the tetromino's blocks is out of bounds
             for (var y = 0; y < tetromino.Matrix.Value.GetLength(0); y++) //dimension 0 = y
@@ -78,7 +78,7 @@ namespace TetrisClient
         /// <param name="givenXOffset">Offset from the left side of the board</param>
         /// <param name="givenYOffset">Offset from the bottom side of the board</param>
         /// <returns></returns>
-        public bool CheckCollision(Tetromino tetromino, int givenXOffset = 0, int givenYOffset = 0)
+        public bool CheckCollision(TetrominoFigure tetromino, int givenXOffset = 0, int givenYOffset = 0)
         {
             var collided = false;
             for (var y = 0; y < Board.GetLength(0); y++) //dimension 0 = y
@@ -103,7 +103,7 @@ namespace TetrisClient
         /// <param name="type">Key pressed</param>
         /// <param name="givenXOffset">Given offset</param>
         /// <returns>true if a collision has occured with the recreated Tetromino</returns>
-        public bool CheckTurnCollision(Tetromino testTetromino, string type, int givenXOffset = 0)
+        public bool CheckTurnCollision(TetrominoFigure testTetromino, string type, int givenXOffset = 0)
         {
             if (type is not "UP" and not "DOWN" ) return false; 
             
@@ -122,7 +122,7 @@ namespace TetrisClient
         /// Mounts the current <paramref name="tetromino"/> in the board representation.
         /// </summary>
         /// <param name="tetromino">Tetromino object</param>
-        public void PutTetrominoInBoard(Tetromino tetromino)
+        public void PutTetrominoInBoard(TetrominoFigure tetromino)
         {
             //Board = tetromino.Matrix.Value;
             // Loop trough all blocks in the tetromino
@@ -176,6 +176,19 @@ namespace TetrisClient
             }
 
             return rowsDeleted;
+        }
+
+        public void DeleteRow(ICollection<int> fullRows)
+        {
+            for (var y = 0; y < Board.GetLength(0); y++)
+            {
+                if (!fullRows.Contains(y)) continue;
+                for (var x = 0; x < Board.GetLength(1); x++)
+                    Board[y, x] = 0;
+
+                DropFloatingTetrominos(y);
+                fullRows.Remove(y);
+            }
         }
 
         /// <summary>

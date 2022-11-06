@@ -16,6 +16,7 @@ using TetrisClient.gameLogic;
 using TetrisClient.gameLogic.Bomb;
 using TetrisClient.gameLogic.Level;
 using TetrisClient.gameLogic.Tetromino;
+using TetrisClient.gameLogic.Singleton;
 using static System.Formats.Asn1.AsnWriter;
 using TetrisClient.gameLogic.Facade;
 using TetrisClient.gameLogic.Strategy;
@@ -24,7 +25,6 @@ namespace TetrisClient
 {
     public partial class MultiplayerWindow
     {
-        private HubConnection _connection;
         private TetrisEngine _engine = new();
         private DispatcherTimer _renderTimer;
 
@@ -40,22 +40,14 @@ namespace TetrisClient
         public MultiplayerWindow()
         {
             InitializeComponent();
-
-            // Url that TetrisHub will run on.
-            const string url = "http://127.0.0.1:5000/TetrisHub";
-
-            // The Builder that helps us create the connection.
-            _connection = new HubConnectionBuilder()
-                .WithUrl(url)
-                .WithAutomaticReconnect()
-                .Build();
+            Singleton singleton = Singleton.GetInstance();
 
             CreateSubscriptions();
 
             // It is mandatory that the connection is started *after* all event listeners are set.
             // If the method this occurs in happens to be `async`, Task.Run can be removed.
             // It is necessary because of the constructor.
-            Task.Run(async () => await _connection.StartAsync());
+            Task.Run(async () => await singleton.getConnection().StartAsync());
         }
 
         /// <summary>
@@ -65,12 +57,13 @@ namespace TetrisClient
         /// <param name="e"></param>
         private async void StartGame_OnClick(object sender, RoutedEventArgs e)
         {
+            Singleton singleton = Singleton.GetInstance();
             // If the connection isn't initialized, nothing can be sent to it.
-            if (_connection.State != HubConnectionState.Connected) return;
+            if (singleton.getConnection().State != HubConnectionState.Connected) return;
             var seed = Guid.NewGuid().GetHashCode();
 
             // Calls `ReadyUp` from the TetrisHub.cs and gives the int it expects
-            await _connection.InvokeAsync("ReadyUp", seed);
+            await singleton.getConnection().InvokeAsync("ReadyUp", seed);
         }
 
 
@@ -79,22 +72,23 @@ namespace TetrisClient
         /// </summary>
         private void CreateSubscriptions()
         {
+            Singleton singleton = Singleton.GetInstance();
             // The first parameter has to be the same as the one in TetrisHub.cs
             // The type specified between <..> determines what the type of the parameter `seed` is.
             // This way the code below corresponds with the method in TetrisHub.cs
-            _connection.On<int>("ReadyUp", seed =>
-                Task.Run(async () => await _connection.InvokeAsync("StartGame", seed)));
-            _connection.On<int>("StartGame", seed => Dispatcher.BeginInvoke(new Action(() =>
+            singleton.getConnection().On<int>("ReadyUp", seed =>
+                Task.Run(async () => await singleton.getConnection().InvokeAsync("StartGame", seed)));
+            singleton.getConnection().On<int>("StartGame", seed => Dispatcher.BeginInvoke(new Action(() =>
                 StartGame(seed))));
-            _connection.On<string>("SendBoard", board => Dispatcher.BeginInvoke(new Action(() =>
+            singleton.getConnection().On<string>("SendBoard", board => Dispatcher.BeginInvoke(new Action(() =>
                 _enemyBoard = JsonConvert.DeserializeObject<int[,]>(board))));
-            _connection.On<string>("SendTetromino", tetromino => Dispatcher.BeginInvoke(new Action(() =>
+            singleton.getConnection().On<string>("SendTetromino", tetromino => Dispatcher.BeginInvoke(new Action(() =>
                 _enemyTetromino = JsonConvert.DeserializeObject<TetrominoJsonObject>(tetromino))));
-            _connection.On<string>("SendNextTetromino", tetromino => Dispatcher.BeginInvoke(new Action(() =>
+            singleton.getConnection().On<string>("SendNextTetromino", tetromino => Dispatcher.BeginInvoke(new Action(() =>
                 _enemyNextTetromino = JsonConvert.DeserializeObject<TetrominoJsonObject>(tetromino))));
-            _connection.On<string>("SendScore", score => Dispatcher.BeginInvoke(new Action(() =>
+            singleton.getConnection().On<string>("SendScore", score => Dispatcher.BeginInvoke(new Action(() =>
                GetEnemyScore(score))));
-            _connection.On<bool>("SendIsGameOver", status => Dispatcher.BeginInvoke(new Action(() =>
+            singleton.getConnection().On<bool>("SendIsGameOver", status => Dispatcher.BeginInvoke(new Action(() =>
                 _enemyGameOver = status)));
         }
 
@@ -199,16 +193,17 @@ namespace TetrisClient
         /// </summary>
         private void SendData()
         {
+            Singleton singleton = Singleton.GetInstance();
             Task.Run(async () =>
-                await _connection.InvokeAsync("SendScore", JsonConvert.SerializeObject(_engine.Score)));
+                await singleton.getConnection().InvokeAsync("SendScore", JsonConvert.SerializeObject(_engine.Score)));
             Task.Run(async () =>
-                await _connection.InvokeAsync("SendBoard", JsonConvert.SerializeObject(TetrisEngine.Representation.Board)));
+                await singleton.getConnection().InvokeAsync("SendBoard", JsonConvert.SerializeObject(_engine.Representation.Board)));
             Task.Run(async () =>
-                await _connection.InvokeAsync("SendTetromino", JsonConvert.SerializeObject(TetrisEngine.Tetromino)));
+                await singleton.getConnection().InvokeAsync("SendTetromino", JsonConvert.SerializeObject(_engine.Tetromino)));
             Task.Run(async () =>
-                await _connection.InvokeAsync("SendIsGameOver", _engine.GameOver));
+                await singleton.getConnection().InvokeAsync("SendIsGameOver", _engine.GameOver));
             Task.Run(async () =>
-                await _connection.InvokeAsync("SendNextTetromino", JsonConvert.SerializeObject(_engine.NextTetromino)));
+                await singleton.getConnection().InvokeAsync("SendNextTetromino", JsonConvert.SerializeObject(_engine.NextTetromino)));
         }
 
 
@@ -280,7 +275,7 @@ namespace TetrisClient
         /// <param name="tetromino"></param>
         /// <param name="grid">TetrisGrid or NextGrid for next tetromino</param>
         /// <param name="opacity">Opacity, used for rendering a ghost tetromino</param>
-        private void RenderTetromino(Tetromino tetromino, Panel grid, double opacity = 1)
+        private void RenderTetromino(TetrominoFigure tetromino, Panel grid, double opacity = 1)
         {
             tetromino.CalculatePositions().ForEach(coordinate =>
             {
@@ -299,7 +294,7 @@ namespace TetrisClient
             Creator creator = new LevelCreator();
             Level level = creator.GetLevel(_enemyScore.Level);
             AbstractFactory abstractFactory = level.GetAbstractFactory();
-            Tetromino generatedTetromino = (Tetromino)abstractFactory.getTetromino(tetromino.OffsetX, tetromino.OffsetY, tetromino.Matrix);
+            TetrominoFigure generatedTetromino = (TetrominoFigure)abstractFactory.getTetromino(tetromino.OffsetX, tetromino.OffsetY, tetromino.Matrix);
             RenderTetromino(generatedTetromino, grid, opacity);
         }
 
@@ -355,39 +350,33 @@ namespace TetrisClient
             {
                 case Key.Right:
                     _sound2.Play();
-                    TetrisEngine.Tetromino.setStrategy(new MoveRight());
-                    TetrisEngine.Tetromino.action();
-                    //_engine.MoveRight();
+                    _engine.MoveRight();
                     break;
                 case Key.Left:
                     _sound2.Play();
-                    TetrisEngine.Tetromino.setStrategy(new MoveLeft());
-                    TetrisEngine.Tetromino.action();
-                    //_engine.MoveLeft();
+                    _engine.MoveLeft();
                     break;
                 case Key.Up:
                     _sound2.Play();
-                    TetrisEngine.Tetromino.setStrategy(new RotationUp());
-                    TetrisEngine.Tetromino.action();
-                    //_engine.HandleRotation("UP");
+                    _engine.HandleRotation("UP");
                     break;
                 case Key.Down:
                     _sound2.Play();
-                    TetrisEngine.Tetromino.setStrategy(new RotationDown());
-                    TetrisEngine.Tetromino.action();
-                    //_engine.HandleRotation("DOWN");
+                    _engine.HandleRotation("DOWN");
                     break;
                 case Key.Space:
                     _sound1.Play();
-                    TetrisEngine.Tetromino.setStrategy(new HardDrop());
-                    TetrisEngine.Tetromino.action();
-                    //_engine.HardDrop();
+                    _engine.HardDrop();
                     break;
                 case Key.LeftShift:
                     _sound2.Play();
-                    TetrisEngine.Tetromino.setStrategy(new SoftDrop());
-                    TetrisEngine.Tetromino.action();
-                    //_engine.SoftDrop();
+                    _engine.SoftDrop();
+                    break;
+                case Key.Z:
+                    _engine.Undo();
+                    break;
+                case Key.B:
+                    _engine.AngelBomb();
                     break;
                 default:
                     return;
