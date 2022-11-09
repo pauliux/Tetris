@@ -46,6 +46,7 @@ namespace TetrisClient
             Timer();
             NewTetromino();
         }
+
         public Bombs GetBomb()
         {
             return (Bombs)_abstractFactory.getBomb();

@@ -8,7 +8,7 @@ using TetrisClient.gameLogic.Tetromino;
 
 namespace TetrisClient.gameLogic.Level
 {
-    internal class Level1 : Level
+    public class Level1 : Level
     {
         public override AbstractFactory GetAbstractFactory()
         {
