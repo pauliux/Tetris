@@ -28,6 +28,10 @@ namespace TetrisClient.gameLogic.Command
                 case "UP":
                     foreach (var offset in offsetsToTest)
                     {
+                        if(Tetromino == null)
+                        {
+                            Tetromino = tetromino;
+                        }
                         var testTetromino = (TetrominoFigure)abstractFactory.getTetromino(Tetromino.OffsetX, Tetromino.OffsetY, Tetromino.Matrix);
                         if (representation.CheckTurnCollision(testTetromino, @operator, offset)) continue;
                         tetromino.OffsetX += offset;
@@ -42,6 +46,10 @@ namespace TetrisClient.gameLogic.Command
                 case "DOWN":
                     foreach (var offset in offsetsToTest)
                     {
+                        if (Tetromino == null)
+                        {
+                            Tetromino = tetromino;
+                        }
                         var testTetromino = (TetrominoFigure)abstractFactory.getTetromino(Tetromino.OffsetX, Tetromino.OffsetY, Tetromino.Matrix);
                         if (representation.CheckTurnCollision(testTetromino, @operator, offset)) continue;
                         tetromino.OffsetX += offset;

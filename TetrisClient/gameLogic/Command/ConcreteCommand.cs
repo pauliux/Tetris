@@ -70,8 +70,7 @@ namespace TetrisClient.gameLogic.Command
                 case "UP": return "DOWN";
                 case "DOWN": return "UP";
                 case "HARDDROP": return "HARDJUMP";
-                case "ANGELBOMB2": return "ANGELBOMB";
-                case "ANGELBOMB4": return "ANGELBOMB";
+                case "ANGELBOMB": return "ANGELBOMBHASNO";
                 default:
                     throw new
              ArgumentException("@operator");

@@ -7,25 +7,26 @@ using TetrisClient.gameLogic.Tetromino;
 
 namespace TetrisClient.gameLogic.Command
 {
-    class User
+    public class User
     {
         Receiver receiver = new Receiver();
         List<Command> commands = new List<Command>();
         int current = 0;
 
-        public void Redo(int levels)
-        {
-            Console.WriteLine("\n---- Redo {0} levels ", levels);
-            // Perform redo operations
-            for (int i = 0; i < levels; i++)
-            {
-                if (current < commands.Count - 1)
-                {
-                    Command command = commands[current++];
-                    command.Execute();
-                }
-            }
-        }
+        //public void Redo(int levels)
+        //{
+        //    Console.WriteLine("\n---- Redo {0} levels ", levels);
+        //    // Perform redo operations
+        //    temp = current - levels;
+        //    for (int i = 0; i < levels; i++)
+        //    {
+        //        if (current < commands.Count - 1)
+        //        {
+        //            Command command = commands[current++];
+        //            command.Execute();
+        //        }
+        //    }
+        //}
 
         public void Undo(int levels)
         {
