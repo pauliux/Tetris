@@ -48,6 +48,7 @@ namespace TetrisTests.AdapterTest
             Target angelBomb2 = new Adapter("angel", 1);
             Assert.AreNotEqual(angelBomb1.GetInformationCurrentScore(), angelBomb2.GetInformationCurrentScore());
         }
+
         [Test]
         public void CheckIfLevelHasEffectOnScoreDevilDiffrent()
         {
@@ -56,6 +57,7 @@ namespace TetrisTests.AdapterTest
             Assert.AreNotEqual(devilBomb1.GetInformationCurrentScore(), devilBomb2.GetInformationCurrentScore());
         }
 
+        [Test]
         public void CheckIfLevelHasEffectOnEffectAngelSame()
         {
             Target angelBomb1 = new Adapter("angel", 6);
