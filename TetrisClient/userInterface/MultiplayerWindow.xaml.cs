@@ -365,25 +365,25 @@ namespace TetrisClient
                     break;
                 case Key.Up:
                     _sound2.Play();
-                    TetrisEngine.Tetromino.setStrategy(new RotationUp());
+                    TetrisEngine.Tetromino.setStrategy(new RotationUp(TetrisEngine._abstractFactory, TetrisEngine.Tetromino, TetrisEngine.Representation));
                     TetrisEngine.Tetromino.action();
                     //_engine.HandleRotation("UP");
                     break;
                 case Key.Down:
                     _sound2.Play();
-                    TetrisEngine.Tetromino.setStrategy(new RotationDown());
+                    TetrisEngine.Tetromino.setStrategy(new RotationDown(TetrisEngine._abstractFactory, TetrisEngine.Tetromino, TetrisEngine.Representation));
                     TetrisEngine.Tetromino.action();
                     //_engine.HandleRotation("DOWN");
                     break;
                 case Key.Space:
                     _sound1.Play();
-                    TetrisEngine.Tetromino.setStrategy(new HardDrop());
+                    TetrisEngine.Tetromino.setStrategy(new HardDrop(TetrisEngine._abstractFactory, TetrisEngine.Tetromino, TetrisEngine.Representation));
                     TetrisEngine.Tetromino.action();
                     //_engine.HardDrop();
                     break;
                 case Key.LeftShift:
                     _sound2.Play();
-                    TetrisEngine.Tetromino.setStrategy(new SoftDrop());
+                    TetrisEngine.Tetromino.setStrategy(new SoftDrop(TetrisEngine._abstractFactory, TetrisEngine.Tetromino, TetrisEngine.Representation));
                     TetrisEngine.Tetromino.action();
                     //_engine.SoftDrop();
                     break;

@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TetrisClient.gameLogic.Tetromino;
 
 namespace TetrisClient.gameLogic.Strategy
 {
-    class HardDrop : AbstractStrategy
+    public class HardDrop : AbstractStrategy
     {
+        public HardDrop(AbstractFactory _abstractFactory, TetrominoFigure _tetromino, Representation _representation)
+            : base(_abstractFactory, _tetromino, _representation)
+        {
+        }
+
         public override void moveDifferently()
         {
+
             //Drops the current tetromino to as low as possible
             while (CheckIfPossible())
             {
-                TetrisEngine.Tetromino.OffsetY++;
+                _tetromino.OffsetY++;
             }
         }
     }

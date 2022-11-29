@@ -9,7 +9,7 @@ namespace TetrisClient.gameLogic.Observers
 {
     public abstract class Subject
     {
-        protected List<Observer> list = new List<Observer>();
+        public List<Observer> list = new List<Observer>();
 
         public abstract void send(string command);
 

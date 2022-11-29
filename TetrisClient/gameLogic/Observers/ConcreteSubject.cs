@@ -10,7 +10,7 @@ using TetrisClient.gameLogic.Singleton;
 
 namespace TetrisClient
 {
-    class ConcreteSubject : Subject
+    public class ConcreteSubject : Subject
     {
         private Singleton singleton = Singleton.GetInstance();
 

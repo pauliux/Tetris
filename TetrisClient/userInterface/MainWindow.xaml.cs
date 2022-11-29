@@ -162,37 +162,37 @@ namespace TetrisClient
             switch (e.Key)
             {
                 case Key.Right:
-                    TetrisEngine.Tetromino.setStrategy(new MoveRight());
+                    TetrisEngine.Tetromino.setStrategy(new MoveRight(TetrisEngine._abstractFactory, TetrisEngine.Tetromino, TetrisEngine.Representation));
                     TetrisEngine.Tetromino.action();
                     //_engine.MoveRight();
                     _sound2.Play();
                     break;
                 case Key.Left:
-                    TetrisEngine.Tetromino.setStrategy(new MoveLeft());
+                    TetrisEngine.Tetromino.setStrategy(new MoveLeft(TetrisEngine._abstractFactory, TetrisEngine.Tetromino, TetrisEngine.Representation));
                     TetrisEngine.Tetromino.action();
                     //_engine.MoveLeft();
                     _sound2.Play();
                     break;
                 case Key.Up:
                     _sound2.Play();
-                    TetrisEngine.Tetromino.setStrategy(new RotationUp());
+                    TetrisEngine.Tetromino.setStrategy(new RotationUp(TetrisEngine._abstractFactory, TetrisEngine.Tetromino, TetrisEngine.Representation));
                     TetrisEngine.Tetromino.action();
                     //_engine.HandleRotation("UP");
                     break;
                 case Key.Down:
                     _sound2.Play();
-                    TetrisEngine.Tetromino.setStrategy(new RotationDown());
+                    TetrisEngine.Tetromino.setStrategy(new RotationDown(TetrisEngine._abstractFactory, TetrisEngine.Tetromino, TetrisEngine.Representation));
                     TetrisEngine.Tetromino.action();
                     //_engine.HandleRotation("DOWN");
                     break;
                 case Key.Space:
-                    TetrisEngine.Tetromino.setStrategy(new HardDrop());
+                    TetrisEngine.Tetromino.setStrategy(new HardDrop(TetrisEngine._abstractFactory, TetrisEngine.Tetromino, TetrisEngine.Representation));
                     TetrisEngine.Tetromino.action();
                     //_engine.HardDrop();
                     _sound1.Play();
                     break;
                 case Key.LeftShift:
-                    TetrisEngine.Tetromino.setStrategy(new SoftDrop());
+                    TetrisEngine.Tetromino.setStrategy(new SoftDrop(TetrisEngine._abstractFactory, TetrisEngine.Tetromino, TetrisEngine.Representation));
                     TetrisEngine.Tetromino.action();
                     //_engine.SoftDrop();
                     _sound2.Play();
