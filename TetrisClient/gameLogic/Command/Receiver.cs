@@ -36,8 +36,7 @@ namespace TetrisClient.gameLogic.Command
                         tetromino.OffsetX += offset;
                         tetromino.Matrix = @operator switch
                         {
-                            "UP" => tetromino.Matrix.Rotate90(),
-                            _ => tetromino.Matrix
+                            "UP" => tetromino.Matrix.Rotate90()
                         };
                         break;
                     }
@@ -54,8 +53,7 @@ namespace TetrisClient.gameLogic.Command
                         tetromino.OffsetX += offset;
                         tetromino.Matrix = @operator switch
                         {
-                            "DOWN" => tetromino.Matrix.Rotate90CounterClockwise(),
-                            _ => tetromino.Matrix
+                            "DOWN" => tetromino.Matrix.Rotate90CounterClockwise()
                         };
                         break;
                     }
