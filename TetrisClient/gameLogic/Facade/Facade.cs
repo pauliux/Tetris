@@ -1,8 +1,10 @@
-﻿using TetrisClient.gameLogic.Bomb;
+﻿using System.Diagnostics.CodeAnalysis;
+using TetrisClient.gameLogic.Bomb;
 using TetrisClient.gameLogic.Tetromino;
 
 namespace TetrisClient.gameLogic.Facade
 {
+    [ExcludeFromCodeCoverage]
     public class Facade
     {
         protected Bombs bombs;

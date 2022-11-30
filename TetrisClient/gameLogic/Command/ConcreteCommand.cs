@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TetrisClient.gameLogic;
 using TetrisClient;
 using TetrisClient.gameLogic.Tetromino;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TetrisClient.gameLogic.Command
 {
@@ -29,15 +30,18 @@ namespace TetrisClient.gameLogic.Command
             this.removeLine = removeLine;
         }
         // Gets operator
+        [ExcludeFromCodeCoverage]
         public string Operator
         {
             set { @operator = value; }
         }
         // Get operand
+        [ExcludeFromCodeCoverage]
         public TetrominoFigure Operand
         {
             set { operand = value; }
         }
+        [ExcludeFromCodeCoverage]
         public Representation Representation
         {
             set { representation = value; }
@@ -61,6 +65,7 @@ namespace TetrisClient.gameLogic.Command
             return receiver.getRepresentation();
         }
         // Returns opposite operator for given operator
+        [ExcludeFromCodeCoverage]
         private string Undo(string @operator)
         {
             switch (@operator)
