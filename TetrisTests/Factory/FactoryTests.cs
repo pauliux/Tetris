@@ -12,7 +12,7 @@ namespace TetrisTests.Factory
     {
         private LevelCreator _creator;
 
-        [SetUp]
+        [OneTimeSetUp]
         public void Setup()
         {
             _creator = new LevelCreator();
