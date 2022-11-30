@@ -45,11 +45,7 @@ namespace TetrisTests.Observers
         [Test]
         public void Subscribe()
         {
-            Assert.Multiple(() =>
-            {
-                Assert.That(subject.list.Count, Is.EqualTo(expected.Count));
-            });
-
+            Assert.That(subject.list.Count, Is.EqualTo(expected.Count));
         }
 
         [Test]
@@ -57,10 +53,9 @@ namespace TetrisTests.Observers
         {
             subject.unsubscribe(tetromino1);
             subject.unsubscribe(tetromino2);
-            Assert.Multiple(() =>
-            {
-                Assert.That(subject.list.Count, Is.EqualTo(0));
-            });
+
+            Assert.That(subject.list.Count, Is.EqualTo(0));
+
 
         }
 
@@ -90,10 +85,8 @@ namespace TetrisTests.Observers
             tetromino2.action();
             Subject subject2 = tetromino2.getSubject();
 
-            Assert.Multiple(() =>
-            {
-                Assert.That(subject1, Is.EqualTo(subject2));
-            });
+
+            Assert.That(subject1, Is.EqualTo(subject2));
 
         }
 

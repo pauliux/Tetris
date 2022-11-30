@@ -20,7 +20,7 @@ namespace TetrisClient
     [ExcludeFromCodeCoverage]
     public partial class MainWindow
     {
-        private readonly TetrisEngine _engine = new(new User(), new LevelCreator());
+        private readonly TetrisEngine _engine = new();
         private DispatcherTimer _renderTimer;
         private readonly SoundPlayer _gameOverTune = new(Resource1.GameOver);
         private readonly SoundPlayer _sound1 = new(Resource1.Sound1);

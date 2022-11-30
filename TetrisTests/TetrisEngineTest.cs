@@ -26,8 +26,12 @@ namespace TetrisTests
         private Level1Factory mockLevel1Factory()
         {
             var mockLevel1Factory = new Mock<Level1Factory>();
-            mockLevel1Factory.Setup(ms => ms.getTetromino(4, 0, new Random(It.IsAny<int>())))
-                .Returns((int x, int y, Random random) => new TetrominoLevel1(1, 4,0, random, new TetrominoDecoratorLevel1(new ConcreteTetrominoComponent())));
+            mockLevel1Factory.Setup(ms => ms.getTetromino(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<Random>()))
+                .Returns((int x, int y, Random random) => new TetrominoLevel1(1, x, y, random, new TetrominoDecoratorLevel1(new ConcreteTetrominoComponent())));
+
+            mockLevel1Factory.Setup(ms => ms.getTetromino(It.IsAny<int>(), It.IsAny<int>()))
+                .Returns((int x, int y) => new TetrominoLevel1(1, x, y, new TetrominoDecoratorLevel1(new ConcreteTetrominoComponent())));
+
 
             return mockLevel1Factory.Object;
         }
@@ -57,13 +61,32 @@ namespace TetrisTests
             var levelCreator = mockLevelCreator(level1);
             var user = mockUser();
 
-            _engine = new TetrisEngine(user, levelCreator);
+            _engine = new TetrisEngine(user, levelCreator, new Representation(), new Score());
         }
 
         [Test]
-        public void StartGame()
+        public void StartGameWithSeed()
         {
             _engine.StartGame(123);
+
+            Assert.Multiple(() =>
+            {
+                Assert.IsNotNull(_engine.Tetromino);
+                Assert.IsNotNull(_engine.NextTetromino);
+            });
+        }
+
+
+        [Test]
+        public void StartGameWithoutSeed()
+        {
+            _engine.StartGame();
+
+            Assert.Multiple(() =>
+            {
+                Assert.IsNotNull(_engine.Tetromino);
+                Assert.IsNotNull(_engine.NextTetromino);
+            });
         }
 
         [Test]

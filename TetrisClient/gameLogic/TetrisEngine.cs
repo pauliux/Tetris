@@ -28,16 +28,19 @@ namespace TetrisClient
         private Creator _creator;
         public AbstractFactory _abstractFactory;
 
-        public TetrisEngine(User user, LevelCreator creator)
+        public TetrisEngine(User user, LevelCreator creator, Representation representation, Score score)
         {
             this.user = user;
             this._creator = creator;
+            this.Representation = representation;
+            this.Score = score;
         }
 
         public TetrisEngine()
         {
             this.user = new User();
             this._creator = new LevelCreator();
+            this.Representation = new Representation();
         }
 
         /// <summary>
@@ -50,8 +53,8 @@ namespace TetrisClient
             _abstractFactory = _level.GetAbstractFactory();
             if (seed != null) _random = new Random((int)seed);
             GameOver = false;
-            Representation = new Representation();
-            Score = new Score();
+           
+            
             NextTetromino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
             Timer();
             NewTetromino();
@@ -238,6 +241,7 @@ namespace TetrisClient
         /// Restarts the game
         /// Asks for an extra NewTetromino so that it will not use the one from last game
         /// </summary>
+        [ExcludeFromCodeCoverage]
         public void Restart()
         {
             GameTimer.Stop();
