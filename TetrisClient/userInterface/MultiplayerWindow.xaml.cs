@@ -22,9 +22,11 @@ using TetrisClient.gameLogic.Facade;
 using TetrisClient.gameLogic.Strategy;
 using TetrisClient.gameLogic.Adapter;
 using TetrisClient.gameLogic.Observers;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TetrisClient
 {
+    [ExcludeFromCodeCoverage]
     public partial class MultiplayerWindow
     {
         private TetrisEngine _engine = new();

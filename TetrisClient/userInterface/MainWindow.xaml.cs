@@ -8,12 +8,14 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using TetrisClient.gameLogic.Strategy;
 using TetrisClient.gameLogic.Tetromino;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TetrisClient
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public partial class MainWindow
     {
         private readonly TetrisEngine _engine = new();
