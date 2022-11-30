@@ -18,7 +18,7 @@ namespace TetrisServer
                 .ConfigureLogging(logging => { logging.AddFilter("Microsoft.AspNetCore.SignalR", LogLevel.Debug); })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseUrls("http://192.168.111.164:5000");
+                    webBuilder.UseUrls("http://0.0.0.0:5000");
                     webBuilder.UseStartup<Startup>();
                 });
     }

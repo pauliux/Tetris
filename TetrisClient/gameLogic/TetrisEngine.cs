@@ -14,19 +14,30 @@ namespace TetrisClient
 {
     public class TetrisEngine
     {
-        public static Representation Representation;
-        public static TetrominoFigure Tetromino;
-        public static TetrominoFigure NextTetromino;
-        public static Score Score;
+        public Representation Representation;
+        public TetrominoFigure Tetromino;
+        public TetrominoFigure NextTetromino;
+        public Score Score;
         public DispatcherTimer GameTimer;
-        public static bool GameOver;
+        public bool GameOver;
         private Random _random;
         private User user;
 
         private Level _level;
         private Creator _creator;
-        public static AbstractFactory _abstractFactory;
-        
+        public AbstractFactory _abstractFactory;
+
+        public TetrisEngine(User user, LevelCreator creator)
+        {
+            this.user = user;
+            this._creator = creator;
+        }
+
+        public TetrisEngine()
+        {
+            this.user = new User();
+            this._creator = new LevelCreator();
+        }
 
         /// <summary>
         /// Starts the game, creates all items
@@ -34,8 +45,6 @@ namespace TetrisClient
         /// </summary>
         public void StartGame(int? seed = null)
         {
-            user = new User();
-            _creator = new LevelCreator();
             _level = _creator.GetLevel(1);
             _abstractFactory = _level.GetAbstractFactory();
             if (seed != null) _random = new Random((int)seed);
@@ -162,7 +171,7 @@ namespace TetrisClient
         //Moves the tetromino to the right if allowed
         public void MoveRight()
         {
-            user.Compute("right", Tetromino, Representation, _abstractFactory,0);
+            user.Compute("right", Tetromino, Representation, _abstractFactory, 0);
             Representation = user.getRepresentation(Representation);
             Tetromino = user.getTetraminoFigure(Tetromino);
         }
@@ -170,7 +179,7 @@ namespace TetrisClient
         //Moves the tetromino to the left if allowed
         public void MoveLeft()
         {
-            user.Compute("left", Tetromino, Representation, _abstractFactory,0);
+            user.Compute("left", Tetromino, Representation, _abstractFactory, 0);
             Representation = user.getRepresentation(Representation);
             Tetromino = user.getTetraminoFigure(Tetromino);
         }
@@ -188,15 +197,15 @@ namespace TetrisClient
         /// <param name="type"> UP(clockwise) or DOWN(CounterClockWise)</param>
         public void HandleRotation(string type)
         {
-            user.Compute(type, Tetromino, Representation, _abstractFactory,0);
-           // Representation = user.getRepresentation(Representation);
+            user.Compute(type, Tetromino, Representation, _abstractFactory, 0);
+            // Representation = user.getRepresentation(Representation);
             Tetromino = user.getTetraminoFigure(Tetromino);
         }
 
         //Drops the current tetromino to as low as possible
         public void HardDrop()
         {
-            user.Compute("HARDDROP", Tetromino, Representation, _abstractFactory,0);
+            user.Compute("HARDDROP", Tetromino, Representation, _abstractFactory, 0);
             //Representation = user.getRepresentation(Representation);
             Tetromino = user.getTetraminoFigure(Tetromino);
         }
@@ -218,7 +227,7 @@ namespace TetrisClient
         /// <param name="offsetCollisionX">Checks for a collision</param>
         /// <param name="offsetCollisionY">^</param>
         /// <returns></returns>
-        public static bool MovePossible(int offsetInBoardX = 0, int offsetInBoardY = 0, int offsetCollisionX = 0,
+        public bool MovePossible(int offsetInBoardX = 0, int offsetInBoardY = 0, int offsetCollisionX = 0,
           int offsetCollisionY = 0)
         {
             return Representation.IsInRangeOfBoard(Tetromino, offsetInBoardX, offsetInBoardY) &&

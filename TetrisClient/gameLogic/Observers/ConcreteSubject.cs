@@ -13,6 +13,12 @@ namespace TetrisClient
     public class ConcreteSubject : Subject
     {
         private Singleton singleton = Singleton.GetInstance();
+        private TetrisEngine _engine;
+
+        public ConcreteSubject(TetrisEngine engine)
+        {
+            this._engine = engine;
+        }
 
         public override void send(string command)
         {
@@ -25,15 +31,15 @@ namespace TetrisClient
         public override void receiveMessage(string message)
         {
             Task.Run(async () =>
-         await singleton.getConnection().InvokeAsync("SendScore", JsonConvert.SerializeObject(TetrisEngine.Score)));
+                await singleton.getConnection().InvokeAsync("SendScore", JsonConvert.SerializeObject(_engine.Score)));
             Task.Run(async () =>
-                await singleton.getConnection().InvokeAsync("SendBoard", JsonConvert.SerializeObject(TetrisEngine.Representation.Board)));
+                await singleton.getConnection().InvokeAsync("SendBoard", JsonConvert.SerializeObject(_engine.Representation.Board)));
             Task.Run(async () =>
-                await singleton.getConnection().InvokeAsync("SendTetromino", JsonConvert.SerializeObject(TetrisEngine.Tetromino)));
+                await singleton.getConnection().InvokeAsync("SendTetromino", JsonConvert.SerializeObject(_engine.Tetromino)));
             Task.Run(async () =>
-                await singleton.getConnection().InvokeAsync("SendIsGameOver", TetrisEngine.GameOver));
+                await singleton.getConnection().InvokeAsync("SendIsGameOver", _engine.GameOver));
             Task.Run(async () =>
-                await singleton.getConnection().InvokeAsync("SendNextTetromino", JsonConvert.SerializeObject(TetrisEngine.NextTetromino)));
+                await singleton.getConnection().InvokeAsync("SendNextTetromino", JsonConvert.SerializeObject(_engine.NextTetromino)));
             this.send(message);
         }
     }

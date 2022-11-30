@@ -6,6 +6,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using TetrisClient.gameLogic.Command;
+using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Strategy;
 using TetrisClient.gameLogic.Tetromino;
 
@@ -16,7 +18,7 @@ namespace TetrisClient
     /// </summary>
     public partial class MainWindow
     {
-        private readonly TetrisEngine _engine = new();
+        private readonly TetrisEngine _engine = new(new User(), new LevelCreator());
         private DispatcherTimer _renderTimer;
         private readonly SoundPlayer _gameOverTune = new(Resource1.GameOver);
         private readonly SoundPlayer _sound1 = new(Resource1.Sound1);
@@ -59,11 +61,11 @@ namespace TetrisClient
 
             RenderLandedTetrominos();
 
-            RenderTetromino(TetrisEngine.Tetromino, TetrisGrid);
+            RenderTetromino(_engine.Tetromino, TetrisGrid);
             RenderTetromino(_engine.CreateGhostTetromino(), TetrisGrid, 0.30);
 
             NextGrid.Children.Clear();
-            RenderTetromino(TetrisEngine.NextTetromino, NextGrid);
+            RenderTetromino(_engine.NextTetromino, NextGrid);
         }
 
         /// <summary>
@@ -93,7 +95,7 @@ namespace TetrisClient
         /// </summary>
         private void RenderLandedTetrominos()
         {
-            var board = TetrisEngine.Representation.Board;
+            var board = _engine.Representation.Board;
 
             for (var y = 0; y < board.GetLength(0); y++)
                 for (var x = 0; x < board.GetLength(1); x++)
@@ -118,7 +120,7 @@ namespace TetrisClient
         /// </summary>
         private void UpdateGame()
         {
-            if (TetrisEngine.GameOver)
+            if (_engine.GameOver)
             {
                 _renderTimer.IsEnabled = false;
                 GameOverText.Visibility = Visibility.Visible;
@@ -128,9 +130,9 @@ namespace TetrisClient
 
             _renderTimer.Interval = _engine.GameTimer.Interval;
 
-            LevelTextBlock.Text = $"{TetrisEngine.Score.Level}";
-            ScoreTextBlock.Text = $"{TetrisEngine.Score.Points}";
-            LinesTextBlock.Text = $"{TetrisEngine.Score.Rows}";
+            LevelTextBlock.Text = $"{_engine.Score.Level}";
+            ScoreTextBlock.Text = $"{_engine.Score.Points}";
+            LinesTextBlock.Text = $"{_engine.Score.Rows}";
 
             RenderGrid();
         }
@@ -162,38 +164,38 @@ namespace TetrisClient
             switch (e.Key)
             {
                 case Key.Right:
-                    TetrisEngine.Tetromino.setStrategy(new MoveRight(TetrisEngine._abstractFactory, TetrisEngine.Tetromino, TetrisEngine.Representation));
-                    TetrisEngine.Tetromino.action();
+                    _engine.Tetromino.setStrategy(new MoveRight(_engine._abstractFactory, _engine.Tetromino, _engine.Representation));
+                    _engine.Tetromino.action();
                     //_engine.MoveRight();
                     _sound2.Play();
                     break;
                 case Key.Left:
-                    TetrisEngine.Tetromino.setStrategy(new MoveLeft(TetrisEngine._abstractFactory, TetrisEngine.Tetromino, TetrisEngine.Representation));
-                    TetrisEngine.Tetromino.action();
+                    _engine.Tetromino.setStrategy(new MoveLeft(_engine._abstractFactory, _engine.Tetromino, _engine.Representation));
+                    _engine.Tetromino.action();
                     //_engine.MoveLeft();
                     _sound2.Play();
                     break;
                 case Key.Up:
                     _sound2.Play();
-                    TetrisEngine.Tetromino.setStrategy(new RotationUp(TetrisEngine._abstractFactory, TetrisEngine.Tetromino, TetrisEngine.Representation));
-                    TetrisEngine.Tetromino.action();
+                    _engine.Tetromino.setStrategy(new RotationUp(_engine._abstractFactory, _engine.Tetromino, _engine.Representation));
+                    _engine.Tetromino.action();
                     //_engine.HandleRotation("UP");
                     break;
                 case Key.Down:
                     _sound2.Play();
-                    TetrisEngine.Tetromino.setStrategy(new RotationDown(TetrisEngine._abstractFactory, TetrisEngine.Tetromino, TetrisEngine.Representation));
-                    TetrisEngine.Tetromino.action();
+                    _engine.Tetromino.setStrategy(new RotationDown(_engine._abstractFactory, _engine.Tetromino, _engine.Representation));
+                    _engine.Tetromino.action();
                     //_engine.HandleRotation("DOWN");
                     break;
                 case Key.Space:
-                    TetrisEngine.Tetromino.setStrategy(new HardDrop(TetrisEngine._abstractFactory, TetrisEngine.Tetromino, TetrisEngine.Representation));
-                    TetrisEngine.Tetromino.action();
+                    _engine.Tetromino.setStrategy(new HardDrop(_engine._abstractFactory, _engine.Tetromino, _engine.Representation));
+                    _engine.Tetromino.action();
                     //_engine.HardDrop();
                     _sound1.Play();
                     break;
                 case Key.LeftShift:
-                    TetrisEngine.Tetromino.setStrategy(new SoftDrop(TetrisEngine._abstractFactory, TetrisEngine.Tetromino, TetrisEngine.Representation));
-                    TetrisEngine.Tetromino.action();
+                    _engine.Tetromino.setStrategy(new SoftDrop(_engine._abstractFactory, _engine.Tetromino, _engine.Representation));
+                    _engine.Tetromino.action();
                     //_engine.SoftDrop();
                     _sound2.Play();
                     break;

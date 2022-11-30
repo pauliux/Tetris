@@ -16,8 +16,8 @@ namespace TetrisTests.Observers
 {
     class ObserverTests
     {
-        private static Subject subject = new ConcreteSubject();
-        private List<Observer> expected = new List<Observer>();
+        private Subject subject;
+        private List<Observer> expected;
         TetrominoFigure tetromino1;
         TetrominoFigure tetromino2;
         Representation _representation;
@@ -26,6 +26,8 @@ namespace TetrisTests.Observers
         [SetUp]
         public void SetUp()
         {
+            subject = new ConcreteSubject(new TetrisEngine());
+            expected = new List<Observer>();
             _representation = new Representation();
             Random _random1 = new Random((int)20);
             Random _random2 = new Random((int)20);
@@ -67,7 +69,7 @@ namespace TetrisTests.Observers
         {
             tetromino1.setSubject(subject);
             Subject sub = tetromino1.getSubject();
-            Subject fakeSubject = new ConcreteSubject();
+            Subject fakeSubject = new ConcreteSubject(new TetrisEngine());
             Assert.Multiple(() =>
             {
                 Assert.That(sub, Is.EqualTo(subject));
