@@ -23,9 +23,11 @@ using TetrisClient.gameLogic.Strategy;
 using TetrisClient.gameLogic.Adapter;
 using TetrisClient.gameLogic.Command;
 using TetrisClient.gameLogic.Observers;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TetrisClient
 {
+    [ExcludeFromCodeCoverage]
     public partial class MultiplayerWindow
     {
         private static TetrisEngine _engine = new(new User(), new LevelCreator());

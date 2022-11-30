@@ -22,7 +22,8 @@ namespace TetrisTests.Strategy
             Creator _creator = new LevelCreator();
             Level _level = _creator.GetLevel(2);
             AbstractFactory _abstractFactory = _level.GetAbstractFactory();
-            TetrominoFigure tetromino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
+            TetrominoFigure tetromino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) 
+                : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
             tetromino.setStrategy(new HardDrop(_abstractFactory, tetromino, representation));
             tetromino.action();
             Assert.That(tetromino.OffsetY, Is.EqualTo(14));
