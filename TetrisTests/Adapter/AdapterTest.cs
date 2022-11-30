@@ -11,41 +11,45 @@ namespace TetrisTests.AdapterTest
 {
     class AdapterTest
     {
-        [Test]
-        public void CheckIfAdapterGivesDiffrentBombEffectLines()
+        [TestCase(5)]
+        [TestCase(10)]
+        public void CheckIfAdapterGivesDiffrentBombEffectLines(int level1)
         {
-            Target angelBomb = new Adapter("angel", 5);
-            Target devilBomb = new Adapter("devil", 5);
+            Target angelBomb = new Adapter("angel", level1);
+            Target devilBomb = new Adapter("devil", level1);
             Assert.AreNotEqual(angelBomb.GetInformationLinesToChange(), devilBomb.GetInformationLinesToChange());
         }
 
-        [Test]
-        public void CheckIfAdapterGivesDiffrentBombEffectScore()
+        [TestCase(5)]
+        [TestCase(10)]
+        public void CheckIfAdapterGivesDiffrentBombEffectScore(int level1)
         {
-            Target angelBomb = new Adapter("angel", 5);
-            Target devilBomb = new Adapter("devil", 5);
+            Target angelBomb = new Adapter("angel", level1);
+            Target devilBomb = new Adapter("devil", level1);
             Assert.AreNotEqual(angelBomb.GetInformationCurrentScore(), devilBomb.GetInformationCurrentScore());
         }
-        [Test]
-        public void CheckIfLevelHasEffectOnScoreAngelSame()
+        [TestCase(6,6)]
+        [TestCase(10, 10)]
+        public void CheckIfLevelHasEffectOnScoreAngelSame(int level1,int level2)
         {
-            Target angelBomb1 = new Adapter("angel", 6);
-            Target angelBomb2 = new Adapter("angel", 6);
+            Target angelBomb1 = new Adapter("angel", level1);
+            Target angelBomb2 = new Adapter("angel", level2);
             Assert.AreEqual(angelBomb1.GetInformationCurrentScore(), angelBomb2.GetInformationCurrentScore());
         }
-        [Test]
-        public void CheckIfLevelHasEffectOnScoreDevilSame()
+        [TestCase(5)]
+        [TestCase(10)]
+        public void CheckIfLevelHasEffectOnScoreDevilSame(int level1)
         {
-            Target devilBomb1 = new Adapter("devil", 5);
-            Target devilBomb2 = new Adapter("devil", 5);
+            Target devilBomb1 = new Adapter("devil", level1);
+            Target devilBomb2 = new Adapter("devil", level1);
             Assert.AreEqual(devilBomb1.GetInformationCurrentScore(), devilBomb2.GetInformationCurrentScore());
         }
-
-        [Test]
-        public void CheckIfLevelHasEffectOnScoreAngelDiffrent()
+        [TestCase(1, 10)]
+        [TestCase(2, 20)]
+        public void CheckIfLevelHasEffectOnScoreAngelDiffrent(int level1,int level2)
         {
-            Target angelBomb1 = new Adapter("angel", 10);
-            Target angelBomb2 = new Adapter("angel", 1);
+            Target angelBomb1 = new Adapter("angel", level1);
+            Target angelBomb2 = new Adapter("angel", level2);
             Assert.AreNotEqual(angelBomb1.GetInformationCurrentScore(), angelBomb2.GetInformationCurrentScore());
         }
 
