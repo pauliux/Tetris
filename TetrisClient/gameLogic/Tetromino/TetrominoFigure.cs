@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows.Media;
 using System.Xml.Linq;
@@ -68,6 +69,7 @@ namespace TetrisClient.gameLogic.Tetromino
         /// Calculates all x and y positions from the tetromino in the board(also uses the offsets)
         /// </summary>
         /// <returns>All coordinates</returns>
+        [ExcludeFromCodeCoverage]
         public List<(int, int)> CalculatePositions()
         {
             var coordinates = new List<(int, int)>();

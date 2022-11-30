@@ -174,5 +174,35 @@ namespace TetrisTests.Commander
             user.Undo(1);
             Assert.AreEqual(Tetramino.Matrix, tempTetramino.Matrix);
         }
+        [Test]
+        public void CheckCommanderTetraminoNoCommandReturn()
+        {
+            Representation representation = new Representation();
+            Random _random = new Random((int)20);
+            Creator _creator = new LevelCreator();
+            Level _level = _creator.GetLevel(1);
+            User user = new User();
+            AbstractFactory _abstractFactory = _level.GetAbstractFactory();
+            TetrominoFigure Tetramino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
+            TetrominoFigure tempTetramino = Tetramino;
+            Tetramino = user.getTetraminoFigure(Tetramino);
+            user.Undo(1);
+            Assert.AreEqual(Tetramino.Matrix, tempTetramino.Matrix);
+        }
+        [Test]
+        public void CheckCommanderRepresentationNoCommandReturn()
+        {
+            Representation representation = new Representation();
+            Random _random = new Random((int)20);
+            Creator _creator = new LevelCreator();
+            Level _level = _creator.GetLevel(1);
+            User user = new User();
+            AbstractFactory _abstractFactory = _level.GetAbstractFactory();
+            TetrominoFigure Tetramino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
+            Representation temprep = representation;
+            representation = user.getRepresentation(representation);
+            user.Undo(1);
+            Assert.AreEqual(representation.Board, temprep.Board);
+        }
     }
 }

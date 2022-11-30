@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using TetrisClient.gameLogic.Tetromino;
 using static System.Linq.Enumerable;
 
@@ -78,6 +79,7 @@ namespace TetrisClient
         /// <param name="givenXOffset">Offset from the left side of the board</param>
         /// <param name="givenYOffset">Offset from the bottom side of the board</param>
         /// <returns></returns>
+        [ExcludeFromCodeCoverage]
         public bool CheckCollision(TetrominoFigure tetromino, int givenXOffset = 0, int givenYOffset = 0)
         {
             var collided = false;
@@ -111,8 +113,7 @@ namespace TetrisClient
             testTetromino.Matrix = type switch
             {
                 "UP" => testTetromino.Matrix.Rotate90(),
-                "DOWN" => testTetromino.Matrix.Rotate90CounterClockwise(),
-                _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+                "DOWN" => testTetromino.Matrix.Rotate90CounterClockwise()
             };
 
             return !IsInRangeOfBoard(testTetromino) || CheckCollision(testTetromino);
@@ -141,6 +142,7 @@ namespace TetrisClient
         /// General method that's called after each tick.
         /// Evaluates if rows are full and handles it.
         /// </summary>
+        [ExcludeFromCodeCoverage]
         public int HandleRowDeletion() => DeleteFullRows(FullRows());
 
 
@@ -148,6 +150,7 @@ namespace TetrisClient
         /// Checks if there are any rows that are full (x axis)
         /// </summary>
         /// <returns>Row numbers that are full</returns>
+        [ExcludeFromCodeCoverage]
         private List<int> FullRows()
         {
             var fullRows = new List<int>();
@@ -161,6 +164,7 @@ namespace TetrisClient
         /// Deletes the rows that are full.
         /// </summary>
         /// <param name="fullRows"><list type="int"></list> with the row numbers that are full></param>
+        [ExcludeFromCodeCoverage]
         private int DeleteFullRows(ICollection<int> fullRows)
         {
             var rowsDeleted = 0;
