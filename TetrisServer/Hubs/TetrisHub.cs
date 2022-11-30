@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 
 namespace TetrisServer.Hubs
 {
+    [ExcludeFromCodeCoverage]
     public class TetrisHub : Hub
     {
         public async Task ReadyUp(int seed) => await Clients.Others.SendAsync("ReadyUp", seed);

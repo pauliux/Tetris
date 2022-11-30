@@ -9,6 +9,7 @@ using TetrisClient.gameLogic.Level;
 using TetrisClient.gameLogic.Tetromino;
 using TetrisClient.gameLogic.Command;
 using TetrisClient.gameLogic.Adapter;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TetrisClient
 {
@@ -56,11 +57,13 @@ namespace TetrisClient
             NewTetromino();
         }
 
+        [ExcludeFromCodeCoverage]
         public Bombs GetBomb()
         {
             return (Bombs)_abstractFactory.getBomb();
         }
 
+        [ExcludeFromCodeCoverage]
         public Bombs GetEvilBomb()
         {
             return (Bombs)_abstractFactory.getEvilBomb();
@@ -108,6 +111,7 @@ namespace TetrisClient
         /// if that is not true the tetromino will be mounted in the representation
         /// </summary>
         /// <returns>true if drop was possible else false</returns>
+        [ExcludeFromCodeCoverage]
         private bool DropTetromino()
         {
             Facade facade = new Facade(Representation);
@@ -121,6 +125,7 @@ namespace TetrisClient
             return false;
         }
 
+        [ExcludeFromCodeCoverage]
         public void AngelBomb()
         {
             Target angelBomb = new Adapter("angel", Score.Level);
@@ -139,6 +144,7 @@ namespace TetrisClient
         /// Also sets the start position of the current tetromino. 
         /// </summary>
         /// <returns>True if the game is lost(new tetromino cant be put in an empty spot at the top, else false</returns>
+        [ExcludeFromCodeCoverage]
         private void NewTetromino()
         {
             Tetromino = NextTetromino;
@@ -156,6 +162,7 @@ namespace TetrisClient
         /// It gets dropped to as low as possible(kinda like the hard drop)
         /// </summary>
         /// <returns>The ghost tetromino</returns>
+        [ExcludeFromCodeCoverage]
         public TetrominoFigure CreateGhostTetromino()
         {
             var ghostTetromino = (TetrominoFigure)_abstractFactory.getTetromino(Tetromino.OffsetX,
@@ -168,6 +175,7 @@ namespace TetrisClient
             return ghostTetromino;
         }
 
+        [ExcludeFromCodeCoverage]
         //Moves the tetromino to the right if allowed
         public void MoveRight()
         {
@@ -176,6 +184,7 @@ namespace TetrisClient
             Tetromino = user.getTetraminoFigure(Tetromino);
         }
 
+        [ExcludeFromCodeCoverage]
         //Moves the tetromino to the left if allowed
         public void MoveLeft()
         {
@@ -184,40 +193,13 @@ namespace TetrisClient
             Tetromino = user.getTetraminoFigure(Tetromino);
         }
 
+        [ExcludeFromCodeCoverage]
         public void Undo()
         {
             user.Undo(1);
             Representation = user.getRepresentation(Representation);
             Tetromino = user.getTetraminoFigure(Tetromino);
         }
-        /// <summary>
-        /// Tries to rotate a tetromino with given offsets, if one of them succeeds
-        /// the tetromino will turn.
-        /// </summary>
-        /// <param name="type"> UP(clockwise) or DOWN(CounterClockWise)</param>
-        public void HandleRotation(string type)
-        {
-            user.Compute(type, Tetromino, Representation, _abstractFactory, 0);
-            // Representation = user.getRepresentation(Representation);
-            Tetromino = user.getTetraminoFigure(Tetromino);
-        }
-
-        //Drops the current tetromino to as low as possible
-        public void HardDrop()
-        {
-            user.Compute("HARDDROP", Tetromino, Representation, _abstractFactory, 0);
-            //Representation = user.getRepresentation(Representation);
-            Tetromino = user.getTetraminoFigure(Tetromino);
-        }
-
-        ////Drops the current tetromino by one
-        public bool SoftDrop()
-        {
-            if (!MovePossible(offsetInBoardX: 0, offsetInBoardY: 1, offsetCollisionY: 1)) return false;
-            Tetromino.OffsetY++;
-            return true;
-        }
-
 
         /// <summary>
         /// Checks if the move is possible, the move can be simulated by giving offsets
@@ -227,6 +209,7 @@ namespace TetrisClient
         /// <param name="offsetCollisionX">Checks for a collision</param>
         /// <param name="offsetCollisionY">^</param>
         /// <returns></returns>
+        [ExcludeFromCodeCoverage]
         public bool MovePossible(int offsetInBoardX = 0, int offsetInBoardY = 0, int offsetCollisionX = 0,
           int offsetCollisionY = 0)
         {

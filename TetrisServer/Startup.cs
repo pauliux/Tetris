@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Diagnostics.CodeAnalysis;
 using TetrisServer.Hubs;
 
 namespace TetrisServer
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         private IConfiguration Configuration { get; }

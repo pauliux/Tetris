@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Media;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace TetrisClient
 {
+    [ExcludeFromCodeCoverage]
     public partial class Startup
     {
         private readonly SoundPlayer _themeSong = new (Resource1.TetrisTechno);
