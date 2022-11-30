@@ -95,6 +95,7 @@ namespace TetrisClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        [ExcludeFromCodeCoverage]
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             if (DropTetromino() && !Score.ForceLevelUpdate) return;
@@ -224,6 +225,7 @@ namespace TetrisClient
         /// Checks if there are any deleted rows, if so the score level will be recalculated.
         /// </summary>
         /// <returns>True if the level has changed</returns>
+        [ExcludeFromCodeCoverage]
         private bool HandleScore()
         {
             var deletedRows = Representation.HandleRowDeletion();
