@@ -41,6 +41,7 @@ namespace TetrisClient
             this.user = new User();
             this._creator = new LevelCreator();
             this.Representation = new Representation();
+            this.Score = new Score();
         }
 
         /// <summary>

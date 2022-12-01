@@ -12,7 +12,7 @@ namespace TetrisClient.gameLogic.Singleton
         private Singleton() { }
         private static Singleton instance;
         private static HubConnection _connection;
-        private const string url = "http://0.0.0.0:5000/TetrisHub";
+        private const string url = "http://127.0.0.1:5000/TetrisHub";
         public static Singleton GetInstance()
         {
             if (instance == null)
