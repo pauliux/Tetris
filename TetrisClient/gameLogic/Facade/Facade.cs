@@ -4,7 +4,6 @@ using TetrisClient.gameLogic.Tetromino;
 
 namespace TetrisClient.gameLogic.Facade
 {
-    [ExcludeFromCodeCoverage]
     public class Facade
     {
         protected Bombs bombs;
@@ -18,6 +17,14 @@ namespace TetrisClient.gameLogic.Facade
         public Facade(Bombs bombs)
         {
             this.bombs = bombs;
+        }
+        public Bombs GetBomb()
+        {
+            return bombs;
+        }
+        public Representation GetRepresentation()
+        {
+            return representation;
         }
         public void PutTetromino(TetrominoFigure Tetromino)
         {
