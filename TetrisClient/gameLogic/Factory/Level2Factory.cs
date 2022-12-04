@@ -1,59 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TetrisClient.gameLogic.Bomb;
-using TetrisClient.gameLogic.Builder;
 using TetrisClient.gameLogic.Decorator;
-using TetrisClient.gameLogic.Factory;
+using TetrisClient.gameLogic.template;
 using TetrisClient.gameLogic.Tetromino;
 
-namespace TetrisClient.gameLogic.Level
+namespace TetrisClient.gameLogic.Factory
 {
-    public class Level2Factory : AbstractFactory
+    public class Level2Factory : LevelTemplate
     {
         private TetrominoComponent component =
             new TetrominoDecoratorLevel2(new TetrominoDecoratorLevel1(new ConcreteTetrominoComponent()));
-       
-        public override Unit getTetromino(int offsetX, int offsetY, Random random)
+
+        public override Unit getLevelTetromino(int offsetX, int offsetY, Random random)
         {
-            //return new TetrominoLevel2(2, offsetX, offsetY, random, component);
-            Unit rawUnit = new TetrominoLevel2(2, offsetX, offsetY, random, component);
-            IBuilder builder = new BuildTetromino(rawUnit);
-            return this.director.getLevel(builder);
+            return new TetrominoLevel2(1, offsetX, offsetY, random, component);
         }
 
-        public override Unit getTetromino(int offsetX, int offsetY)
+        public override Unit getLevelTetromino(int offsetX, int offsetY, Matrix matrix)
         {
-            //return new TetrominoLevel2(2, offsetX, offsetY, component);
-            Unit rawUnit = new TetrominoLevel2(2, offsetX, offsetY, component);
-            IBuilder builder = new BuildTetromino(rawUnit);
-            return this.director.getLevel(builder);
+            return new TetrominoLevel2(1, offsetX, offsetY, matrix, component);
         }
 
-        public override Unit getTetromino(int offsetX, int offsetY, Matrix matrix)
+        public override Unit getLevelTetromino(int offsetX, int offsetY)
         {
-            //return new TetrominoLevel2(2, offsetX, offsetY, matrix, component);
-            Unit rawUnit = new TetrominoLevel2(2, offsetX, offsetY, matrix, component);
-            IBuilder builder = new BuildTetromino(rawUnit);
-            return this.director.getLevel(builder);
+            return new TetrominoLevel2(1, offsetX, offsetY, component);
         }
 
-        public override Unit getBomb()
+        public override Unit getLevelBomb()
         {
-            //return new BombLevel2();
-            Unit rawUnit = new BombLevel2();
-            IBuilder builder = new BuildBomb(rawUnit);
-            return this.director.getBomb(builder);
+            return new BombLevel2();
         }
 
-        public override Unit getEvilBomb()
+        public override Unit getLevelEvilBomb()
         {
-            //return new EvilBombLevel2();
-            Unit rawUnit = new EvilBombLevel2();
-            IBuilder builder = new BuildBomb(rawUnit);
-            return this.director.getBomb(builder);
+            return new EvilBombLevel2();
         }
     }
 }
