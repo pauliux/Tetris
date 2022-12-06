@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TetrisClient.gameLogic.Bomb;
 using TetrisClient.gameLogic.Builder;
-using TetrisClient.gameLogic.Decorator;
-using TetrisClient.gameLogic.EvilBomb;
 using TetrisClient.gameLogic.Factory;
-using TetrisClient.gameLogic.Tetromino;
 
 namespace TetrisClient.gameLogic.template
 {

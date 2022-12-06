@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TetrisClient;
-using TetrisClient.gameLogic;
+﻿
 using TetrisClient.gameLogic.Adapter;
 
 namespace TetrisTests.AdapterTest

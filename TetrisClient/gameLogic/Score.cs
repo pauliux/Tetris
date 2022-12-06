@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace TetrisClient
 {
     public class Score

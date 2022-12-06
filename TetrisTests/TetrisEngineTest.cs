@@ -1,14 +1,11 @@
 ﻿using Moq;
-using System;
 using System.Windows.Threading;
 using TetrisClient;
-using TetrisClient.gameLogic;
 using TetrisClient.gameLogic.Bomb;
 using TetrisClient.gameLogic.Command;
 using TetrisClient.gameLogic.Decorator;
 using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Level;
-using TetrisClient.gameLogic.Observers;
 using TetrisClient.gameLogic.Tetromino;
 
 namespace TetrisTests

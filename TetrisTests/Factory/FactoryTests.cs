@@ -1,6 +1,5 @@
 ﻿using TetrisClient;
 using TetrisClient.gameLogic.Factory;
-using TetrisClient.gameLogic;
 using TetrisClient.gameLogic.Bomb;
 using TetrisClient.gameLogic.EvilBomb;
 using TetrisClient.gameLogic.Level;

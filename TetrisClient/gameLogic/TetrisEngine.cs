@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Threading;
 using TetrisClient.gameLogic;
 using TetrisClient.gameLogic.Bomb;

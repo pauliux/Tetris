@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TetrisClient.gameLogic;
-using TetrisClient;
 using TetrisClient.gameLogic.Tetromino;
 using System.Diagnostics.CodeAnalysis;
 

@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Moq;
+﻿
 using TetrisClient;
-using TetrisClient.gameLogic;
-using TetrisClient.gameLogic.Factory;
-using TetrisClient.gameLogic.Level;
-using TetrisClient.gameLogic.Observers;
-using TetrisClient.gameLogic.Strategy;
-using TetrisClient.gameLogic.Tetromino;
 
 namespace TetrisTests.Observers
 {

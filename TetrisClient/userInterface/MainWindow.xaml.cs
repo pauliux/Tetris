@@ -6,8 +6,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using TetrisClient.gameLogic.Command;
-using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Strategy;
 using TetrisClient.gameLogic.Tetromino;
 using System.Diagnostics.CodeAnalysis;

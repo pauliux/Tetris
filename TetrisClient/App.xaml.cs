@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace TetrisClient
+﻿namespace TetrisClient
 {
     /// <summary>
     /// Interaction logic for App.xaml

@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Windows.Media;
-using System.Xml.Linq;
 using TetrisClient.gameLogic.Decorator;
 using TetrisClient.gameLogic.Factory;
-using TetrisClient.gameLogic.Level;
 
 namespace TetrisClient.gameLogic.Tetromino
 {
