@@ -5,7 +5,7 @@
     Title="Startup"
     Width="480"
     mc:Ignorable="d"
-    x:Class="TetrisClient.Startup"
+    x:Class="TetrisClient.userInterface.Startup"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -71,7 +71,8 @@
         <Label
             Content="Arrow up = Rotate 90 degrees clockwise&#xD;&#xA;Arrow Down = Rotate 90 degress counterclockwise&#xD;&#xA;Arrow Left = Move left&#xD;&#xA;Arrow Right = Move right&#xD;&#xA;Space = Hard drop&#xD;&#xA;Shift = Soft drop&#xD;&#xA;&#xD;&#xA;R = Restart&#xD;&#xA;Esc = Quit&#xD;&#xA;P = Pause"
             Foreground="#FF00FFE7"
-            Grid.ColumnSpan="2"
+            Grid.ColumnSpan="2" 
+            Grid.Column="0"
             HorizontalAlignment="Center"
             HorizontalContentAlignment="Center"
             Margin="0,362,0,99"

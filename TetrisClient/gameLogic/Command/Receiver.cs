@@ -1,38 +1,41 @@
 ﻿
+using System;
 using System.Collections.Generic;
+using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Tetromino;
 namespace TetrisClient.gameLogic.Command
 {
     public class Receiver
     {
-        private TetrominoFigure Tetromino;
-        private Representation Representation;
+        private TetrominoFigure _tetromino;
+        private Representation _representation;
         public void Operation(string @operator, TetrominoFigure tetromino, Representation representation, AbstractFactory abstractFactory, int remove)
         {
             var offsetsToTest = new[] { 0, 1, -1, 2, -2 };
             switch (@operator)
             {
                 case "left":
-                    if (MovePossible(representation,ref tetromino, offsetInBoardX: -1, offsetCollisionX: -1))
+                    if (MovePossible(representation, ref tetromino, offsetInBoardX: -1, offsetCollisionX: -1))
                         tetromino.OffsetX--;
                     break;
                 case "right":
-                    if (MovePossible(representation,ref tetromino, offsetInBoardX: 1, offsetCollisionX: 1))
+                    if (MovePossible(representation, ref tetromino, offsetInBoardX: 1, offsetCollisionX: 1))
                         tetromino.OffsetX++;
                     break;
                 case "UP":
                     foreach (var offset in offsetsToTest)
                     {
-                        if(Tetromino == null)
+                        if (_tetromino == null)
                         {
-                            Tetromino = tetromino;
+                            _tetromino = tetromino;
                         }
-                        var testTetromino = (TetrominoFigure)abstractFactory.getTetromino(Tetromino.OffsetX, Tetromino.OffsetY, Tetromino.Matrix);
+                        var testTetromino = (TetrominoFigure)abstractFactory.GetTetromino(_tetromino.OffsetX, _tetromino.OffsetY, _tetromino.Matrix);
                         if (representation.CheckTurnCollision(testTetromino, @operator, offset)) continue;
                         tetromino.OffsetX += offset;
                         tetromino.Matrix = @operator switch
                         {
-                            "UP" => tetromino.Matrix.Rotate90()
+                            "UP" => tetromino.Matrix.Rotate90(),
+                            _ => throw new ArgumentOutOfRangeException(nameof(@operator), @operator, null)
                         };
                         break;
                     }
@@ -40,29 +43,30 @@ namespace TetrisClient.gameLogic.Command
                 case "DOWN":
                     foreach (var offset in offsetsToTest)
                     {
-                        if (Tetromino == null)
+                        if (_tetromino == null)
                         {
-                            Tetromino = tetromino;
+                            _tetromino = tetromino;
                         }
-                        var testTetromino = (TetrominoFigure)abstractFactory.getTetromino(Tetromino.OffsetX, Tetromino.OffsetY, Tetromino.Matrix);
+                        var testTetromino = (TetrominoFigure)abstractFactory.GetTetromino(_tetromino.OffsetX, _tetromino.OffsetY, _tetromino.Matrix);
                         if (representation.CheckTurnCollision(testTetromino, @operator, offset)) continue;
                         tetromino.OffsetX += offset;
                         tetromino.Matrix = @operator switch
                         {
-                            "DOWN" => tetromino.Matrix.Rotate90CounterClockwise()
+                            "DOWN" => tetromino.Matrix.Rotate90CounterClockwise(),
+                            _ => throw new ArgumentOutOfRangeException(nameof(@operator), @operator, null)
                         };
                         break;
                     }
                     break;
                 case "HARDDROP":
-                    while (SoftDrop(representation,ref tetromino))
+                    while (SoftDrop(representation, ref tetromino))
                     {
 
                     }
                     break;
                 case "ANGELBOMB":
                     ICollection<int> temp2 = new List<int>();
-                    for(int i = 15; i > 15 - remove; i--)
+                    for (int i = 15; i > 15 - remove; i--)
                     {
                         temp2.Add(i);
                     }
@@ -70,12 +74,12 @@ namespace TetrisClient.gameLogic.Command
                     break;
             }
 
-            Tetromino = tetromino;
-            Representation = representation;
+            _tetromino = tetromino;
+            _representation = representation;
         }
         private bool SoftDrop(Representation representation, ref TetrominoFigure tetromino)
         {
-            if (!MovePossible(representation,ref tetromino,offsetInBoardX: 0, offsetInBoardY: 1, offsetCollisionY: 1)) return false;
+            if (!MovePossible(representation, ref tetromino, offsetInBoardX: 0, offsetInBoardY: 1, offsetCollisionY: 1)) return false;
             tetromino.OffsetY++;
             return true;
         }
@@ -86,13 +90,13 @@ namespace TetrisClient.gameLogic.Command
                    && !representation.CheckCollision(tetromino, offsetCollisionX, offsetCollisionY);
         }
 
-        public TetrominoFigure getFigure()
+        public TetrominoFigure GetFigure()
         {
-            return Tetromino;
+            return _tetromino;
         }
-        public Representation getRepresentation()
+        public Representation GetRepresentation()
         {
-            return Representation;
+            return _representation;
         }
     }
 }

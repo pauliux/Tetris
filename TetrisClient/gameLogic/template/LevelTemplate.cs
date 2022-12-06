@@ -6,46 +6,45 @@ namespace TetrisClient.gameLogic.template
 {
     public abstract class LevelTemplate : AbstractFactory
     {
-        public abstract Unit getLevelTetromino(int offsetX, int offsetY, Random random);
-        public abstract Unit getLevelTetromino(int offsetX, int offsetY, Matrix matrix);
-        public abstract Unit getLevelTetromino(int offsetX, int offsetY);
-        public abstract Unit getLevelBomb();
-        public abstract Unit getLevelEvilBomb();
+        public abstract Unit GetLevelTetromino(int offsetX, int offsetY, Random random);
+        public abstract Unit GetLevelTetromino(int offsetX, int offsetY, Matrix matrix);
+        public abstract Unit GetLevelTetromino(int offsetX, int offsetY);
+        public abstract Unit GetLevelBomb();
+        public abstract Unit GetLevelEvilBomb();
 
-        public override Unit getTetromino(int offsetX, int offsetY, Random random)
+        public override Unit GetTetromino(int offsetX, int offsetY, Random random)
         {
-            Unit rawUnit = getLevelTetromino(offsetX, offsetY, random);
-            rawUnit.Clone();
-            IBuilder builder = new BuildTetromino(rawUnit);
-            return this.director.getLevel(builder);
+            Unit rawUnit = GetLevelTetromino(offsetX, offsetY, random);
+            Builder.Builder builder = new BuildTetromino((Unit)rawUnit.Clone());
+            return this.Director.GetLevel(builder);
         }
 
-        public override Unit getTetromino(int offsetX, int offsetY)
+        public override Unit GetTetromino(int offsetX, int offsetY)
         {
-            Unit rawUnit = getLevelTetromino(offsetX, offsetY);
-            IBuilder builder = new BuildTetromino(rawUnit);
-            return this.director.getLevel(builder);
+            Unit rawUnit = GetLevelTetromino(offsetX, offsetY);
+            Builder.Builder builder = new BuildTetromino(rawUnit);
+            return this.Director.GetLevel(builder);
         }
 
-        public override Unit getTetromino(int offsetX, int offsetY, Matrix matrix)
+        public override Unit GetTetromino(int offsetX, int offsetY, Matrix matrix)
         {
-            Unit rawUnit = getLevelTetromino(offsetX, offsetY, matrix);
-            IBuilder builder = new BuildTetromino(rawUnit);
-            return this.director.getLevel(builder);
+            Unit rawUnit = GetLevelTetromino(offsetX, offsetY, matrix);
+            Builder.Builder builder = new BuildTetromino(rawUnit);
+            return this.Director.GetLevel(builder);
         }
 
-        public override Unit getBomb()
+        public override Unit GetBomb()
         {
-            Unit rawUnit = getLevelBomb();
-            IBuilder builder = new BuildBomb(rawUnit);
-            return this.director.getBomb(builder);
+            Unit rawUnit = GetLevelBomb();
+            Builder.Builder builder = new BuildBomb(rawUnit);
+            return this.Director.GetBomb(builder);
         }
 
-        public override Unit getEvilBomb()
+        public override Unit GetEvilBomb()
         {
-            Unit rawUnit = getLevelEvilBomb();
-            IBuilder builder = new BuildBomb(rawUnit);
-            return this.director.getBomb(builder);
+            Unit rawUnit = GetLevelEvilBomb();
+            Builder.Builder builder = new BuildBomb(rawUnit);
+            return this.Director.GetBomb(builder);
         }
     }
 }

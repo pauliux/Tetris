@@ -8,30 +8,30 @@ namespace TetrisClient.gameLogic.Factory
 {
     public class Level2Factory : LevelTemplate
     {
-        private TetrominoComponent component =
+        private TetrominoComponent _component =
             new TetrominoDecoratorLevel2(new TetrominoDecoratorLevel1(new ConcreteTetrominoComponent()));
 
-        public override Unit getLevelTetromino(int offsetX, int offsetY, Random random)
+        public override Unit GetLevelTetromino(int offsetX, int offsetY, Random random)
         {
-            return new TetrominoLevel2(1, offsetX, offsetY, random, component);
+            return new TetrominoLevel2(1, offsetX, offsetY, random, _component);
         }
 
-        public override Unit getLevelTetromino(int offsetX, int offsetY, Matrix matrix)
+        public override Unit GetLevelTetromino(int offsetX, int offsetY, Matrix matrix)
         {
-            return new TetrominoLevel2(1, offsetX, offsetY, matrix, component);
+            return new TetrominoLevel2(1, offsetX, offsetY, matrix, _component);
         }
 
-        public override Unit getLevelTetromino(int offsetX, int offsetY)
+        public override Unit GetLevelTetromino(int offsetX, int offsetY)
         {
-            return new TetrominoLevel2(1, offsetX, offsetY, component);
+            return new TetrominoLevel2(1, offsetX, offsetY, _component);
         }
 
-        public override Unit getLevelBomb()
+        public override Unit GetLevelBomb()
         {
             return new BombLevel2();
         }
 
-        public override Unit getLevelEvilBomb()
+        public override Unit GetLevelEvilBomb()
         {
             return new EvilBombLevel2();
         }

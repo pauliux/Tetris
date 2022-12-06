@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Media;
 using System.Windows;
 using System.Windows.Controls;
@@ -6,11 +7,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using TetrisClient.gameLogic;
 using TetrisClient.gameLogic.Strategy;
 using TetrisClient.gameLogic.Tetromino;
-using System.Diagnostics.CodeAnalysis;
 
-namespace TetrisClient
+namespace TetrisClient.userInterface
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -164,38 +165,38 @@ namespace TetrisClient
             switch (e.Key)
             {
                 case Key.Right:
-                    _engine.Tetromino.setStrategy(new MoveRight(_engine._abstractFactory, _engine.Tetromino, _engine.Representation));
-                    _engine.Tetromino.action();
+                    _engine.Tetromino.SetStrategy(new MoveRight(_engine.AbstractFactory, _engine.Tetromino, _engine.Representation));
+                    _engine.Tetromino.Action();
                     //_engine.MoveRight();
                     _sound2.Play();
                     break;
                 case Key.Left:
-                    _engine.Tetromino.setStrategy(new MoveLeft(_engine._abstractFactory, _engine.Tetromino, _engine.Representation));
-                    _engine.Tetromino.action();
+                    _engine.Tetromino.SetStrategy(new MoveLeft(_engine.AbstractFactory, _engine.Tetromino, _engine.Representation));
+                    _engine.Tetromino.Action();
                     //_engine.MoveLeft();
                     _sound2.Play();
                     break;
                 case Key.Up:
                     _sound2.Play();
-                    _engine.Tetromino.setStrategy(new RotationUp(_engine._abstractFactory, _engine.Tetromino, _engine.Representation));
-                    _engine.Tetromino.action();
+                    _engine.Tetromino.SetStrategy(new RotationUp(_engine.AbstractFactory, _engine.Tetromino, _engine.Representation));
+                    _engine.Tetromino.Action();
                     //_engine.HandleRotation("UP");
                     break;
                 case Key.Down:
                     _sound2.Play();
-                    _engine.Tetromino.setStrategy(new RotationDown(_engine._abstractFactory, _engine.Tetromino, _engine.Representation));
-                    _engine.Tetromino.action();
+                    _engine.Tetromino.SetStrategy(new RotationDown(_engine.AbstractFactory, _engine.Tetromino, _engine.Representation));
+                    _engine.Tetromino.Action();
                     //_engine.HandleRotation("DOWN");
                     break;
                 case Key.Space:
-                    _engine.Tetromino.setStrategy(new HardDrop(_engine._abstractFactory, _engine.Tetromino, _engine.Representation));
-                    _engine.Tetromino.action();
+                    _engine.Tetromino.SetStrategy(new HardDrop(_engine.AbstractFactory, _engine.Tetromino, _engine.Representation));
+                    _engine.Tetromino.Action();
                     //_engine.HardDrop();
                     _sound1.Play();
                     break;
                 case Key.LeftShift:
-                    _engine.Tetromino.setStrategy(new SoftDrop(_engine._abstractFactory, _engine.Tetromino, _engine.Representation));
-                    _engine.Tetromino.action();
+                    _engine.Tetromino.SetStrategy(new SoftDrop(_engine.AbstractFactory, _engine.Tetromino, _engine.Representation));
+                    _engine.Tetromino.Action();
                     //_engine.SoftDrop();
                     _sound2.Play();
                     break;

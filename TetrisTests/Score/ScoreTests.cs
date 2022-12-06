@@ -1,32 +1,31 @@
 ﻿
-using TetrisClient;
 
-namespace TetrisTests.Observers
+namespace TetrisTests.Score
 {
     class ScoreTests
     {
         [Test]
-        public void scoreHandleScoreTestingZero()
+        public void ScoreHandleScoreTestingZero()
         {
-            Score score = new Score();
+            TetrisClient.gameLogic.Score score = new TetrisClient.gameLogic.Score();
             score.HandleScore(0);
             Assert.AreEqual(0, score.Rows);
 
         }
         [TestCase(2,3)]
         [TestCase(4, 6)]
-        public void scoreHandleScoreTesting(int rows1, int rows2)
+        public void ScoreHandleScoreTesting(int rows1, int rows2)
         {
-            Score score = new Score();
+            TetrisClient.gameLogic.Score score = new TetrisClient.gameLogic.Score();
             score.HandleScore(rows1);
             score.HandleScore(rows2);
             Assert.AreEqual(rows1+rows2, score.Rows);
 
         }
         [TestCase(4, 6)]
-        public void scoreHandleLevelTesting1(int rows1, int rows2)
+        public void ScoreHandleLevelTesting1(int rows1, int rows2)
         {
-            Score score = new Score();
+            TetrisClient.gameLogic.Score score = new TetrisClient.gameLogic.Score();
             score.HandleScore(rows1);
             score.HandleScore(rows2);
             score.HandleLevel();
@@ -34,9 +33,9 @@ namespace TetrisTests.Observers
 
         }
         [TestCase(4, 6)]
-        public void scoreHandleLevelTesting2(int rows1, int rows2)
+        public void ScoreHandleLevelTesting2(int rows1, int rows2)
         {
-            Score score = new Score();
+            TetrisClient.gameLogic.Score score = new TetrisClient.gameLogic.Score();
             score.ForceLevelUpdate = true;
             score.HandleScore(rows1);
             score.HandleLevel();

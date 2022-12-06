@@ -90,7 +90,7 @@ namespace TetrisClient.gameLogic.Tetromino
         public Matrix CreateShape(Random rand = null)
         {
             Random random = rand ?? new Random();
-            return _component.getTetrominos().ElementAt(random.Next(0, _component.getTetrominos().Count)).Value;
+            return _component.GetTetrominos().ElementAt(random.Next(0, _component.GetTetrominos().Count)).Value;
         }
     }
 }

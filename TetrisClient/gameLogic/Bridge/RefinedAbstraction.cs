@@ -8,7 +8,7 @@ namespace TetrisClient.gameLogic.Bridge
     {
         public override void Operation()
         {
-            implementor.Operation();
+            Implementor.Operation();
         }
     }
 }

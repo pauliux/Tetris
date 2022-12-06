@@ -5,14 +5,14 @@ namespace TetrisClient.gameLogic.Builder
 {
     public class Director
     {
-        public Unit getLevel(IBuilder builder)
+        public Unit GetLevel(Builder builder)
         {
-            return builder.rawUnit;
+            return builder.RawUnit;
         }
 
-        public Unit getBomb(IBuilder builder)
+        public Unit GetBomb(Builder builder)
         {
-            return builder.rawUnit;
+            return builder.RawUnit;
         }
     }
 }

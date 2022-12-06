@@ -3,18 +3,18 @@ namespace TetrisClient.gameLogic.Observers
 {
     public abstract class Observer
     {
-        protected Subject subject;
+        protected Subject Subject;
 
-        public abstract void update(string command);
+        public abstract void Update(string command);
 
-        public Subject getSubject()
+        public Subject GetSubject()
         {
-            return this.subject;
+            return this.Subject;
         }
 
-        public void setSubject(Subject subject)
+        public void SetSubject(Subject subject)
         {
-            this.subject = subject;
+            this.Subject = subject;
         }
     }
 }

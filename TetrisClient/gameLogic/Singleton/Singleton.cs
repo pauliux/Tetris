@@ -6,24 +6,24 @@ namespace TetrisClient.gameLogic.Singleton
     public sealed class Singleton
     {
         private Singleton() { }
-        private static Singleton instance;
+        private static Singleton _instance;
         private static HubConnection _connection;
-        private const string url = "http://127.0.0.1:5000/TetrisHub";
+        private const string Url = "http://127.0.0.1:5000/TetrisHub";
         public static Singleton GetInstance()
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = new Singleton();
+                _instance = new Singleton();
             }
-            return instance;
+            return _instance;
         }
 
-        public HubConnection getConnection()
+        public HubConnection GetConnection()
         {
             if(_connection == null)
             {
                 _connection = new HubConnectionBuilder()
-                .WithUrl(url)
+                .WithUrl(Url)
                 .WithAutomaticReconnect()
                 .Build();
 

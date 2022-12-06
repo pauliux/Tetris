@@ -2,26 +2,26 @@
 {
     public class Adapter : Target
     {
-        private Adaptee adaptee;
-        private string typee;
+        private Adaptee _adaptee;
+        private string _typee;
         public Adapter(string type, int level)
         {
-            typee = type;
-            this.level = level;
+            _typee = type;
+            this.Level = level;
         }
         public override int GetInformationLinesToChange()
         {
-            adaptee = new Adaptee();
+            _adaptee = new Adaptee();
 
-            linesToChange = adaptee.GetBombsEffect(typee, level);
-            return linesToChange;
+            LinesToChange = _adaptee.GetBombsEffect(_typee, Level);
+            return LinesToChange;
         }
         public override int GetInformationCurrentScore()
         {
-            adaptee = new Adaptee();
-            linesToChange = adaptee.GetBombsEffect(typee, level);
-            score = adaptee.GetBombsScore(typee, linesToChange, level);
-            return score;
+            _adaptee = new Adaptee();
+            LinesToChange = _adaptee.GetBombsEffect(_typee, Level);
+            Score = _adaptee.GetBombsScore(_typee, LinesToChange, Level);
+            return Score;
         }
     }
 }

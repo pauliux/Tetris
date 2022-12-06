@@ -4,10 +4,10 @@ namespace TetrisClient.gameLogic.Adapter
 {
     public class Target
     {
-        protected int linesToChange;
-        protected int level;
-        protected string type;
-        protected int score;
+        protected int LinesToChange;
+        protected int Level;
+        protected string Type;
+        protected int Score;
 
         [ExcludeFromCodeCoverage]
         public virtual int GetInformationLinesToChange()

@@ -5,7 +5,7 @@ namespace TetrisClient.gameLogic.Decorator
 {
     public abstract class TetrominoComponent
     {
-        public abstract Dictionary<char, Matrix> getTetrominos();
+        public abstract Dictionary<char, Matrix> GetTetrominos();
 
         //    {'O',new Matrix(new[,] { { 1, 1 }, { 1, 1 } })}
         //    //{'T',new Matrix(new[,] { { 2, 2, 2 }, { 0, 2, 0 }, { 0, 0, 0 } })},

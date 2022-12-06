@@ -3,11 +3,11 @@ using TetrisClient.gameLogic.Factory;
 
 namespace TetrisClient.gameLogic.Builder
 {
-    public class BuildTetromino : IBuilder
+    public class BuildTetromino : Builder
     {
         public BuildTetromino(Unit rawUnit) : base(rawUnit)
         {
-            _ = base.rawUnit;
+            _ = RawUnit;
         }
     }
 }

@@ -1,7 +1,8 @@
-﻿using TetrisClient;
+﻿
+using System.Diagnostics;
+using TetrisClient.gameLogic;
 using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Bomb;
-using TetrisClient.gameLogic.EvilBomb;
 using TetrisClient.gameLogic.Level;
 using TetrisClient.gameLogic.Tetromino;
 
@@ -9,7 +10,7 @@ namespace TetrisTests.Factory
 {
     public class FactoryTests
     {
-        private LevelCreator _creator;
+        private LevelCreator? _creator;
 
         [OneTimeSetUp]
         public void Setup()
@@ -20,6 +21,7 @@ namespace TetrisTests.Factory
         [Test]
         public void GetLevel1ReturnsLevel1()
         {
+            Debug.Assert(_creator != null, nameof(_creator) + " != null");
             Level level = _creator.GetLevel(1);
             Assert.That(level, Is.TypeOf<Level1>());
         }
@@ -27,6 +29,7 @@ namespace TetrisTests.Factory
         [Test]
         public void GetLevel2ReturnsLevel2()
         {
+            Debug.Assert(_creator != null, nameof(_creator) + " != null");
             Level level = _creator.GetLevel(2);
             Assert.That(level, Is.TypeOf<Level2>());
         }
@@ -34,6 +37,7 @@ namespace TetrisTests.Factory
         [Test]
         public void GetLevel3ReturnsLevel2()
         {
+            Debug.Assert(_creator != null, nameof(_creator) + " != null");
             Level level = _creator.GetLevel(3);
             Assert.That(level, Is.TypeOf<Level2>());
         }
@@ -41,43 +45,43 @@ namespace TetrisTests.Factory
         [Test]
         public void GetAbstractFactoryReturnsLevel1Factory()
         {
-            var _abstractFactory = new Level1().GetAbstractFactory();
-            Assert.That(_abstractFactory, Is.TypeOf<Level1Factory>());
+            var abstractFactory = new Level1().GetAbstractFactory();
+            Assert.That(abstractFactory, Is.TypeOf<Level1Factory>());
         }
 
         [Test]
         public void GetAbstractFactoryReturnsLevel2Factory()
         {
-            var _abstractFactory = new Level2().GetAbstractFactory();
-            Assert.That(_abstractFactory, Is.TypeOf<Level2Factory>());
+            var abstractFactory = new Level2().GetAbstractFactory();
+            Assert.That(abstractFactory, Is.TypeOf<Level2Factory>());
         }
 
         [Test]
         public void GetEvilBombReturnsEvilBombLevel1()
         {
             var factory = new Level1Factory();
-            Assert.That(factory.getEvilBomb(), Is.TypeOf<EvilBombLevel1>());
+            Assert.That(factory.GetEvilBomb(), Is.TypeOf<EvilBombLevel1>());
         }
 
         [Test]
         public void GetEvilBombReturnsEvilBombLevel2()
         {
             var factory = new Level2Factory();
-            Assert.That(factory.getEvilBomb(), Is.TypeOf<EvilBombLevel2>());
+            Assert.That(factory.GetEvilBomb(), Is.TypeOf<EvilBombLevel2>());
         }
 
         [Test]
         public void GetBombReturnsBombLevel1()
         {
             var factory = new Level1Factory();
-            Assert.That(factory.getBomb(), Is.TypeOf<BombLevel1>());
+            Assert.That(factory.GetBomb(), Is.TypeOf<BombLevel1>());
         }
 
         [Test]
         public void GetBombReturnsBombLevel2()
         {
             var factory = new Level2Factory();
-            Assert.That(factory.getBomb(), Is.TypeOf<BombLevel2>());
+            Assert.That(factory.GetBomb(), Is.TypeOf<BombLevel2>());
         }
 
         [Test]
@@ -87,9 +91,9 @@ namespace TetrisTests.Factory
 
             Assert.Multiple(() =>
                 {
-                    Assert.That(factory.getTetromino(1, 1, new Matrix()), Is.TypeOf<TetrominoLevel2>());
-                    Assert.That(factory.getTetromino(1, 1, new Random()), Is.TypeOf<TetrominoLevel2>());
-                    Assert.That(factory.getTetromino(1, 1), Is.TypeOf<TetrominoLevel2>());
+                    Assert.That(factory.GetTetromino(1, 1, new Matrix()), Is.TypeOf<TetrominoLevel2>());
+                    Assert.That(factory.GetTetromino(1, 1, new Random()), Is.TypeOf<TetrominoLevel2>());
+                    Assert.That(factory.GetTetromino(1, 1), Is.TypeOf<TetrominoLevel2>());
                 });
         }
 
@@ -99,9 +103,9 @@ namespace TetrisTests.Factory
             var factory = new Level1Factory();
             Assert.Multiple(() =>
             {
-                Assert.That(factory.getTetromino(1, 1, new Matrix()), Is.TypeOf<TetrominoLevel1>());
-                Assert.That(factory.getTetromino(1, 1, new Random()), Is.TypeOf<TetrominoLevel1>());
-                Assert.That(factory.getTetromino(1, 1), Is.TypeOf<TetrominoLevel1>());
+                Assert.That(factory.GetTetromino(1, 1, new Matrix()), Is.TypeOf<TetrominoLevel1>());
+                Assert.That(factory.GetTetromino(1, 1, new Random()), Is.TypeOf<TetrominoLevel1>());
+                Assert.That(factory.GetTetromino(1, 1), Is.TypeOf<TetrominoLevel1>());
             });
         }
 

@@ -1,5 +1,5 @@
 ﻿
-namespace TetrisClient
+namespace TetrisClient.gameLogic
 {
     public class Score
     {

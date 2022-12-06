@@ -1,5 +1,5 @@
 ﻿
-using TetrisClient;
+
 using TetrisClient.gameLogic;
 using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Tetromino;
@@ -15,95 +15,94 @@ namespace TetrisTests.Commander
         public void CheckMovingLeft()
         {
             Representation representation = new Representation();
-            Random _random = new Random((int)20);
-            Creator _creator = new LevelCreator();
-            Level _level = _creator.GetLevel(1);
+            Random random = new Random(20);
+            Creator creator = new LevelCreator();
+            Level level = creator.GetLevel(1);
             User user = new User();
-            AbstractFactory _abstractFactory = _level.GetAbstractFactory();
-            TetrominoFigure Tetramino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
-            user.Compute("left", Tetramino, representation, _abstractFactory, 0);
-            Tetramino = user.getTetraminoFigure(Tetramino);
-            Assert.AreEqual(Tetramino.OffsetX, 3);
+            AbstractFactory abstractFactory = level.GetAbstractFactory();
+            TetrominoFigure tetramino = (TetrominoFigure)abstractFactory.GetTetromino(4, 0, random);
+            user.Compute("left", tetramino, representation, abstractFactory, 0);
+            tetramino = user.GetTetraminoFigure(tetramino);
+            Assert.AreEqual(tetramino.OffsetX, 3);
         }
 
         [Test]
         public void CheckMovingRight()
         {
             Representation representation = new Representation();
-            Random _random = new Random((int)20);
-            Creator _creator = new LevelCreator();
-            Level _level = _creator.GetLevel(1);
+            Random random = new Random(20);
+            Creator creator = new LevelCreator();
+            Level level = creator.GetLevel(1);
             User user = new User();
-            AbstractFactory _abstractFactory = _level.GetAbstractFactory();
-            TetrominoFigure Tetramino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
-            user.Compute("right", Tetramino, representation, _abstractFactory, 0);
-            Tetramino = user.getTetraminoFigure(Tetramino);
-            Assert.AreEqual(Tetramino.OffsetX, 5);
+            AbstractFactory abstractFactory = level.GetAbstractFactory();
+            TetrominoFigure tetramino = (TetrominoFigure)abstractFactory.GetTetromino(4, 0, random);
+            user.Compute("right", tetramino, representation, abstractFactory, 0);
+            tetramino = user.GetTetraminoFigure(tetramino);
+            Assert.AreEqual(tetramino.OffsetX, 5);
         }
 
         [Test]
         public void CheckRotatingLeft()
         {
             Representation representation = new Representation();
-            Random _random = new Random((int)20);
-            Creator _creator = new LevelCreator();
-            Level _level = _creator.GetLevel(1);
+            Random random = new Random(20);
+            Creator creator = new LevelCreator();
+            Level level = creator.GetLevel(1);
             User user = new User();
-            AbstractFactory _abstractFactory = _level.GetAbstractFactory();
-            TetrominoFigure Tetramino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
-            TetrominoFigure TetraminoTemp = Tetramino;
-            user.Compute("UP", Tetramino, representation, _abstractFactory, 0);
-            Tetramino = user.getTetraminoFigure(Tetramino);
-            TetraminoTemp.Matrix.Rotate90();
-            Assert.AreEqual(TetraminoTemp.Matrix, Tetramino.Matrix);
+            AbstractFactory abstractFactory = level.GetAbstractFactory();
+            TetrominoFigure tetramino = (TetrominoFigure)abstractFactory.GetTetromino(4, 0, random);
+            TetrominoFigure tetraminoTemp = tetramino;
+            user.Compute("UP", tetramino, representation, abstractFactory, 0);
+            tetramino = user.GetTetraminoFigure(tetramino);
+            tetraminoTemp.Matrix = tetraminoTemp.Matrix.Rotate90();
+            Assert.AreEqual(tetraminoTemp.Matrix, tetramino.Matrix);
         }
 
         [Test]
         public void CheckRotatingRight()
         {
             Representation representation = new Representation();
-            Random _random = new Random((int)20);
-            Creator _creator = new LevelCreator();
-            Level _level = _creator.GetLevel(1);
+            Random random = new Random(20);
+            Creator creator = new LevelCreator();
+            Level level = creator.GetLevel(1);
             User user = new User();
-            AbstractFactory _abstractFactory = _level.GetAbstractFactory();
-            TetrominoFigure Tetramino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
-            TetrominoFigure TetraminoTemp = Tetramino;
-            user.Compute("DOWN", Tetramino, representation, _abstractFactory, 0);
-            Tetramino = user.getTetraminoFigure(Tetramino);
-            TetraminoTemp.Matrix.Rotate90CounterClockwise();
-            Assert.AreEqual(TetraminoTemp.Matrix, Tetramino.Matrix);
+            AbstractFactory abstractFactory = level.GetAbstractFactory();
+            TetrominoFigure tetramino = (TetrominoFigure)abstractFactory.GetTetromino(4, 0, random);
+            TetrominoFigure tetraminoTemp = tetramino;
+            user.Compute("DOWN", tetramino, representation, abstractFactory, 0);
+            tetramino = user.GetTetraminoFigure(tetramino);
+            tetraminoTemp.Matrix = tetraminoTemp.Matrix.Rotate90CounterClockwise();
+            Assert.AreEqual(tetraminoTemp.Matrix, tetramino.Matrix);
         }
 
         [Test]
         public void CheckPlacingBlock()
         {
             Representation representation = new Representation();
-            Random _random = new Random((int)20);
-            Creator _creator = new LevelCreator();
-            Level _level = _creator.GetLevel(1);
+            Random random = new Random(20);
+            Creator creator = new LevelCreator();
+            Level level = creator.GetLevel(1);
             User user = new User();
-            AbstractFactory _abstractFactory = _level.GetAbstractFactory();
-            TetrominoFigure Tetramino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
-            user.Compute("HARDDROP", Tetramino, representation, _abstractFactory, 0);
-            Tetramino = user.getTetraminoFigure(Tetramino);
-            Console.WriteLine("saf");
-            Assert.AreEqual(Tetramino.OffsetY, 14);
+            AbstractFactory abstractFactory = level.GetAbstractFactory();
+            TetrominoFigure tetramino = (TetrominoFigure)abstractFactory.GetTetromino(4, 0, random);
+            user.Compute("HARDDROP", tetramino, representation, abstractFactory, 0);
+            tetramino = user.GetTetraminoFigure(tetramino);
+            Assert.AreEqual(tetramino.OffsetY, 14);
         }
 
         [Test]
         public void CheckAngelBomb()
         {
             Representation representation = new Representation();
-            Random _random = new Random((int)20);
-            Creator _creator = new LevelCreator();
-            Level _level = _creator.GetLevel(1);
+            Random random = new Random(20);
+            Creator creator = new LevelCreator();
+            Level level = creator.GetLevel(1);
             User user = new User();
-            AbstractFactory _abstractFactory = _level.GetAbstractFactory();
-            TetrominoFigure Tetramino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 14) : (TetrominoFigure)_abstractFactory.getTetromino(4, 14, _random);
-            representation.PutTetrominoInBoard(Tetramino);
-            user.Compute("ANGELBOMB", Tetramino, representation, _abstractFactory, 3);
-            representation = user.getRepresentation(representation);
+            AbstractFactory abstractFactory = level.GetAbstractFactory();
+            TetrominoFigure tetramino = (TetrominoFigure)abstractFactory.GetTetromino(4, 14, random);
+            representation.PutTetrominoInBoard(tetramino);
+            user.Compute("ANGELBOMB", tetramino, representation, abstractFactory, 3);
+            representation = user.GetRepresentation(representation);
             Assert.AreEqual(representation.Board, (new Representation()).Board);
         }
 
@@ -111,92 +110,87 @@ namespace TetrisTests.Commander
         public void CheckUndoCommandLeft()
         {
             Representation representation = new Representation();
-            Random _random = new Random((int)20);
-            Creator _creator = new LevelCreator();
-            Level _level = _creator.GetLevel(1);
+            Random random = new Random(20);
+            Creator creator = new LevelCreator();
+            Level level = creator.GetLevel(1);
             User user = new User();
-            AbstractFactory _abstractFactory = _level.GetAbstractFactory();
-            TetrominoFigure Tetramino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
-            user.Compute("left", Tetramino, representation, _abstractFactory, 0);
-            Tetramino = user.getTetraminoFigure(Tetramino);
+            AbstractFactory abstractFactory = level.GetAbstractFactory();
+            TetrominoFigure tetramino = (TetrominoFigure)abstractFactory.GetTetromino(4, 0, random);
+            user.Compute("left", tetramino, representation, abstractFactory, 0);
+            tetramino = user.GetTetraminoFigure(tetramino);
             user.Undo(1);
-            Assert.AreEqual(Tetramino.OffsetX, 4);
+            Assert.AreEqual(tetramino.OffsetX, 4);
         }
 
         [Test]
         public void CheckUndoCommandRight()
         {
             Representation representation = new Representation();
-            Random _random = new Random((int)20);
-            Creator _creator = new LevelCreator();
-            Level _level = _creator.GetLevel(1);
+            Random random = new Random(20);
+            Creator creator = new LevelCreator();
+            Level level = creator.GetLevel(1);
             User user = new User();
-            AbstractFactory _abstractFactory = _level.GetAbstractFactory();
-            TetrominoFigure Tetramino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
-            user.Compute("right", Tetramino, representation, _abstractFactory, 0);
-            Tetramino = user.getTetraminoFigure(Tetramino);
+            AbstractFactory abstractFactory = level.GetAbstractFactory();
+            TetrominoFigure tetramino = (TetrominoFigure)abstractFactory.GetTetromino(4, 0, random);
+            user.Compute("right", tetramino, representation, abstractFactory, 0);
+            tetramino = user.GetTetraminoFigure(tetramino);
             user.Undo(1);
-            Assert.AreEqual(Tetramino.OffsetX, 4);
+            Assert.AreEqual(tetramino.OffsetX, 4);
         }
         [Test]
-        public void CheckUndoCommandUP()
+        public void CheckUndoCommandUp()
         {
             Representation representation = new Representation();
-            Random _random = new Random((int)20);
-            Creator _creator = new LevelCreator();
-            Level _level = _creator.GetLevel(1);
+            Random random = new Random(20);
+            Creator creator = new LevelCreator();
+            Level level = creator.GetLevel(1);
             User user = new User();
-            AbstractFactory _abstractFactory = _level.GetAbstractFactory();
-            TetrominoFigure Tetramino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
-            TetrominoFigure tempTetramino = Tetramino;
-            user.Compute("UP", Tetramino, representation, _abstractFactory, 0);
-            Tetramino = user.getTetraminoFigure(Tetramino);
+            AbstractFactory abstractFactory = level.GetAbstractFactory();
+            TetrominoFigure tetramino = (TetrominoFigure)abstractFactory.GetTetromino(4, 0, random);
+            TetrominoFigure tempTetramino = tetramino;
+            user.Compute("UP", tetramino, representation, abstractFactory, 0);
+            tetramino = user.GetTetraminoFigure(tetramino);
             user.Undo(1);
-            Assert.AreEqual(Tetramino.Matrix, tempTetramino.Matrix);
+            Assert.AreEqual(tetramino.Matrix, tempTetramino.Matrix);
         }
         [Test]
-        public void CheckUndoCommandDOWN()
+        public void CheckUndoCommandDown()
         {
             Representation representation = new Representation();
-            Random _random = new Random((int)20);
-            Creator _creator = new LevelCreator();
-            Level _level = _creator.GetLevel(1);
+            Random random = new Random(20);
+            Creator creator = new LevelCreator();
+            Level level = creator.GetLevel(1);
             User user = new User();
-            AbstractFactory _abstractFactory = _level.GetAbstractFactory();
-            TetrominoFigure Tetramino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
-            TetrominoFigure tempTetramino = Tetramino;
-            user.Compute("DOWN", Tetramino, representation, _abstractFactory, 0);
-            Tetramino = user.getTetraminoFigure(Tetramino);
+            AbstractFactory abstractFactory = level.GetAbstractFactory();
+            TetrominoFigure tetramino = (TetrominoFigure)abstractFactory.GetTetromino(4, 0, random);
+            TetrominoFigure tempTetramino = tetramino;
+            user.Compute("DOWN", tetramino, representation, abstractFactory, 0);
+            tetramino = user.GetTetraminoFigure(tetramino);
             user.Undo(1);
-            Assert.AreEqual(Tetramino.Matrix, tempTetramino.Matrix);
+            Assert.AreEqual(tetramino.Matrix, tempTetramino.Matrix);
         }
         [Test]
         public void CheckCommanderTetraminoNoCommandReturn()
         {
-            Representation representation = new Representation();
-            Random _random = new Random((int)20);
-            Creator _creator = new LevelCreator();
-            Level _level = _creator.GetLevel(1);
+            Random random = new Random(20);
+            Creator creator = new LevelCreator();
+            Level level = creator.GetLevel(1);
             User user = new User();
-            AbstractFactory _abstractFactory = _level.GetAbstractFactory();
-            TetrominoFigure Tetramino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
-            TetrominoFigure tempTetramino = Tetramino;
-            Tetramino = user.getTetraminoFigure(Tetramino);
+            AbstractFactory abstractFactory = level.GetAbstractFactory();
+            TetrominoFigure tetramino = (TetrominoFigure)abstractFactory.GetTetromino(4, 0, random);
+            TetrominoFigure tempTetramino = tetramino;
+            tetramino = user.GetTetraminoFigure(tetramino);
             user.Undo(1);
-            Assert.AreEqual(Tetramino.Matrix, tempTetramino.Matrix);
+            Assert.AreEqual(tetramino.Matrix, tempTetramino.Matrix);
         }
         [Test]
         public void CheckCommanderRepresentationNoCommandReturn()
         {
             Representation representation = new Representation();
-            Random _random = new Random((int)20);
-            Creator _creator = new LevelCreator();
-            Level _level = _creator.GetLevel(1);
             User user = new User();
-            AbstractFactory _abstractFactory = _level.GetAbstractFactory();
-            TetrominoFigure Tetramino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
+
             Representation temprep = representation;
-            representation = user.getRepresentation(representation);
+            representation = user.GetRepresentation(representation);
             user.Undo(1);
             Assert.AreEqual(representation.Board, temprep.Board);
         }

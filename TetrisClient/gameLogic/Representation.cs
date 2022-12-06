@@ -1,10 +1,10 @@
-﻿
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using TetrisClient.gameLogic.Tetromino;
 using static System.Linq.Enumerable;
 
-namespace TetrisClient
+namespace TetrisClient.gameLogic
 {
     public class Representation
     {
@@ -113,7 +113,8 @@ namespace TetrisClient
             testTetromino.Matrix = type switch
             {
                 "UP" => testTetromino.Matrix.Rotate90(),
-                "DOWN" => testTetromino.Matrix.Rotate90CounterClockwise()
+                "DOWN" => testTetromino.Matrix.Rotate90CounterClockwise(),
+                _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
             };
 
             return !IsInRangeOfBoard(testTetromino) || CheckCollision(testTetromino);

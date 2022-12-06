@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Media;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,21 +11,18 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
-using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic;
-using TetrisClient.gameLogic.Bomb;
-using TetrisClient.gameLogic.Level;
-using TetrisClient.gameLogic.Tetromino;
-using TetrisClient.gameLogic.Singleton;
-using static System.Formats.Asn1.AsnWriter;
-using TetrisClient.gameLogic.Facade;
-using TetrisClient.gameLogic.Strategy;
 using TetrisClient.gameLogic.Adapter;
-using TetrisClient.gameLogic.Command;
+using TetrisClient.gameLogic.Bomb;
+using TetrisClient.gameLogic.Facade;
+using TetrisClient.gameLogic.Factory;
+using TetrisClient.gameLogic.Level;
 using TetrisClient.gameLogic.Observers;
-using System.Diagnostics.CodeAnalysis;
+using TetrisClient.gameLogic.Singleton;
+using TetrisClient.gameLogic.Strategy;
+using TetrisClient.gameLogic.Tetromino;
 
-namespace TetrisClient
+namespace TetrisClient.userInterface
 {
     [ExcludeFromCodeCoverage]
     public partial class MultiplayerWindow
@@ -41,7 +39,7 @@ namespace TetrisClient
         private Score _enemyScore;
         private bool _enemyGameOver;
 
-        private Subject subject = new ConcreteSubject(_engine);
+        private readonly Subject _subject = new ConcreteSubject(_engine);
 
         public MultiplayerWindow()
         {
@@ -53,7 +51,7 @@ namespace TetrisClient
             // It is mandatory that the connection is started *after* all event listeners are set.
             // If the method this occurs in happens to be `async`, Task.Run can be removed.
             // It is necessary because of the constructor.
-            Task.Run(async () => await singleton.getConnection().StartAsync());
+            Task.Run(async () => await singleton.GetConnection().StartAsync());
         }
 
         /// <summary>
@@ -65,11 +63,11 @@ namespace TetrisClient
         {
             Singleton singleton = Singleton.GetInstance();
             // If the connection isn't initialized, nothing can be sent to it.
-            if (singleton.getConnection().State != HubConnectionState.Connected) return;
+            if (singleton.GetConnection().State != HubConnectionState.Connected) return;
             var seed = Guid.NewGuid().GetHashCode();
 
             // Calls `ReadyUp` from the TetrisHub.cs and gives the int it expects
-            await singleton.getConnection().InvokeAsync("ReadyUp", seed);
+            await singleton.GetConnection().InvokeAsync("ReadyUp", seed);
         }
 
 
@@ -82,19 +80,19 @@ namespace TetrisClient
             // The first parameter has to be the same as the one in TetrisHub.cs
             // The type specified between <..> determines what the type of the parameter `seed` is.
             // This way the code below corresponds with the method in TetrisHub.cs
-            singleton.getConnection().On<int>("ReadyUp", seed =>
-                Task.Run(async () => await singleton.getConnection().InvokeAsync("StartGame", seed)));
-            singleton.getConnection().On<int>("StartGame", seed => Dispatcher.BeginInvoke(new Action(() =>
+            singleton.GetConnection().On<int>("ReadyUp", seed =>
+                Task.Run(async () => await singleton.GetConnection().InvokeAsync("StartGame", seed)));
+            singleton.GetConnection().On<int>("StartGame", seed => Dispatcher.BeginInvoke(new Action(() =>
                 StartGame(seed))));
-            singleton.getConnection().On<string>("SendBoard", board => Dispatcher.BeginInvoke(new Action(() =>
+            singleton.GetConnection().On<string>("SendBoard", board => Dispatcher.BeginInvoke(new Action(() =>
                 _enemyBoard = JsonConvert.DeserializeObject<int[,]>(board))));
-            singleton.getConnection().On<string>("SendTetromino", tetromino => Dispatcher.BeginInvoke(new Action(() =>
+            singleton.GetConnection().On<string>("SendTetromino", tetromino => Dispatcher.BeginInvoke(new Action(() =>
                 _enemyTetromino = JsonConvert.DeserializeObject<TetrominoJsonObject>(tetromino))));
-            singleton.getConnection().On<string>("SendNextTetromino", tetromino => Dispatcher.BeginInvoke(new Action(() =>
+            singleton.GetConnection().On<string>("SendNextTetromino", tetromino => Dispatcher.BeginInvoke(new Action(() =>
                 _enemyNextTetromino = JsonConvert.DeserializeObject<TetrominoJsonObject>(tetromino))));
-            singleton.getConnection().On<string>("SendScore", score => Dispatcher.BeginInvoke(new Action(() =>
+            singleton.GetConnection().On<string>("SendScore", score => Dispatcher.BeginInvoke(new Action(() =>
                GetEnemyScore(score))));
-            singleton.getConnection().On<bool>("SendIsGameOver", status => Dispatcher.BeginInvoke(new Action(() =>
+            singleton.GetConnection().On<bool>("SendIsGameOver", status => Dispatcher.BeginInvoke(new Action(() =>
                 _enemyGameOver = status)));
         }
 
@@ -112,7 +110,7 @@ namespace TetrisClient
             Dispatcher.Invoke(() => { ReadyButton.Visibility = Visibility.Hidden; });
             Dispatcher.Invoke(() => { ReadyButton.Visibility = Visibility.Hidden; });
             _engine.StartGame(seed);
-            subject.subscribe(_engine.Tetromino);
+            _subject.Subscribe(_engine.Tetromino);
             Timer();
         }
 
@@ -204,15 +202,15 @@ namespace TetrisClient
         {
             Singleton singleton = Singleton.GetInstance();
             Task.Run(async () =>
-         await singleton.getConnection().InvokeAsync("SendScore", JsonConvert.SerializeObject(_engine.Score)));
+         await singleton.GetConnection().InvokeAsync("SendScore", JsonConvert.SerializeObject(_engine.Score)));
             Task.Run(async () =>
-                await singleton.getConnection().InvokeAsync("SendBoard", JsonConvert.SerializeObject(_engine.Representation.Board)));
+                await singleton.GetConnection().InvokeAsync("SendBoard", JsonConvert.SerializeObject(_engine.Representation.Board)));
             Task.Run(async () =>
-                await singleton.getConnection().InvokeAsync("SendTetromino", JsonConvert.SerializeObject(_engine.Tetromino)));
+                await singleton.GetConnection().InvokeAsync("SendTetromino", JsonConvert.SerializeObject(_engine.Tetromino)));
             Task.Run(async () =>
-                await singleton.getConnection().InvokeAsync("SendIsGameOver", _engine.GameOver));
+                await singleton.GetConnection().InvokeAsync("SendIsGameOver", _engine.GameOver));
             Task.Run(async () =>
-                await singleton.getConnection().InvokeAsync("SendNextTetromino", JsonConvert.SerializeObject(_engine.NextTetromino)));
+                await singleton.GetConnection().InvokeAsync("SendNextTetromino", JsonConvert.SerializeObject(_engine.NextTetromino)));
         }
 
 
@@ -303,7 +301,7 @@ namespace TetrisClient
             Creator creator = new LevelCreator();
             Level level = creator.GetLevel(_enemyScore.Level);
             AbstractFactory abstractFactory = level.GetAbstractFactory();
-            TetrominoFigure generatedTetromino = (TetrominoFigure)abstractFactory.getTetromino(tetromino.OffsetX, tetromino.OffsetY, tetromino.Matrix);
+            TetrominoFigure generatedTetromino = (TetrominoFigure)abstractFactory.GetTetromino(tetromino.OffsetX, tetromino.OffsetY, tetromino.Matrix);
             RenderTetromino(generatedTetromino, grid, opacity);
         }
 
@@ -367,26 +365,26 @@ namespace TetrisClient
                     break;
                 case Key.Up:
                     _sound2.Play();
-                    _engine.Tetromino.setStrategy(new RotationUp(_engine._abstractFactory, _engine.Tetromino, _engine.Representation));
-                    _engine.Tetromino.action();
+                    _engine.Tetromino.SetStrategy(new RotationUp(_engine.AbstractFactory, _engine.Tetromino, _engine.Representation));
+                    _engine.Tetromino.Action();
                     //_engine.HandleRotation("UP");
                     break;
                 case Key.Down:
                     _sound2.Play();
-                    _engine.Tetromino.setStrategy(new RotationDown(_engine._abstractFactory, _engine.Tetromino, _engine.Representation));
-                    _engine.Tetromino.action();
+                    _engine.Tetromino.SetStrategy(new RotationDown(_engine.AbstractFactory, _engine.Tetromino, _engine.Representation));
+                    _engine.Tetromino.Action();
                     //_engine.HandleRotation("DOWN");
                     break;
                 case Key.Space:
                     _sound1.Play();
-                    _engine.Tetromino.setStrategy(new HardDrop(_engine._abstractFactory, _engine.Tetromino, _engine.Representation));
-                    _engine.Tetromino.action();
+                    _engine.Tetromino.SetStrategy(new HardDrop(_engine.AbstractFactory, _engine.Tetromino, _engine.Representation));
+                    _engine.Tetromino.Action();
                     //_engine.HardDrop();
                     break;
                 case Key.LeftShift:
                     _sound2.Play();
-                    _engine.Tetromino.setStrategy(new SoftDrop(_engine._abstractFactory, _engine.Tetromino, _engine.Representation));
-                    _engine.Tetromino.action();
+                    _engine.Tetromino.SetStrategy(new SoftDrop(_engine.AbstractFactory, _engine.Tetromino, _engine.Representation));
+                    _engine.Tetromino.Action();
                     //_engine.SoftDrop();
                     break;
                 case Key.Z:

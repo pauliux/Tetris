@@ -1,29 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Tetromino;
 
 namespace TetrisClient.gameLogic.Command
 {
     public class User
     {
-        Receiver receiver = new Receiver();
-        List<Command> commands = new List<Command>();
-        int current = 0;
-
-        //public void Redo(int levels)
-        //{
-        //    Console.WriteLine("\n---- Redo {0} levels ", levels);
-        //    // Perform redo operations
-        //    temp = current - levels;
-        //    for (int i = 0; i < levels; i++)
-        //    {
-        //        if (current < commands.Count - 1)
-        //        {
-        //            Command command = commands[current++];
-        //            command.Execute();
-        //        }
-        //    }
-        //}
+        Receiver _receiver = new Receiver();
+        List<Command> _commands = new List<Command>();
+        int _current;
 
         public void Undo(int levels)
         {
@@ -32,9 +18,9 @@ namespace TetrisClient.gameLogic.Command
             // Perform undo operations
             for (int i = 0; i < levels; i++)
             {
-                if (current > 0)
+                if (_current > 0)
                 {
-                    Command command = commands[--current] as Command;
+                    Command command = _commands[--_current];
                     command.UnExecute();
                 }
             }
@@ -43,27 +29,27 @@ namespace TetrisClient.gameLogic.Command
         public void Compute(string @operator, TetrominoFigure operand, Representation representation, AbstractFactory abstractFactory, int removeLine)
         {
             // Create command operation and execute it
-            Command command = new ConcreteCommand(receiver, @operator, operand, representation, abstractFactory, removeLine);
+            Command command = new ConcreteCommand(_receiver, @operator, operand, representation, abstractFactory, removeLine);
             command.Execute();
             // Add command to undo list
-            commands.Insert(current,command);
-            current++;
+            _commands.Insert(_current,command);
+            _current++;
         }
 
-        public TetrominoFigure getTetraminoFigure(TetrominoFigure tetramino)
+        public TetrominoFigure GetTetraminoFigure(TetrominoFigure tetramino)
         {
-            if(current != 0 && commands.Count > 0)
+            if(_current != 0 && _commands.Count > 0)
             {
-                Command command = commands[current-1];
+                Command command = _commands[_current-1];
                 return command.GetTetrominoFigure();
             }
             return tetramino;
         }
-        public Representation getRepresentation(Representation representation)
+        public Representation GetRepresentation(Representation representation)
         {
-            if (current != 0 && commands.Count > 0)
+            if (_current != 0 && _commands.Count > 0)
             {
-                Command command = commands[current-1];
+                Command command = _commands[_current-1];
                 return command.GetRepresentation();
             }
             return representation;

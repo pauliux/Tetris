@@ -5,22 +5,22 @@ namespace TetrisClient.gameLogic.Observers
 {
     public abstract class Subject
     {
-        public List<Observer> list = new List<Observer>();
+        public List<Observer> List = new List<Observer>();
 
-        public abstract void send(string command);
+        public abstract void Send(string command);
 
-        public abstract void receiveMessage(string message);
+        public abstract void ReceiveMessage(string message);
 
-        public void subscribe(Observer observer)
+        public void Subscribe(Observer observer)
         {
-            list.Add(observer);
-            observer.setSubject(this);
+            List.Add(observer);
+            observer.SetSubject(this);
         }
 
-        public void unsubscribe(Observer observer)
+        public void Unsubscribe(Observer observer)
         {
-            int index = list.IndexOf(observer);
-            list.RemoveAt(index);
+            int index = List.IndexOf(observer);
+            List.RemoveAt(index);
         }
     }
 }

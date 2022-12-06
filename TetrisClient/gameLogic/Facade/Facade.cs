@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿
 using TetrisClient.gameLogic.Bomb;
 using TetrisClient.gameLogic.Tetromino;
 
@@ -6,38 +6,38 @@ namespace TetrisClient.gameLogic.Facade
 {
     public class Facade
     {
-        protected Bombs bombs;
-        protected Representation representation;
+        protected Bombs Bombs;
+        protected Representation Representation;
         protected TetrominoFigure Tetromino;
 
         public Facade(Representation representation)
         {
-            this.representation = representation;
+            this.Representation = representation;
         }
         public Facade(Bombs bombs)
         {
-            this.bombs = bombs;
+            this.Bombs = bombs;
         }
         public Bombs GetBomb()
         {
-            return bombs;
+            return Bombs;
         }
         public Representation GetRepresentation()
         {
-            return representation;
+            return Representation;
         }
-        public void PutTetromino(TetrominoFigure Tetromino)
+        public void PutTetromino(TetrominoFigure tetromino)
         {
-            representation.PutTetrominoInBoard(Tetromino);
+            Representation.PutTetrominoInBoard(tetromino);
         }
         public string EnableBombPic()
         {
-            return bombs.GetImageEnabled();
+            return Bombs.GetImageEnabled();
         }
 
         public string DisableBombPic()
         {
-            return bombs.GetImageDisabled();
+            return Bombs.GetImageDisabled();
         }
     }
 }

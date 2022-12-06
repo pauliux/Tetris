@@ -1,14 +1,12 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
-using System.Threading.Tasks;
-using TetrisClient.gameLogic.Observers;
-using TetrisClient.gameLogic.Singleton;
 
-namespace TetrisClient
+namespace TetrisClient.gameLogic.Observers
 {
     public class ConcreteSubject : Subject
     {
-        private Singleton singleton = Singleton.GetInstance();
+        private Singleton.Singleton _singleton = Singleton.Singleton.GetInstance();
         private TetrisEngine _engine;
 
         public ConcreteSubject(TetrisEngine engine)
@@ -16,27 +14,27 @@ namespace TetrisClient
             this._engine = engine;
         }
 
-        public override void send(string command)
+        public override void Send(string command)
         {
-            foreach (Observer observer in list)
+            foreach (Observer observer in List)
             {
-                observer.update(command);
+                observer.Update(command);
             }
         }
 
-        public override void receiveMessage(string message)
+        public override void ReceiveMessage(string message)
         {
             Task.Run(async () =>
-                await singleton.getConnection().InvokeAsync("SendScore", JsonConvert.SerializeObject(_engine.Score)));
+                await _singleton.GetConnection().InvokeAsync("SendScore", JsonConvert.SerializeObject(_engine.Score)));
             Task.Run(async () =>
-                await singleton.getConnection().InvokeAsync("SendBoard", JsonConvert.SerializeObject(_engine.Representation.Board)));
+                await _singleton.GetConnection().InvokeAsync("SendBoard", JsonConvert.SerializeObject(_engine.Representation.Board)));
             Task.Run(async () =>
-                await singleton.getConnection().InvokeAsync("SendTetromino", JsonConvert.SerializeObject(_engine.Tetromino)));
+                await _singleton.GetConnection().InvokeAsync("SendTetromino", JsonConvert.SerializeObject(_engine.Tetromino)));
             Task.Run(async () =>
-                await singleton.getConnection().InvokeAsync("SendIsGameOver", _engine.GameOver));
+                await _singleton.GetConnection().InvokeAsync("SendIsGameOver", _engine.GameOver));
             Task.Run(async () =>
-                await singleton.getConnection().InvokeAsync("SendNextTetromino", JsonConvert.SerializeObject(_engine.NextTetromino)));
-            this.send(message);
+                await _singleton.GetConnection().InvokeAsync("SendNextTetromino", JsonConvert.SerializeObject(_engine.NextTetromino)));
+            this.Send(message);
         }
     }
 }

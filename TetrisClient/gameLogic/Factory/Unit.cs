@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using TetrisClient.gameLogic.Observers;
+using TetrisClient.gameLogic.Strategy;
 
 namespace TetrisClient.gameLogic.Factory
 {
     public abstract class Unit : Observer, ICloneable
     {
-        private int level;
+        private int _level;
 
-        private AbstractStrategy abstractStrategy;
+        private AbstractStrategy _abstractStrategy;
 
         protected Unit(int level)
         {
-            this.level = level;
+            this._level = level;
         }
 
         public object Clone()
@@ -20,28 +21,28 @@ namespace TetrisClient.gameLogic.Factory
             return (Unit)this.MemberwiseClone();
         }
         [ExcludeFromCodeCoverage]
-        public AbstractStrategy getStrategy()
+        public AbstractStrategy GetStrategy()
         {
-            return abstractStrategy;
+            return _abstractStrategy;
         }
 
-        public void setStrategy(AbstractStrategy abstractStrategy)
+        public void SetStrategy(AbstractStrategy abstractStrategy)
         {
-            this.abstractStrategy = abstractStrategy;
+            this._abstractStrategy = abstractStrategy;
         }
 
-        public void action()
+        public void Action()
         {
-            this.abstractStrategy.moveDifferently();
+            this._abstractStrategy.MoveDifferently();
             string actionName = "Tetromino changed position!";
 
-            if (this.subject != null)
+            if (this.Subject != null)
             {
-                this.subject.receiveMessage(actionName);
+                this.Subject.ReceiveMessage(actionName);
             }
         }
 
-        public override void update(string command)
+        public override void Update(string command)
         {
             Console.WriteLine("Tetromino changed position!");
         }

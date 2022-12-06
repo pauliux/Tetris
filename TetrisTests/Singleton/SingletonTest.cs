@@ -1,22 +1,20 @@
 ﻿
-using TetrisClient.gameLogic.Singleton;
-
-namespace TetrisTests.Singelton
+namespace TetrisTests.Singleton
 {
     class SingletonTest
     {
         [Test]
         public void CheckIfSingleTonSameConnection()
         {
-            Singleton singleton1 = Singleton.GetInstance();
-            Singleton singleton2 = Singleton.GetInstance();
-            Assert.AreEqual(singleton1.getConnection(), singleton2.getConnection());
+            TetrisClient.gameLogic.Singleton.Singleton singleton1 = TetrisClient.gameLogic.Singleton.Singleton.GetInstance();
+            TetrisClient.gameLogic.Singleton.Singleton singleton2 = TetrisClient.gameLogic.Singleton.Singleton.GetInstance();
+            Assert.AreEqual(singleton1.GetConnection(), singleton2.GetConnection());
         }
         [Test]
         public void CheckIfSingleTonSameInstance()
         {
-            Singleton singleton1 = Singleton.GetInstance();
-            Singleton singleton2 = Singleton.GetInstance();
+            TetrisClient.gameLogic.Singleton.Singleton singleton1 = TetrisClient.gameLogic.Singleton.Singleton.GetInstance();
+            TetrisClient.gameLogic.Singleton.Singleton singleton2 = TetrisClient.gameLogic.Singleton.Singleton.GetInstance();
             Assert.AreSame(singleton1, singleton2);
         }
     }

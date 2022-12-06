@@ -1,6 +1,4 @@
-﻿using TetrisClient.gameLogic.Bomb;
-
-namespace TetrisClient.gameLogic.EvilBomb
+﻿namespace TetrisClient.gameLogic.Bomb
 {
     public class EvilBombLevel1 : Bombs
     {

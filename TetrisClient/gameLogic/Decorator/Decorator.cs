@@ -5,17 +5,17 @@ namespace TetrisClient.gameLogic.Decorator
 {
     public class Decorator : TetrominoComponent
     {
-        private TetrominoComponent component;
+        private TetrominoComponent _component;
 
         public Decorator(TetrominoComponent component)
         {
-            this.component = component;
+            this._component = component;
         }
 
 
-        public override Dictionary<char, Matrix> getTetrominos()
+        public override Dictionary<char, Matrix> GetTetrominos()
         {
-            return component.getTetrominos();
+            return _component.GetTetrominos();
         }
     }
 }

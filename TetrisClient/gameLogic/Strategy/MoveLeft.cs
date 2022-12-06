@@ -1,22 +1,21 @@
-﻿
+﻿using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Tetromino;
-using TetrisClient.gameLogic;
 
-namespace TetrisClient
+namespace TetrisClient.gameLogic.Strategy
 {
     public class MoveLeft : AbstractStrategy
     {
-        public MoveLeft(AbstractFactory _abstractFactory, TetrominoFigure _tetromino, Representation _representation)
-            : base(_abstractFactory, _tetromino, _representation)
+        public MoveLeft(AbstractFactory abstractFactory, TetrominoFigure tetromino, Representation representation)
+            : base(abstractFactory, tetromino, representation)
         {
         }
 
         //Moves the tetromino to the left if allowed
-        public override void moveDifferently()
+        public override void MoveDifferently()
         {
 
             if (MovePossible(offsetInBoardX: -1, offsetCollisionX: -1))
-                _tetromino.OffsetX--;
+                Tetromino.OffsetX--;
         }
 
     }

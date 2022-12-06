@@ -1,5 +1,4 @@
-﻿
-using TetrisClient;
+﻿using System.Diagnostics;
 using TetrisClient.gameLogic;
 using TetrisClient.gameLogic.Bomb;
 using TetrisClient.gameLogic.Facade;
@@ -7,41 +6,40 @@ using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Level;
 using TetrisClient.gameLogic.Tetromino;
 
-namespace TetrisTests
+namespace TetrisTests.Facade
 {
     public class FacadeTests
     {
-        private Bombs bombs;
-        private Representation representation;
+        private Bombs? _bombs;
+        private Representation? _representation;
 
-        private const int Level = 1;
         private const string ImageEnabled = "/Resources/bomb1.png";
         private const string ImageDisabled = "/Resources/bomb1_disabled.png";
 
         [OneTimeSetUp]
         public void Setup()
         {
-            bombs = new BombLevel1();
-            representation = new Representation();
+            _bombs = new BombLevel1();
+            _representation = new Representation();
         }
 
         [Test]
         public void CheckConstructors()
         {
-            Facade facadeBombs = new Facade(bombs);
-            Facade facadeRepresentation = new Facade(representation);
+            TetrisClient.gameLogic.Facade.Facade facadeBombs = new TetrisClient.gameLogic.Facade.Facade(_bombs);
+            TetrisClient.gameLogic.Facade.Facade facadeRepresentation = new TetrisClient.gameLogic.Facade.Facade(_representation);
             
             Assert.Multiple(() =>
             {
-                Assert.That(bombs, Is.EqualTo(facadeBombs.GetBomb()));
-                Assert.That(representation, Is.EqualTo(facadeRepresentation.GetRepresentation()));
+                Assert.That(_bombs, Is.EqualTo(facadeBombs.GetBomb()));
+                Assert.That(_representation, Is.EqualTo(facadeRepresentation.GetRepresentation()));
             });
         }
 
         [Test]
         public void CheckEnableBomb()
         {
-            Facade facade = new Facade(bombs);
+            TetrisClient.gameLogic.Facade.Facade facade = new TetrisClient.gameLogic.Facade.Facade(_bombs);
 
             string enableClient = FacadeClient.ClientEnableBomb(facade);
             //string enable = facade.EnableBombPic();
@@ -59,7 +57,7 @@ namespace TetrisTests
         [Test]
         public void CheckDisableBomb()
         {
-            Facade facade = new Facade(bombs);
+            TetrisClient.gameLogic.Facade.Facade facade = new TetrisClient.gameLogic.Facade.Facade(_bombs);
 
             //string disable = facade.DisableBombPic();
             string disableClient = FacadeClient.ClientDisableBomb(facade);
@@ -77,37 +75,39 @@ namespace TetrisTests
         [Test]
         public void CheckPutTetromino()
         {
-            Random _random = new Random((int)20);
-            Creator _creator = new LevelCreator();
-            Level _level = _creator.GetLevel(2);
-            AbstractFactory _abstractFactory = _level.GetAbstractFactory();
-            TetrominoFigure tetromino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
+            Random random = new Random(20);
+            Creator creator = new LevelCreator();
+            Level level = creator.GetLevel(2);
+            AbstractFactory abstractFactory = level.GetAbstractFactory();
+            TetrominoFigure tetromino = (TetrominoFigure)abstractFactory.GetTetromino(4, 0, random);
 
-            Facade represent = new Facade(representation);
+            TetrisClient.gameLogic.Facade.Facade represent = new TetrisClient.gameLogic.Facade.Facade(_representation);
 
             represent.PutTetromino(tetromino);
-            representation.PutTetrominoInBoard(tetromino);
+            Debug.Assert(_representation != null, nameof(_representation) + " != null");
+            _representation.PutTetrominoInBoard(tetromino);
 
-            Assert.That(representation.Board, Is.EqualTo(represent.GetRepresentation().Board));
+            Assert.That(_representation.Board, Is.EqualTo(represent.GetRepresentation().Board));
         }
 
         [Test]
         public void CheckPutTetrominoClient()
         {
-            Random _random = new Random((int)20);
-            Creator _creator = new LevelCreator();
-            Level _level = _creator.GetLevel(2);
-            AbstractFactory _abstractFactory = _level.GetAbstractFactory();
-            TetrominoFigure tetromino = _random == null ? (TetrominoFigure)_abstractFactory.getTetromino(4, 0) : (TetrominoFigure)_abstractFactory.getTetromino(4, 0, _random);
+            Random random = new Random(20);
+            Creator creator = new LevelCreator();
+            Level level = creator.GetLevel(2);
+            AbstractFactory abstractFactory = level.GetAbstractFactory();
+            TetrominoFigure tetromino = (TetrominoFigure)abstractFactory.GetTetromino(4, 0, random);
 
-            Facade represent = new Facade(representation);
+            TetrisClient.gameLogic.Facade.Facade represent = new TetrisClient.gameLogic.Facade.Facade(_representation);
 
             represent.PutTetromino(tetromino);
-            representation.PutTetrominoInBoard(tetromino);
+            Debug.Assert(_representation != null, nameof(_representation) + " != null");
+            _representation.PutTetrominoInBoard(tetromino);
 
             FacadeClient.PutTetromino(represent, tetromino);
 
-            Assert.That(representation.Board, Is.EqualTo(represent.GetRepresentation().Board));
+            Assert.That(_representation.Board, Is.EqualTo(represent.GetRepresentation().Board));
         }
     }
 }

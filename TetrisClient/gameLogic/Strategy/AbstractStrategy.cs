@@ -1,29 +1,28 @@
-﻿
+﻿using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Tetromino;
-using TetrisClient.gameLogic;
 
-namespace TetrisClient
+namespace TetrisClient.gameLogic.Strategy
 {
     public abstract class AbstractStrategy
     {
-        protected AbstractFactory _abstractFactory;
-        protected TetrominoFigure _tetromino;
-        protected Representation _representation;
+        protected AbstractFactory AbstractFactory;
+        protected TetrominoFigure Tetromino;
+        protected Representation Representation;
 
         public AbstractStrategy(AbstractFactory abstractFactory, TetrominoFigure tetromino, Representation representation)
         {
-            this._abstractFactory = abstractFactory;
-            this._tetromino = tetromino;
-            this._representation = representation;
+            this.AbstractFactory = abstractFactory;
+            this.Tetromino = tetromino;
+            this.Representation = representation;
         }
 
-        public abstract void moveDifferently();
+        public abstract void MoveDifferently();
 
         public bool MovePossible(int offsetInBoardX = 0, int offsetInBoardY = 0, int offsetCollisionX = 0,
          int offsetCollisionY = 0)
         {
-            return _representation.IsInRangeOfBoard(_tetromino, offsetInBoardX, offsetInBoardY) &&
-              !_representation.CheckCollision(_tetromino, offsetCollisionX, offsetCollisionY);
+            return Representation.IsInRangeOfBoard(Tetromino, offsetInBoardX, offsetInBoardY) &&
+              !Representation.CheckCollision(Tetromino, offsetCollisionX, offsetCollisionY);
         }
 
 
@@ -45,14 +44,14 @@ namespace TetrisClient
             var offsetsToTest = new[] { 0, 1, -1, 2, -2 };
             foreach (var offset in offsetsToTest)
             {
-                var testTetromino = (TetrominoFigure)_abstractFactory.getTetromino(_tetromino.OffsetX, _tetromino.OffsetY, _tetromino.Matrix);
-                if (_representation.CheckTurnCollision(testTetromino, type, offset)) continue;
-                _tetromino.OffsetX += offset;
-                _tetromino.Matrix = type switch
+                var testTetromino = (TetrominoFigure)AbstractFactory.GetTetromino(Tetromino.OffsetX, Tetromino.OffsetY, Tetromino.Matrix);
+                if (Representation.CheckTurnCollision(testTetromino, type, offset)) continue;
+                Tetromino.OffsetX += offset;
+                Tetromino.Matrix = type switch
                 {
-                    "UP" => _tetromino.Matrix.Rotate90(),
-                    "DOWN" => _tetromino.Matrix.Rotate90CounterClockwise(),
-                    _ => _tetromino.Matrix
+                    "UP" => Tetromino.Matrix.Rotate90(),
+                    "DOWN" => Tetromino.Matrix.Rotate90CounterClockwise(),
+                    _ => Tetromino.Matrix
                 };
                 break;
             }
