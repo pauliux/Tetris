@@ -8,13 +8,9 @@
             {
                 case "angel":
                     if(level < 2)
-                    {
                         return 2;
-                    }
                     else
-                    {
                         return 4;
-                    }
                 case "devil":
                     if (level < 2)
                     {
