@@ -43,7 +43,6 @@ namespace TetrisClient.gameLogic.Strategy
         {
             if (type is not "UP" and not "DOWN") return;
 
-            var offsetsToTest = new[] { 0, 1, -1, 2, -2 };
             ConcreteAggregate offsets = new ConcreteAggregate();
             offsets.RoatationSet();
             Iterator.Iterator i = offsets.CreateIterator();
