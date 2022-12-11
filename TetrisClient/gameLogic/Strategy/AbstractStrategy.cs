@@ -1,4 +1,6 @@
-﻿using TetrisClient.gameLogic.Factory;
+﻿using System.Windows.Automation.Peers;
+using TetrisClient.gameLogic.Factory;
+using TetrisClient.gameLogic.Iterator;
 using TetrisClient.gameLogic.Tetromino;
 
 namespace TetrisClient.gameLogic.Strategy
@@ -42,19 +44,29 @@ namespace TetrisClient.gameLogic.Strategy
             if (type is not "UP" and not "DOWN") return;
 
             var offsetsToTest = new[] { 0, 1, -1, 2, -2 };
-            foreach (var offset in offsetsToTest)
+            ConcreteAggregate offsets = new ConcreteAggregate();
+            offsets.RoatationSet();
+            Iterator.Iterator i = offsets.CreateIterator();
+
+            object offset = i.First();
+
+            while (offset != null)
             {
+
                 var testTetromino = (TetrominoFigure)AbstractFactory.GetTetromino(Tetromino.OffsetX, Tetromino.OffsetY, Tetromino.Matrix);
-                if (Representation.CheckTurnCollision(testTetromino, type, offset)) continue;
-                Tetromino.OffsetX += offset;
-                Tetromino.Matrix = type switch
-                {
-                    "UP" => Tetromino.Matrix.Rotate90(),
-                    "DOWN" => Tetromino.Matrix.Rotate90CounterClockwise(),
-                    _ => Tetromino.Matrix
-                };
+                if (Representation.CheckTurnCollision(testTetromino, type, (int)offset)) continue;
+                    Tetromino.OffsetX += (int)offset;
+                    Tetromino.Matrix = type switch
+                    {
+                        "UP" => Tetromino.Matrix.Rotate90(),
+                        "DOWN" => Tetromino.Matrix.Rotate90CounterClockwise(),
+                        _ => Tetromino.Matrix
+
+                    };
+                offset = i.Next();
                 break;
             }
+
         }
     }
 }
