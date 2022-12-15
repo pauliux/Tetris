@@ -1,0 +1,2 @@
+﻿C:\Users\pijus\.nuget\packages\microsoft.vssdk.buildtools\16.8.3038\tools\VSSDK\Empty.resx
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris.Vsix\source.extension.vsixmanifest

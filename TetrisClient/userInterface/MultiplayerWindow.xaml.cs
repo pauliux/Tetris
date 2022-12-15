@@ -162,18 +162,31 @@ namespace TetrisClient.userInterface
             Bombs bomb = _engine.GetBomb();
             Facade facade = new Facade(bomb);
             Target angelBomb = new Adapter("angel", _engine.Score.Level);
-            if (_engine.Score.Points >= angelBomb.GetInformationCurrentScore())
+            bomb.SendScore(_engine.Score.Points);
+            if (bomb.State.GetType().Name.Equals("EnabledState"))
             {
                 BombButton.IsEnabled = true;
                 //BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageEnabled(), UriKind.Relative));
                 BombButtonImage.Source = new BitmapImage(new Uri(FacadeClient.ClientEnableBomb(facade), UriKind.Relative));
             }
-            else
+            else if (bomb.State.GetType().Name.Equals("DisabledState"))
             {
                 BombButton.IsEnabled = false;
                 //BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageDisabled(), UriKind.Relative));
                 BombButtonImage.Source = new BitmapImage(new Uri(FacadeClient.ClientDisableBomb(facade), UriKind.Relative));
             }
+            //if (_engine.Score.Points >= angelBomb.GetInformationCurrentScore())
+            //{
+            //    BombButton.IsEnabled = true;
+            //    //BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageEnabled(), UriKind.Relative));
+            //    BombButtonImage.Source = new BitmapImage(new Uri(FacadeClient.ClientEnableBomb(facade), UriKind.Relative));
+            //}
+            //else
+            //{
+            //    BombButton.IsEnabled = false;
+            //    //BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageDisabled(), UriKind.Relative));
+            //    BombButtonImage.Source = new BitmapImage(new Uri(FacadeClient.ClientDisableBomb(facade), UriKind.Relative));
+            //}
         }
 
         private void SetEvilBombButton()

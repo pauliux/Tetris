@@ -1,0 +1,2 @@
+﻿C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris.Package\tools\install.ps1
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris.Package\tools\uninstall.ps1
