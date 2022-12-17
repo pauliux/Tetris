@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Windows.Threading;
 using TetrisClient.gameLogic.Adapter;
 using TetrisClient.gameLogic.Bomb;
+using TetrisClient.gameLogic.ChainOfResposibility;
 using TetrisClient.gameLogic.Command;
 using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Tetromino;
@@ -23,6 +24,24 @@ namespace TetrisClient.gameLogic
         private Level.Level _level;
         private Creator _creator;
         public AbstractFactory AbstractFactory;
+
+
+        /// <summary>
+        /// Checks if there are any deleted rows, if so the score level will be recalculated.
+        /// </summary>
+        /// <returns>True if the level has changed</returns>
+        [ExcludeFromCodeCoverage]
+        private bool HandleScore()
+        {
+            var deletedRows = Representation.HandleRowDeletion();
+            if (!Score.ForceLevelUpdate)
+            {
+                if (deletedRows == 0) return false;
+                Score.HandleScore(deletedRows);
+            }
+
+            return Score.HandleLevel();
+        }
 
         public TetrisEngine(User user, LevelCreator creator, Representation representation, Score score)
         {
@@ -217,22 +236,6 @@ namespace TetrisClient.gameLogic
               !Representation.CheckCollision(Tetromino, offsetCollisionX, offsetCollisionY);
         }
 
-        /// <summary>
-        /// Checks if there are any deleted rows, if so the score level will be recalculated.
-        /// </summary>
-        /// <returns>True if the level has changed</returns>
-        [ExcludeFromCodeCoverage]
-        private bool HandleScore()
-        {
-            var deletedRows = Representation.HandleRowDeletion();
-            if (!Score.ForceLevelUpdate)
-            {
-                if (deletedRows == 0) return false;
-                Score.HandleScore(deletedRows);
-            }
-
-            return Score.HandleLevel();
-        }
 
         /// <summary>
         /// Stops the timer

@@ -18,6 +18,7 @@ using TetrisClient.gameLogic.Facade;
 using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Level;
 using TetrisClient.gameLogic.Observers;
+using TetrisClient.gameLogic.Proxy;
 using TetrisClient.gameLogic.Singleton;
 using TetrisClient.gameLogic.Strategy;
 using TetrisClient.gameLogic.Tetromino;
@@ -162,7 +163,12 @@ namespace TetrisClient.userInterface
             Bombs bomb = _engine.GetBomb();
             Facade facade = new Facade(bomb);
             Target angelBomb = new Adapter("angel", _engine.Score.Level);
-            bomb.SendScore(_engine.Score.Points);
+
+            ProxyClient proxyClient = new ProxyClient();
+            Proxy proxy = new Proxy(bomb);
+            proxyClient.ClientCallScore(proxy, _engine.Score.Points);
+
+            //bomb.SendScore(_engine.Score.Points);
             if (bomb.State.GetType().Name.Equals("EnabledState"))
             {
                 BombButton.IsEnabled = true;

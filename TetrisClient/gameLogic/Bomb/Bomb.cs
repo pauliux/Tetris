@@ -1,9 +1,10 @@
 ﻿using TetrisClient.gameLogic.Adapter;
 using TetrisClient.gameLogic.Factory;
+using TetrisClient.gameLogic.Proxy;
 
 namespace TetrisClient
 {
-    public abstract class Bombs : Unit
+    public abstract class Bombs : Unit,ISubject
     {
         private State state;
 
