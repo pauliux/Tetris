@@ -1,0 +1,1787 @@
+{
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0",
+  "runs": [
+    {
+      "tool": {
+        "name": "Microsoft (R) Visual C# Compiler",
+        "version": "4.4.0.0",
+        "fileVersion": "4.4.0-4.22520.11 (9e075f03)",
+        "semanticVersion": "4.4.0",
+        "language": "lt-LT"
+      },
+      "results": [
+        {
+          "ruleId": "S3415",
+          "level": "warning",
+          "message": "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 26,
+                  "startColumn": 29,
+                  "endLine": 26,
+                  "endColumn": 49
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "NUnit2006",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.Not.EqualTo(expected)), instead of the classic model, Assert.AreNotEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Adapter/AdapterTest.cs",
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 13,
+                  "endLine": 23,
+                  "endColumn": 111
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreNotEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2006",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.Not.EqualTo(expected)), instead of the classic model, Assert.AreNotEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Adapter/AdapterTest.cs",
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 13,
+                  "endLine": 14,
+                  "endColumn": 113
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreNotEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 26,
+                  "startColumn": 13,
+                  "endLine": 26,
+                  "endColumn": 50
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2007",
+          "level": "warning",
+          "message": "The actual value should not be a constant - perhaps the actual value and the expected value have switched places",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 26,
+                  "startColumn": 48,
+                  "endLine": 26,
+                  "endColumn": 49
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "NUnit2003",
+          "level": "note",
+          "message": "Consider using the constraint model, Assert.That(expr, Is.True), instead of the classic model, Assert.IsTrue(expr)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Decorator/DecoratorTests.cs",
+                "region": {
+                  "startLine": 13,
+                  "startColumn": 13,
+                  "endLine": 13,
+                  "endColumn": 60
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "IsTrue"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2002",
+          "level": "note",
+          "message": "Consider using the constraint model, Assert.That(expr, Is.False), instead of the classic model, Assert.IsFalse(expr)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Decorator/DecoratorTests.cs",
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 13,
+                  "endLine": 14,
+                  "endColumn": 61
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "IsFalse"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2002",
+          "level": "note",
+          "message": "Consider using the constraint model, Assert.That(expr, Is.False), instead of the classic model, Assert.IsFalse(expr)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Decorator/DecoratorTests.cs",
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 13,
+                  "endLine": 15,
+                  "endColumn": 61
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "IsFalse"
+            }
+          }
+        },
+        {
+          "ruleId": "S3415",
+          "level": "warning",
+          "message": "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 41,
+                  "startColumn": 29,
+                  "endLine": 41,
+                  "endColumn": 49
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Adapter/AdapterTest.cs",
+                "region": {
+                  "startLine": 39,
+                  "startColumn": 13,
+                  "endLine": 39,
+                  "endColumn": 110
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2003",
+          "level": "note",
+          "message": "Consider using the constraint model, Assert.That(expr, Is.True), instead of the classic model, Assert.IsTrue(expr)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Decorator/DecoratorTests.cs",
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 13,
+                  "endLine": 23,
+                  "endColumn": 60
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "IsTrue"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Adapter/AdapterTest.cs",
+                "region": {
+                  "startLine": 31,
+                  "startColumn": 13,
+                  "endLine": 31,
+                  "endColumn": 110
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2003",
+          "level": "note",
+          "message": "Consider using the constraint model, Assert.That(expr, Is.True), instead of the classic model, Assert.IsTrue(expr)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Decorator/DecoratorTests.cs",
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 13,
+                  "endLine": 24,
+                  "endColumn": 60
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "IsTrue"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2002",
+          "level": "note",
+          "message": "Consider using the constraint model, Assert.That(expr, Is.False), instead of the classic model, Assert.IsFalse(expr)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Decorator/DecoratorTests.cs",
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 13,
+                  "endLine": 25,
+                  "endColumn": 61
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "IsFalse"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 41,
+                  "startColumn": 13,
+                  "endLine": 41,
+                  "endColumn": 50
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2007",
+          "level": "warning",
+          "message": "The actual value should not be a constant - perhaps the actual value and the expected value have switched places",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 41,
+                  "startColumn": 48,
+                  "endLine": 41,
+                  "endColumn": 49
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "NUnit2006",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.Not.EqualTo(expected)), instead of the classic model, Assert.AreNotEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Adapter/AdapterTest.cs",
+                "region": {
+                  "startLine": 47,
+                  "startColumn": 13,
+                  "endLine": 47,
+                  "endColumn": 113
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreNotEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2003",
+          "level": "note",
+          "message": "Consider using the constraint model, Assert.That(expr, Is.True), instead of the classic model, Assert.IsTrue(expr)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Decorator/DecoratorTests.cs",
+                "region": {
+                  "startLine": 33,
+                  "startColumn": 13,
+                  "endLine": 33,
+                  "endColumn": 60
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "IsTrue"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2003",
+          "level": "note",
+          "message": "Consider using the constraint model, Assert.That(expr, Is.True), instead of the classic model, Assert.IsTrue(expr)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Decorator/DecoratorTests.cs",
+                "region": {
+                  "startLine": 34,
+                  "startColumn": 13,
+                  "endLine": 34,
+                  "endColumn": 60
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "IsTrue"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2003",
+          "level": "note",
+          "message": "Consider using the constraint model, Assert.That(expr, Is.True), instead of the classic model, Assert.IsTrue(expr)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Decorator/DecoratorTests.cs",
+                "region": {
+                  "startLine": 35,
+                  "startColumn": 13,
+                  "endLine": 35,
+                  "endColumn": 60
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "IsTrue"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2046",
+          "level": "note",
+          "message": "Use Assert.That(<collection>, Has.Count.EqualTo(<value>)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Observer/ObserverTests.cs",
+                "region": {
+                  "startLine": 44,
+                  "startColumn": 25,
+                  "endLine": 44,
+                  "endColumn": 44
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "NUnit2006",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.Not.EqualTo(expected)), instead of the classic model, Assert.AreNotEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Adapter/AdapterTest.cs",
+                "region": {
+                  "startLine": 55,
+                  "startColumn": 13,
+                  "endLine": 55,
+                  "endColumn": 113
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreNotEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Score/ScoreTests.cs",
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 13,
+                  "endLine": 12,
+                  "endColumn": 43
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Adapter/AdapterTest.cs",
+                "region": {
+                  "startLine": 63,
+                  "startColumn": 13,
+                  "endLine": 63,
+                  "endColumn": 112
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2046",
+          "level": "note",
+          "message": "Use Assert.That(<collection>, Has.Count.EqualTo(<value>)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Observer/ObserverTests.cs",
+                "region": {
+                  "startLine": 54,
+                  "startColumn": 25,
+                  "endLine": 54,
+                  "endColumn": 44
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Adapter/AdapterTest.cs",
+                "region": {
+                  "startLine": 70,
+                  "startColumn": 13,
+                  "endLine": 70,
+                  "endColumn": 112
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Score/ScoreTests.cs",
+                "region": {
+                  "startLine": 22,
+                  "startColumn": 13,
+                  "endLine": 22,
+                  "endColumn": 53
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 13,
+                  "endLine": 58,
+                  "endColumn": 68
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2006",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.Not.EqualTo(expected)), instead of the classic model, Assert.AreNotEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Adapter/AdapterTest.cs",
+                "region": {
+                  "startLine": 78,
+                  "startColumn": 13,
+                  "endLine": 78,
+                  "endColumn": 115
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreNotEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2007",
+          "level": "warning",
+          "message": "The actual value should not be a constant - perhaps the actual value and the expected value have switched places",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Facade/FacadeTests.cs",
+                "region": {
+                  "startLine": 49,
+                  "startColumn": 29,
+                  "endLine": 49,
+                  "endColumn": 41
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "NUnit2007",
+          "level": "warning",
+          "message": "The actual value should not be a constant - perhaps the actual value and the expected value have switched places",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Facade/FacadeTests.cs",
+                "region": {
+                  "startLine": 50,
+                  "startColumn": 29,
+                  "endLine": 50,
+                  "endColumn": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3415",
+          "level": "warning",
+          "message": "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Adapter/AdapterTest.cs",
+                "region": {
+                  "startLine": 92,
+                  "startColumn": 29,
+                  "endLine": 92,
+                  "endColumn": 66
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Score/ScoreTests.cs",
+                "region": {
+                  "startLine": 32,
+                  "startColumn": 13,
+                  "endLine": 32,
+                  "endColumn": 44
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2006",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.Not.EqualTo(expected)), instead of the classic model, Assert.AreNotEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Adapter/AdapterTest.cs",
+                "region": {
+                  "startLine": 85,
+                  "startColumn": 13,
+                  "endLine": 85,
+                  "endColumn": 115
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreNotEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 75,
+                  "startColumn": 13,
+                  "endLine": 75,
+                  "endColumn": 68
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Adapter/AdapterTest.cs",
+                "region": {
+                  "startLine": 92,
+                  "startColumn": 13,
+                  "endLine": 92,
+                  "endColumn": 67
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2007",
+          "level": "warning",
+          "message": "The actual value should not be a constant - perhaps the actual value and the expected value have switched places",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Adapter/AdapterTest.cs",
+                "region": {
+                  "startLine": 92,
+                  "startColumn": 65,
+                  "endLine": 92,
+                  "endColumn": 66
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3415",
+          "level": "warning",
+          "message": "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 90,
+                  "startColumn": 29,
+                  "endLine": 90,
+                  "endColumn": 50
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Score/ScoreTests.cs",
+                "region": {
+                  "startLine": 42,
+                  "startColumn": 13,
+                  "endLine": 42,
+                  "endColumn": 59
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "S3415",
+          "level": "warning",
+          "message": "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Adapter/AdapterTest.cs",
+                "region": {
+                  "startLine": 99,
+                  "startColumn": 29,
+                  "endLine": 99,
+                  "endColumn": 67
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Adapter/AdapterTest.cs",
+                "region": {
+                  "startLine": 99,
+                  "startColumn": 13,
+                  "endLine": 99,
+                  "endColumn": 68
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2007",
+          "level": "warning",
+          "message": "The actual value should not be a constant - perhaps the actual value and the expected value have switched places",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Adapter/AdapterTest.cs",
+                "region": {
+                  "startLine": 99,
+                  "startColumn": 66,
+                  "endLine": 99,
+                  "endColumn": 67
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Singleton/SingletonTest.cs",
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 13,
+                  "endLine": 11,
+                  "endColumn": 84
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2015",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.SameAs(expected)), instead of the classic model, Assert.AreSame(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Singleton/SingletonTest.cs",
+                "region": {
+                  "startLine": 18,
+                  "startColumn": 13,
+                  "endLine": 18,
+                  "endColumn": 51
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreSame"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2007",
+          "level": "warning",
+          "message": "The actual value should not be a constant - perhaps the actual value and the expected value have switched places",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Facade/FacadeTests.cs",
+                "region": {
+                  "startLine": 67,
+                  "startColumn": 29,
+                  "endLine": 67,
+                  "endColumn": 42
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "NUnit2007",
+          "level": "warning",
+          "message": "The actual value should not be a constant - perhaps the actual value and the expected value have switched places",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Facade/FacadeTests.cs",
+                "region": {
+                  "startLine": 68,
+                  "startColumn": 29,
+                  "endLine": 68,
+                  "endColumn": 41
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 90,
+                  "startColumn": 13,
+                  "endLine": 90,
+                  "endColumn": 51
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2007",
+          "level": "warning",
+          "message": "The actual value should not be a constant - perhaps the actual value and the expected value have switched places",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 90,
+                  "startColumn": 48,
+                  "endLine": 90,
+                  "endColumn": 50
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3415",
+          "level": "warning",
+          "message": "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 122,
+                  "startColumn": 29,
+                  "endLine": 122,
+                  "endColumn": 49
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 106,
+                  "startColumn": 13,
+                  "endLine": 106,
+                  "endColumn": 80
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "S3415",
+          "level": "warning",
+          "message": "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 138,
+                  "startColumn": 29,
+                  "endLine": 138,
+                  "endColumn": 49
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 122,
+                  "startColumn": 13,
+                  "endLine": 122,
+                  "endColumn": 50
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2007",
+          "level": "warning",
+          "message": "The actual value should not be a constant - perhaps the actual value and the expected value have switched places",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 122,
+                  "startColumn": 48,
+                  "endLine": 122,
+                  "endColumn": 49
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 138,
+                  "startColumn": 13,
+                  "endLine": 138,
+                  "endColumn": 50
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2007",
+          "level": "warning",
+          "message": "The actual value should not be a constant - perhaps the actual value and the expected value have switched places",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 138,
+                  "startColumn": 48,
+                  "endLine": 138,
+                  "endColumn": 49
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 154,
+                  "startColumn": 13,
+                  "endLine": 154,
+                  "endColumn": 68
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 170,
+                  "startColumn": 13,
+                  "endLine": 170,
+                  "endColumn": 68
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 195,
+                  "startColumn": 13,
+                  "endLine": 195,
+                  "endColumn": 65
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2005",
+          "level": "warning",
+          "message": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/Commander/CommanderTest.cs",
+                "region": {
+                  "startLine": 184,
+                  "startColumn": 13,
+                  "endLine": 184,
+                  "endColumn": 68
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "AreEqual"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2019",
+          "level": "note",
+          "message": "Consider using the constraint model, Assert.That(expr, Is.Not.Null), instead of the classic model, Assert.IsNotNull(expr)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/TetrisEngineTest.cs",
+                "region": {
+                  "startLine": 87,
+                  "startColumn": 17,
+                  "endLine": 87,
+                  "endColumn": 52
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "IsNotNull"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2019",
+          "level": "note",
+          "message": "Consider using the constraint model, Assert.That(expr, Is.Not.Null), instead of the classic model, Assert.IsNotNull(expr)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/TetrisEngineTest.cs",
+                "region": {
+                  "startLine": 73,
+                  "startColumn": 17,
+                  "endLine": 73,
+                  "endColumn": 52
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "IsNotNull"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2019",
+          "level": "note",
+          "message": "Consider using the constraint model, Assert.That(expr, Is.Not.Null), instead of the classic model, Assert.IsNotNull(expr)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/TetrisEngineTest.cs",
+                "region": {
+                  "startLine": 88,
+                  "startColumn": 17,
+                  "endLine": 88,
+                  "endColumn": 56
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "IsNotNull"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2019",
+          "level": "note",
+          "message": "Consider using the constraint model, Assert.That(expr, Is.Not.Null), instead of the classic model, Assert.IsNotNull(expr)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/TetrisEngineTest.cs",
+                "region": {
+                  "startLine": 74,
+                  "startColumn": 17,
+                  "endLine": 74,
+                  "endColumn": 56
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "IsNotNull"
+            }
+          }
+        },
+        {
+          "ruleId": "NUnit2002",
+          "level": "note",
+          "message": "Consider using the constraint model, Assert.That(expr, Is.False), instead of the classic model, Assert.IsFalse(expr)",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/TetrisEngineTest.cs",
+                "region": {
+                  "startLine": 120,
+                  "startColumn": 13,
+                  "endLine": 120,
+                  "endColumn": 56
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "HasToleranceValue": "False",
+              "IsGenericMethod": "False",
+              "ModelName": "IsFalse"
+            }
+          }
+        },
+        {
+          "ruleId": "CA1822",
+          "level": "note",
+          "message": "Member 'MockLevelCreator' does not access instance data and can be marked as static",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/TetrisEngineTest.cs",
+                "region": {
+                  "startLine": 45,
+                  "startColumn": 30,
+                  "endLine": 45,
+                  "endColumn": 46
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1822",
+          "level": "note",
+          "message": "Member 'MockLevel1' does not access instance data and can be marked as static",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/TetrisEngineTest.cs",
+                "region": {
+                  "startLine": 37,
+                  "startColumn": 24,
+                  "endLine": 37,
+                  "endColumn": 34
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1822",
+          "level": "note",
+          "message": "Member 'MockUser' does not access instance data and can be marked as static",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/TetrisEngineTest.cs",
+                "region": {
+                  "startLine": 18,
+                  "startColumn": 22,
+                  "endLine": 18,
+                  "endColumn": 30
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "CA1822",
+          "level": "note",
+          "message": "Member 'MockLevel1Factory' does not access instance data and can be marked as static",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/pijus/OneDrive/Stalinis%20kompiuteris/Tetris%20v3/Tetris/TetrisTests/TetrisEngineTest.cs",
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 31,
+                  "endLine": 24,
+                  "endColumn": 48
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        }
+      ],
+      "rules": {
+        "CA1822": {
+          "id": "CA1822",
+          "shortDescription": "Mark members as static",
+          "fullDescription": "Members that do not access instance data or call instance methods can be marked as static. After you mark the methods as static, the compiler will emit nonvirtual call sites to these members. This can give you a measurable performance gain for performance-sensitive code.",
+          "defaultLevel": "note",
+          "helpUri": "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1822",
+          "properties": {
+            "category": "Performance",
+            "isEnabledByDefault": true,
+            "tags": [
+              "PortedFromFxCop",
+              "Telemetry",
+              "EnabledRuleInAggressiveMode"
+            ]
+          }
+        },
+        "NUnit2002": {
+          "id": "NUnit2002",
+          "shortDescription": "Consider using Assert.That(expr, Is.False) instead of Assert.IsFalse(expr)",
+          "fullDescription": "Consider using the constraint model, Assert.That(expr, Is.False), instead of the classic model, Assert.IsFalse(expr).",
+          "defaultLevel": "note",
+          "helpUri": "https://github.com/nunit/nunit.analyzers/tree/master/documentation/NUnit2002.md",
+          "properties": {
+            "category": "Assertion",
+            "isEnabledByDefault": true
+          }
+        },
+        "NUnit2003": {
+          "id": "NUnit2003",
+          "shortDescription": "Consider using Assert.That(expr, Is.True) instead of Assert.IsTrue(expr)",
+          "fullDescription": "Consider using the constraint model, Assert.That(expr, Is.True), instead of the classic model, Assert.IsTrue(expr).",
+          "defaultLevel": "note",
+          "helpUri": "https://github.com/nunit/nunit.analyzers/tree/master/documentation/NUnit2003.md",
+          "properties": {
+            "category": "Assertion",
+            "isEnabledByDefault": true
+          }
+        },
+        "NUnit2005": {
+          "id": "NUnit2005",
+          "shortDescription": "Consider using Assert.That(actual, Is.EqualTo(expected)) instead of Assert.AreEqual(expected, actual)",
+          "fullDescription": "Consider using the constraint model, Assert.That(actual, Is.EqualTo(expected)), instead of the classic model, Assert.AreEqual(expected, actual).",
+          "defaultLevel": "warning",
+          "helpUri": "https://github.com/nunit/nunit.analyzers/tree/master/documentation/NUnit2005.md",
+          "properties": {
+            "category": "Assertion",
+            "isEnabledByDefault": true
+          }
+        },
+        "NUnit2006": {
+          "id": "NUnit2006",
+          "shortDescription": "Consider using Assert.That(actual, Is.Not.EqualTo(expected)) instead of Assert.AreNotEqual(expected, actual)",
+          "fullDescription": "Consider using the constraint model, Assert.That(actual, Is.Not.EqualTo(expected)), instead of the classic model, Assert.AreNotEqual(expected, actual).",
+          "defaultLevel": "warning",
+          "helpUri": "https://github.com/nunit/nunit.analyzers/tree/master/documentation/NUnit2006.md",
+          "properties": {
+            "category": "Assertion",
+            "isEnabledByDefault": true
+          }
+        },
+        "NUnit2007": {
+          "id": "NUnit2007",
+          "shortDescription": "The actual value should not be a constant",
+          "fullDescription": "The actual value should not be a constant. This indicates that the actual value and the expected value have switched places.",
+          "defaultLevel": "warning",
+          "helpUri": "https://github.com/nunit/nunit.analyzers/tree/master/documentation/NUnit2007.md",
+          "properties": {
+            "category": "Assertion",
+            "isEnabledByDefault": true
+          }
+        },
+        "NUnit2015": {
+          "id": "NUnit2015",
+          "shortDescription": "Consider using Assert.That(actual, Is.SameAs(expected)) instead of Assert.AreSame(expected, actual)",
+          "fullDescription": "Consider using the constraint model, Assert.That(actual, Is.SameAs(expected)), instead of the classic model, Assert.AreSame(expected, actual).",
+          "defaultLevel": "warning",
+          "helpUri": "https://github.com/nunit/nunit.analyzers/tree/master/documentation/NUnit2015.md",
+          "properties": {
+            "category": "Assertion",
+            "isEnabledByDefault": true
+          }
+        },
+        "NUnit2019": {
+          "id": "NUnit2019",
+          "shortDescription": "Consider using Assert.That(expr, Is.Not.Null) instead of Assert.IsNotNull(expr)",
+          "fullDescription": "Consider using the constraint model, Assert.That(expr, Is.Not.Null), instead of the classic model, Assert.IsNotNull(expr).",
+          "defaultLevel": "note",
+          "helpUri": "https://github.com/nunit/nunit.analyzers/tree/master/documentation/NUnit2019.md",
+          "properties": {
+            "category": "Assertion",
+            "isEnabledByDefault": true
+          }
+        },
+        "NUnit2046": {
+          "id": "NUnit2046",
+          "shortDescription": "Use CollectionConstraint for better assertion messages in case of failure",
+          "fullDescription": "Use Has.Length/Has.Count/Is.Empty instead of testing property directly.",
+          "defaultLevel": "note",
+          "helpUri": "https://github.com/nunit/nunit.analyzers/tree/master/documentation/NUnit2046.md",
+          "properties": {
+            "category": "Assertion",
+            "isEnabledByDefault": true
+          }
+        },
+        "S3415": {
+          "id": "S3415",
+          "shortDescription": "Assertion arguments should be passed in the correct order",
+          "fullDescription": "The standard assertions library methods such as AreEqual and AreSame in MSTest and NUnit, or Equal and Same in XUnit, expect the first argument to be the expected value and the second argument to be the actual value. Swap them, and your test will still have the same outcome (succeed/fail when it should) but the error messages will be confusing.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-3415",
+          "properties": {
+            "category": "Major Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "TestSourceScope",
+              "SonarWay"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

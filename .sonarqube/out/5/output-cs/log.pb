@@ -1,0 +1,1 @@
+Roslyn version: 4.4.0.0Language version: CSharp11!Concurrent execution: enabled½¸File 'C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris.Vsix\obj\Debug\net472\AnalyzerTetris.Vsix.AssemblyInfo.cs' was recognized as generated

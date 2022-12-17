@@ -1,0 +1,6 @@
+projectKey=tetris2
+serverUrl=http://localhost:9000
+serverVersion=9.7.1.62043
+dashboardUrl=http://localhost:9000/dashboard?id=tetris2
+ceTaskId=AYTuQH6pHqjchZFbOEMF
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYTuQH6pHqjchZFbOEMF

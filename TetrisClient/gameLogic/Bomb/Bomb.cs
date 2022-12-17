@@ -1,9 +1,13 @@
-﻿using TetrisClient.gameLogic.Factory;
+﻿using TetrisClient.gameLogic.Adapter;
+using TetrisClient.gameLogic.Factory;
+using TetrisClient.gameLogic.Proxy;
 
-namespace TetrisClient.gameLogic.Bomb
+namespace TetrisClient
 {
-    public abstract class Bombs : Unit
+    public abstract class Bombs : Unit,ISubject
     {
+        private State state;
+
         private string _imageEnabled;
         private string _imageDisabled;
         private int _level;
@@ -13,6 +17,17 @@ namespace TetrisClient.gameLogic.Bomb
             _imageEnabled = imageEnabled;
             _imageDisabled = imageDisabled;
             this._level = level;
+            this.state = new DisabledState(0, this, new Adapter("angel", 1));
+        }
+        public State State
+        {
+            get { return state; }
+            set { state = value; }
+        }
+
+        public void SendScore(int score)
+        {
+            state.SendScore(score);
         }
 
         public string GetImageEnabled()

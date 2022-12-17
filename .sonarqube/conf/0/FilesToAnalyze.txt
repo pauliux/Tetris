@@ -1,0 +1,2 @@
+﻿C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris\AnalyzerTetrisAnalyzer.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris\Resources.resx

@@ -1,0 +1,17 @@
+﻿C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris.Test\AnalyzerTetrisUnitTests.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris.Test\Verifiers\CSharpAnalyzerVerifier`1+Test.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris.Test\Verifiers\CSharpAnalyzerVerifier`1.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris.Test\Verifiers\CSharpCodeFixVerifier`2+Test.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris.Test\Verifiers\CSharpCodeFixVerifier`2.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris.Test\Verifiers\CSharpCodeRefactoringVerifier`1+Test.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris.Test\Verifiers\CSharpCodeRefactoringVerifier`1.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris.Test\Verifiers\CSharpVerifierHelper.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris.Test\Verifiers\VisualBasicAnalyzerVerifier`1+Test.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris.Test\Verifiers\VisualBasicAnalyzerVerifier`1.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris.Test\Verifiers\VisualBasicCodeFixVerifier`2+Test.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris.Test\Verifiers\VisualBasicCodeFixVerifier`2.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris.Test\Verifiers\VisualBasicCodeRefactoringVerifier`1+Test.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\AnalyzerTetris\AnalyzerTetris.Test\Verifiers\VisualBasicCodeRefactoringVerifier`1.cs
+C:\Users\pijus\.nuget\packages\mstest.testadapter\1.3.2\build\_common\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\pijus\.nuget\packages\mstest.testadapter\1.3.2\build\_common\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\pijus\.nuget\packages\mstest.testadapter\1.3.2\build\netcoreapp1.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll

@@ -1,0 +1,8 @@
+﻿C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\TetrisServer\Hubs\TetrisHub.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\TetrisServer\Program.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\TetrisServer\Startup.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\TetrisServer\obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\TetrisServer\obj\Debug\net6.0\TetrisServer.AssemblyInfo.cs
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\TetrisServer\appsettings.Development.json
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\TetrisServer\appsettings.json
+C:\Users\pijus\OneDrive\Stalinis kompiuteris\Tetris v3\Tetris\TetrisServer\Properties\launchSettings.json
