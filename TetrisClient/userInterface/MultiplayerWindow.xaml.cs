@@ -457,6 +457,9 @@ namespace TetrisClient.userInterface
                 case Key.V:
                     _engine.DevilBomb();
                     break;
+                case Key.X:
+                    _engine.ComboBomb();
+                    break;
                 default:
                     return;
             }

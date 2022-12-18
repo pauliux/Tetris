@@ -247,6 +247,15 @@ namespace TetrisClient.gameLogic
                     await singleton.GetConnection().InvokeAsync("AddLines", JsonConvert.SerializeObject(lines.ToString())));
             }
         }
+
+        public void ComboBomb()
+        {
+            Composite.Composite composite = new Composite.Composite(0);
+            composite.Add(AbstractFactory.GetBomb());
+            composite.Add(AbstractFactory.GetEvilBomb());
+            composite.Execute(Representation);
+        }
+        
         /// <summary>
         /// Checks if the move is possible, the move can be simulated by giving offsets
         /// </summary>
