@@ -16,6 +16,10 @@ namespace TetrisClient.gameLogic.Factory
             this._level = level;
         }
 
+        public abstract void Add(Unit c);
+        public abstract void Remove(Unit c);
+        public abstract void Execute(Representation representation);
+
         public object Clone()
         {
             return (Unit)this.MemberwiseClone();
