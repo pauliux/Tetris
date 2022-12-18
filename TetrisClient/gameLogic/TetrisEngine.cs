@@ -12,6 +12,7 @@ using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Tetromino;
 using Newtonsoft.Json;
 using TetrisClient.gameLogic.Mediator;
+using TetrisClient.gameLogic.Interpreter;
 
 namespace TetrisClient.gameLogic
 {
@@ -244,6 +245,24 @@ namespace TetrisClient.gameLogic
                 Task.Run(async () =>
                     await singleton.GetConnection().InvokeAsync("AddLines", JsonConvert.SerializeObject(lines.ToString())));
             }
+        }
+
+        public void Rotate180()
+        {
+            var expression = new Rotate180DegreesExpression();
+            expression.Interpret(this);
+        }
+
+        public void RotateCounterClockwise()
+        {
+            var expression = new RotateCounterClockwiseExpression();
+            expression.Interpret(this);
+        }
+
+        public void RotateClockwise()
+        {
+            var expression = new RotateClockwiseExpression();
+            expression.Interpret(this);
         }
 
         public void ComboBomb()

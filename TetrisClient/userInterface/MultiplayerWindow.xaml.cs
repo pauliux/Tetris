@@ -426,14 +426,12 @@ namespace TetrisClient.userInterface
                     break;
                 case Key.Up:
                     _sound2.Play();
-                    _engine.Tetromino.SetStrategy(new RotationUp(_engine.AbstractFactory, _engine.Tetromino, _engine.Representation));
-                    _engine.Tetromino.Action();
+                    _engine.RotateClockwise();
                     //_engine.HandleRotation("UP");
                     break;
                 case Key.Down:
                     _sound2.Play();
-                    _engine.Tetromino.SetStrategy(new RotationDown(_engine.AbstractFactory, _engine.Tetromino, _engine.Representation));
-                    _engine.Tetromino.Action();
+                    _engine.RotateCounterClockwise();
                     //_engine.HandleRotation("DOWN");
                     break;
                 case Key.Space:
@@ -459,6 +457,9 @@ namespace TetrisClient.userInterface
                     break;
                 case Key.X:
                     _engine.ComboBomb();
+                    break;
+                case Key.Enter:
+                    _engine.Rotate180();
                     break;
                 default:
                     return;

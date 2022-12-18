@@ -7,7 +7,7 @@ namespace TetrisClient.gameLogic.Decorator
     {
         public override Dictionary<char, Matrix> GetTetrominos()
         {
-            return new Dictionary<char, Matrix>{{ 'O', new Matrix(new[,] { { 1, 1 }, { 1, 1 } }) }};
+            return new Dictionary<char, Matrix>{{ 'U', new Matrix(new[,] { { 1, 0, 1 }, {1, 0, 1 }, { 1, 1, 1 } }) }};
         }
     }
 }
