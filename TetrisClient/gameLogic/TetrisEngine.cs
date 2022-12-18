@@ -12,6 +12,7 @@ using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Tetromino;
 using Newtonsoft.Json;
 using TetrisClient.gameLogic.Mediator;
+using TetrisClient.gameLogic.Visitor;
 
 namespace TetrisClient.gameLogic
 {
@@ -151,7 +152,8 @@ namespace TetrisClient.gameLogic
             Facade.Facade facade = new Facade.Facade(Representation);
             if (MovePossible(offsetInBoardY: 1, offsetCollisionY: 1))
             {
-                Tetromino.OffsetY++;
+                Tetromino.Accept(new OffsetYVisitor());
+                //Tetromino.OffsetY++;
                 return true;
             }
             facade.PutTetromino(Tetromino);
