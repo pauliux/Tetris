@@ -11,12 +11,14 @@ using TetrisClient.gameLogic.Command;
 using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Tetromino;
 using Newtonsoft.Json;
+using TetrisClient.gameLogic.Mediator;
 
 namespace TetrisClient.gameLogic
 {
     public class TetrisEngine
     {
         public Representation Representation;
+        public Lines lines;
         public TetrominoFigure Tetromino;
         public TetrominoFigure NextTetromino;
         public Score Score;
@@ -24,6 +26,7 @@ namespace TetrisClient.gameLogic
         public bool GameOver;
         private Random _random;
         private User _user;
+        private Mediator.Mediator mediator;
 
         private Level.Level _level;
         private Creator _creator;
@@ -47,20 +50,27 @@ namespace TetrisClient.gameLogic
             return Score.HandleLevel();
         }
 
-        public TetrisEngine(User user, LevelCreator creator, Representation representation, Score score)
+        public TetrisEngine(User user, LevelCreator creator, Representation representation, Score score, Mediator.Mediator mediator, Lines line)
         {
+            this.mediator = mediator;
             this._user = user;
             this._creator = creator;
             this.Representation = representation;
             this.Score = score;
+            this.lines = line;
         }
 
         public TetrisEngine()
         {
+            ConcreteMediator mediatorr = new ConcreteMediator();
             this._user = new User();
             this._creator = new LevelCreator();
-            this.Representation = new Representation();
+            this.Representation = new Representation(mediatorr);
+            this.lines = new Lines(0, mediatorr);
             this.Score = new Score();
+            mediatorr.LinesSet = this.lines;
+            mediatorr.RepresentationSet = this.Representation;
+            this.mediator = mediatorr;
         }
 
         /// <summary>

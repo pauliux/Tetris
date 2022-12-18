@@ -3,17 +3,41 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using TetrisClient.gameLogic.Tetromino;
 using static System.Linq.Enumerable;
+using TetrisClient.gameLogic.Mediator;
 
 namespace TetrisClient.gameLogic
 {
-    public class Representation
+    public class Representation : TetrisRepresentationAndLines
     {
         public readonly int[,] Board;
 
         /// <summary>
         /// Constructor, when called generates an empty board.
         /// </summary>
-        public Representation() => Board = GenerateEmptyBoard();
+        public Representation(Mediator.Mediator mediator) : base(mediator)
+        {
+            Board = GenerateEmptyBoard();
+        }
+
+        public void Send(string message)
+        {
+            mediator.Send(message, this);
+        }
+        public void Notify(string message)
+        {
+            string[] words = message.Split(':');
+            int linestoAffect = int.Parse(words[0]);
+            bool RemoveLine = bool.Parse(words[1]);
+            bool AddLines = bool.Parse(words[2]);
+
+            if (AddLines)
+            {
+                string sendMessage = linestoAffect.ToString() + ":" + RemoveLine.ToString() + ":" + "False";
+                AddLinesToBoard(linestoAffect);
+                Send(sendMessage);
+            }
+
+        }
 
         /// <summary>
         /// multidimensional array that represents the board.

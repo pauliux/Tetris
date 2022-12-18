@@ -115,7 +115,10 @@ namespace TetrisClient.userInterface
             int liness = Int32.Parse(linesss);
             if (liness > 0)
             {
-                _engine.Representation.AddLinesToBoard(liness);
+                _engine.lines.LinesToAffect = liness;
+                _engine.lines.AddLines = bool.Parse("True");
+                _engine.lines.Send();
+
             }
 
         }
