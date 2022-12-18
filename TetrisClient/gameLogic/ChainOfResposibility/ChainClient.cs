@@ -10,7 +10,7 @@ namespace TetrisClient.gameLogic.ChainOfResposibility
     {
         public static bool ChainClientCode(AbstractHandler handler)
         {
-            return 
+            return true;
         }
     }
 }

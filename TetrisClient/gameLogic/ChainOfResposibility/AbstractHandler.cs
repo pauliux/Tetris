@@ -9,10 +9,6 @@ namespace TetrisClient.gameLogic.ChainOfResposibility
     public class AbstractHandler : IHandler
     {
         private IHandler nexthandler;
-        public virtual  HandleScore()
-        {
-            
-        }
 
         public IHandler SetNext(IHandler handler)
         {
