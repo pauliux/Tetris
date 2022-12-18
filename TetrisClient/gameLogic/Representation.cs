@@ -71,6 +71,45 @@ namespace TetrisClient.gameLogic
             return true;
         }
 
+        public void AddLinesToBoard(int lines)
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < lines; i++)
+            {
+                int block = rnd.Next(5, 10);
+                int[,] tempboard = GenerateEmptyBoard();
+
+                for (int row = Board.GetLength(0) - 1; row > 0; row--)
+                {
+                    for (int index = 0; index < Board.GetLength(1); index++)
+                    {
+                        tempboard[row - 1, index] = Board[row, index];
+                    }
+                }
+
+                for (int index = 0; index < Board.GetLength(1); index++)
+                {
+                    if (index != block)
+                    {
+                        tempboard[15, index] = 1;
+                    }
+                    else
+                    {
+                        tempboard[15, index] = 0;
+                    }
+                }
+
+                for (int row = 0; row < Board.GetLength(0); row++)
+                {
+                    for (int index = 0; index < Board.GetLength(1); index++)
+                    {
+                        Board[row, index] = tempboard[row, index];
+                    }
+                }
+            }
+        }
+
+
         /// <summary>
         /// Checks if any blocks of the given <paramref name="tetromino"/> is the same as any of the occupied blocks
         /// in the board and looks one step ahead (vertically).
