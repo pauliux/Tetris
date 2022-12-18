@@ -12,9 +12,9 @@
                     else
                         return 4;
                 case "devil":
-                    if (level < 2)
+                    if (level < 4)
                     {
-                        return 1;
+                        return 2;
                     }
                     else if (level > 8)
                     {
@@ -34,7 +34,7 @@
                 case "angel":
                     return influence * level * 5 + 200;
                 case "devil":
-                    return influence * level * 7 + 200;
+                    return influence * level * 7 + 1000;
                 default: return 0;
             }
         }

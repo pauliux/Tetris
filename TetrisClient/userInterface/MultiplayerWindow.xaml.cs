@@ -22,6 +22,7 @@ using TetrisClient.gameLogic.Proxy;
 using TetrisClient.gameLogic.Singleton;
 using TetrisClient.gameLogic.Strategy;
 using TetrisClient.gameLogic.Tetromino;
+using TetrisClient.gameLogic.Memento;
 using static System.Formats.Asn1.AsnWriter;
 
 namespace TetrisClient.userInterface
@@ -41,11 +42,20 @@ namespace TetrisClient.userInterface
         private Score _enemyScore;
         private bool _enemyGameOver;
 
+        private Originator DevilButton = new Originator();
+
+        private Caretaker DevilButtonCareTaker = new Caretaker();
+
         private readonly Subject _subject = new ConcreteSubject(_engine);
 
         public MultiplayerWindow()
         {
+
             InitializeComponent();
+
+            DevilButton.State = "OFF";
+            DevilButtonCareTaker.Memento = DevilButton.CreateMemento();
+
             Singleton singleton = Singleton.GetInstance();
 
             CreateSubscriptions();
@@ -168,7 +178,23 @@ namespace TetrisClient.userInterface
             SetTextBlocks();
             RenderGrid();
             SetBombButton();
+            EnablePicturesBombDevil();
             SetEvilBombButton();
+        }
+
+        private void EnablePicturesBombDevil()
+        {
+            Bombs evilBomb = _engine.GetEvilBomb();
+            Facade facade = new Facade(evilBomb);
+            Target devilBomb = new Adapter("devil", _engine.Score.Level);
+            if (_engine.Score.Points >= devilBomb.GetInformationCurrentScore())
+            {
+                DevilButton.State = "ON";
+            }
+            else
+            {
+                DevilButton.SetMemento(DevilButtonCareTaker.Memento);
+            }
         }
 
         private void SetBombButton()
@@ -212,8 +238,7 @@ namespace TetrisClient.userInterface
         {
             Bombs evilBomb = _engine.GetEvilBomb();
             Facade facade = new Facade(evilBomb);
-            Target devilBomb = new Adapter("devil", _engine.Score.Level);
-            if (_engine.Score.Points >= devilBomb.GetInformationCurrentScore())
+            if (DevilButton.State == "ON")
             {
                 BombEvilButton.IsEnabled = true;
                 //BombButtonImage.Source = new BitmapImage(new Uri(bomb.GetImageEnabled(), UriKind.Relative));
