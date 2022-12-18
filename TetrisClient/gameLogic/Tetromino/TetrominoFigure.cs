@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using TetrisClient.gameLogic.Decorator;
 using TetrisClient.gameLogic.Factory;
+using TetrisClient.gameLogic.Visitor;
 
 namespace TetrisClient.gameLogic.Tetromino
 {
@@ -91,6 +92,11 @@ namespace TetrisClient.gameLogic.Tetromino
         {
             Random random = rand ?? new Random();
             return _component.GetTetrominos().ElementAt(random.Next(0, _component.GetTetrominos().Count)).Value;
+        }
+
+        public void Accept(Visitor.Visitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

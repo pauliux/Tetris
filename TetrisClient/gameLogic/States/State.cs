@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
-using TetrisClient.gameLogic.Adapter;
-using TetrisClient.gameLogic.Facade;
+﻿using TetrisClient.gameLogic.Adapter;
 
 namespace TetrisClient
 {
@@ -21,7 +14,6 @@ namespace TetrisClient
             get { return currentScore; }
             set { currentScore = value; }
         }
-
         public Bombs Bomb
         {
             get { return bomb; }
