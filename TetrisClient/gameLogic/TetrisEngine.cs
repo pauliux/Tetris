@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using System.Windows.Threading;
+using Microsoft.AspNetCore.SignalR.Client;
+using Newtonsoft.Json;
 using TetrisClient.gameLogic.Adapter;
 using TetrisClient.gameLogic.Bomb;
 using TetrisClient.gameLogic.ChainOfResposibility;
 using TetrisClient.gameLogic.Command;
 using TetrisClient.gameLogic.Factory;
 using TetrisClient.gameLogic.Tetromino;
+using Newtonsoft.Json;
 
 namespace TetrisClient.gameLogic
 {
@@ -219,7 +223,18 @@ namespace TetrisClient.gameLogic
             Representation = _user.GetRepresentation(Representation);
             Tetromino = _user.GetTetraminoFigure(Tetromino);
         }
-
+        public void DevilBomb()
+        {
+            Target devilBomb = new Adapter.Adapter("devil", Score.Level);
+            Singleton.Singleton singleton = Singleton.Singleton.GetInstance();
+            if (Score.Points >= devilBomb.GetInformationCurrentScore())
+            {
+                Score.Points = Score.Points - devilBomb.GetInformationCurrentScore();
+                int lines = devilBomb.GetInformationLinesToChange();
+                Task.Run(async () =>
+                    await singleton.GetConnection().InvokeAsync("AddLines", JsonConvert.SerializeObject(lines.ToString())));
+            }
+        }
         /// <summary>
         /// Checks if the move is possible, the move can be simulated by giving offsets
         /// </summary>
